@@ -1,4 +1,4 @@
-package daniel.lop.io.marvelappstarter
+package alex.lop.io.alexProject
 
 import org.junit.Test
 
