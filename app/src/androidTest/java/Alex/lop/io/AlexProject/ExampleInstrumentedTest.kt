@@ -1,4 +1,4 @@
-package daniel.lop.io.marvelappstarter
+package Alex.lop.io.AlexProject
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

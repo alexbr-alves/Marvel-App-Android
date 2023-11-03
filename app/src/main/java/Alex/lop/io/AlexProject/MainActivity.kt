@@ -1,8 +1,8 @@
-package daniel.lop.io.marvelappstarter
+package Alex.lop.io.AlexProject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import daniel.lop.io.marvelappstarter.databinding.ActivityMainBinding
+import Alex.lop.io.AlexProject.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
