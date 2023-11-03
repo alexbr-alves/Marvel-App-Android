@@ -1,4 +1,4 @@
-package Alex.lop.io.AlexProject.ui.base
+package alex.lop.io.alexProject.ui.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

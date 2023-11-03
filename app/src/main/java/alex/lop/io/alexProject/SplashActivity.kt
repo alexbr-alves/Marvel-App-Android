@@ -1,8 +1,8 @@
-package Alex.lop.io.AlexProject
+package alex.lop.io.alexProject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import Alex.lop.io.AlexProject.databinding.ActivitySplashBinding
+import alex.lop.io.alexProject.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
 

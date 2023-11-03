@@ -1,6 +1,6 @@
-package Alex.lop.io.AlexProject.data.model.character
+package alex.lop.io.alexProject.data.model.character
 
-import Alex.lop.io.AlexProject.data.model.ThumbnailModel
+import alex.lop.io.alexProject.data.model.ThumbnailModel
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 

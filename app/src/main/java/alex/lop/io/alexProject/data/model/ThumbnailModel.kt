@@ -1,4 +1,4 @@
-package Alex.lop.io.AlexProject.data.model
+package alex.lop.io.alexProject.data.model
 
 import com.google.gson.annotations.SerializedName
 

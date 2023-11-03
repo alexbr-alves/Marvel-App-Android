@@ -1,8 +1,8 @@
-package Alex.lop.io.AlexProject
+package alex.lop.io.alexProject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import Alex.lop.io.AlexProject.databinding.ActivityMainBinding
+import alex.lop.io.alexProject.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
