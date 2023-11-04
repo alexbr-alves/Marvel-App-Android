@@ -2,7 +2,7 @@ package alex.lop.io.alexProject.ui.adapters
 
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.data.model.character.ComicModel
-import alex.lop.io.alexProject.databinding.ItemCharacterBinding
+import alex.lop.io.alexProject.databinding.ItemComicBinding
 import alex.lop.io.alexProject.util.limitDescription
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,12 +11,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
+class ComicAdapter : RecyclerView.Adapter<ComicAdapter.ComicViewHolder>() {
 
-    inner class CharacterViewHolder(val binding : ItemCharacterBinding) :
+    inner class ComicViewHolder(val binding : ItemComicBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object : DiffUtil.ItemCallback<ComicModel>() {
+
         override fun areItemsTheSame(oldItem : ComicModel, newItem : ComicModel) : Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
@@ -26,6 +27,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
             newItem : ComicModel
         ) : Boolean {
             return oldItem.id == newItem.id &&
+                    oldItem.title == newItem.title &&
                     oldItem.name == newItem.name &&
                     oldItem.description == newItem.description &&
                     oldItem.thumbnailModel.path == newItem.thumbnailModel.path &&
@@ -36,44 +38,30 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
 
     private val differ = AsyncListDiffer(this, differCallback)
 
-    private var characters : List<ComicModel>
+    private var comics : List<ComicModel>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
-    override fun getItemCount() : Int = characters.size
-    override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : CharacterViewHolder {
-        return CharacterViewHolder(
-            ItemCharacterBinding.inflate(
+    override fun getItemCount() : Int = comics.size
+    override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : ComicViewHolder {
+        return ComicViewHolder(
+            ItemComicBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
     }
 
-    override fun onBindViewHolder(holder : CharacterViewHolder, position : Int) {
-        val character = characters[position]
+    override fun onBindViewHolder(holder : ComicViewHolder, position : Int) {
+        val comic = comics[position]
         holder.binding.apply {
-            tvNameCharacter.text = character.name
-            if (character.description == "") {
-                tvDescriptionCharacter.text =
-                    holder.itemView.context.getString(R.string.text_description_empty)
-            } else {
-                tvDescriptionCharacter.text = character.description.limitDescription(100)
-            }
+            tvNameComic.text = comic.title
+            tvDescriptionComic.text = comic.description
 
             Glide.with(holder.itemView.context)
-                .load(character.thumbnailModel.path + "." + character.thumbnailModel.extension)
-                .into(imgCharacter)
+                .load(comic.thumbnailModel.path + "." + comic.thumbnailModel.extension)
+                .into(imgComic)
         }
-        holder.itemView.setOnClickListener {
-            onItemClickListener?.let {
-                it(character)
-            }
-        }
+
     }
 
-    private var onItemClickListener : ((ComicModel) -> Unit)? = null
-
-    fun setonClickListener(listener : (ComicModel) -> Unit) {
-        onItemClickListener = listener
-    }
 }
