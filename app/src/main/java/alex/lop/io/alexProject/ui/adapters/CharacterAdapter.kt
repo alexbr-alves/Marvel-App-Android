@@ -36,7 +36,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
 
     private val differ = AsyncListDiffer(this, differCallback)
 
-    private var characters : List<ComicModel>
+    var characters : List<ComicModel>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
@@ -73,7 +73,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
 
     private var onItemClickListener : ((ComicModel) -> Unit)? = null
 
-    fun setonClickListener(listener : (ComicModel) -> Unit) {
+    fun setOnClickListener(listener : (ComicModel) -> Unit) {
         onItemClickListener = listener
     }
 }

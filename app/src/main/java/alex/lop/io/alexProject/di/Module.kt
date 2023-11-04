@@ -1,7 +1,7 @@
 package alex.lop.io.alexProject.di
 
 import alex.lop.io.alexProject.data.remote.ServiceApi
-import alex.lop.io.alexProject.util.Constants.API_KEY
+import alex.lop.io.alexProject.util.Constants.APIKEY
 import alex.lop.io.alexProject.util.Constants.BASE_URL
 import alex.lop.io.alexProject.util.Constants.HASH
 import alex.lop.io.alexProject.util.Constants.PRIVATE_KEY
@@ -30,24 +30,22 @@ object Module {
     fun provideOkHttpClient() : OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
+
         return OkHttpClient().newBuilder()
-            .addInterceptor { chain ->
-                val currentTimesTamp = System.currentTimeMillis()
+            .addInterceptor{ chain ->
+                val currentTimestamp = System.currentTimeMillis()
                 val newUrl = chain.request().url
                     .newBuilder()
-                    .addQueryParameter(TS, currentTimesTamp.toString())
-                    .addQueryParameter(API_KEY, PUBLIC_KEY)
-                    .addQueryParameter(
-                        HASH,
-                        provideToMd5Hash(currentTimesTamp.toString() + PUBLIC_KEY + PRIVATE_KEY)
-                    )
+                    .addQueryParameter(TS, currentTimestamp.toString())
+                    .addQueryParameter(APIKEY, PUBLIC_KEY)
+                    .addQueryParameter(HASH, provideToMd5Hash(currentTimestamp.toString() + PRIVATE_KEY + PUBLIC_KEY))
                     .build()
 
-                val request = chain.request()
+                val newRequest = chain.request()
                     .newBuilder()
                     .url(newUrl)
                     .build()
-                chain.proceed(request)
+                chain.proceed(newRequest)
             }
             .addInterceptor(logging)
             .build()
