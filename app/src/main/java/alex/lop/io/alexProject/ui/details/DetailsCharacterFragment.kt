@@ -22,6 +22,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -43,6 +44,19 @@ class DetailsCharacterFragment :
         setupRecycleView()
         onLoadCharacter(characterModel)
         collectObserver()
+        binding.tvDescriptionCharacterDetails.setOnClickListener {
+            onShowDialog(characterModel)
+        }
+    }
+
+    private fun onShowDialog(characterModel : CharacterModel) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(characterModel.name)
+            .setMessage(characterModel.description)
+            .setNegativeButton(getString(R.string.close_dialog)){ dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
     private fun collectObserver() = lifecycleScope.launch {

@@ -1,12 +1,9 @@
 package alex.lop.io.alexProject.ui.details
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.data.model.character.CharacterModelResponse
 import alex.lop.io.alexProject.data.model.comic.ComicModelResponse
 import alex.lop.io.alexProject.repository.MarvelRepository
 import alex.lop.io.alexProject.ui.state.ResourceState
-import alex.lop.io.alexProject.ui.state.ResourceState.Success
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,11 +24,11 @@ class DetailsCharacterViewModel @Inject constructor(
         MutableStateFlow<ResourceState<ComicModelResponse>>(ResourceState.Loading())
     val details : StateFlow<ResourceState<ComicModelResponse>> = _details
 
-    fun fetch(characterId: Int) = viewModelScope.launch {
+    fun fetch(characterId : Int) = viewModelScope.launch {
         safeFetch(characterId)
     }
 
-    private suspend fun safeFetch(characterId: Int) {
+    private suspend fun safeFetch(characterId : Int) {
         _details.value = ResourceState.Loading()
         try {
             val response = repository.getComics(characterId)
