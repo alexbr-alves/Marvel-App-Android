@@ -12,7 +12,7 @@
         android:label="DetailsCharacterFragment" >
         <argument
             android:name="character"
-            app:argType="alex.lop.io.alexProject.data.model.character.ComicModel" />
+            app:argType="alex.lop.io.alexProject.data.model.character.CharacterModel" />
     </fragment>
     <fragment
         android:id="@+id/favoriteCharacterFragment"

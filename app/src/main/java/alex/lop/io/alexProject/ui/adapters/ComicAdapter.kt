@@ -1,9 +1,7 @@
 package alex.lop.io.alexProject.ui.adapters
 
-import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.data.model.character.ComicModel
+import alex.lop.io.alexProject.data.model.comic.ComicModel
 import alex.lop.io.alexProject.databinding.ItemComicBinding
-import alex.lop.io.alexProject.util.limitDescription
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -28,7 +26,6 @@ class ComicAdapter : RecyclerView.Adapter<ComicAdapter.ComicViewHolder>() {
         ) : Boolean {
             return oldItem.id == newItem.id &&
                     oldItem.title == newItem.title &&
-                    oldItem.name == newItem.name &&
                     oldItem.description == newItem.description &&
                     oldItem.thumbnailModel.path == newItem.thumbnailModel.path &&
                     oldItem.thumbnailModel.extension == newItem.thumbnailModel.extension
@@ -38,11 +35,14 @@ class ComicAdapter : RecyclerView.Adapter<ComicAdapter.ComicViewHolder>() {
 
     private val differ = AsyncListDiffer(this, differCallback)
 
-    private var comics : List<ComicModel>
+    var comics : List<ComicModel>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
-    override fun getItemCount() : Int = comics.size
+    override fun getItemCount(): Int {
+        return comics.size
+    }
+
     override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : ComicViewHolder {
         return ComicViewHolder(
             ItemComicBinding.inflate(

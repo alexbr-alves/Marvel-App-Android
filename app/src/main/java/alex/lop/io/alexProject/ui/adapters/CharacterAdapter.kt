@@ -1,7 +1,8 @@
 package alex.lop.io.alexProject.ui.adapters
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.data.model.character.ComicModel
+import alex.lop.io.alexProject.data.model.character.CharacterModel
+import alex.lop.io.alexProject.data.model.comic.ComicModel
 import alex.lop.io.alexProject.databinding.ItemCharacterBinding
 import alex.lop.io.alexProject.util.limitDescription
 import android.view.LayoutInflater
@@ -16,14 +17,14 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
     inner class CharacterViewHolder(val binding : ItemCharacterBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback = object : DiffUtil.ItemCallback<ComicModel>() {
-        override fun areItemsTheSame(oldItem : ComicModel, newItem : ComicModel) : Boolean {
+    private val differCallback = object : DiffUtil.ItemCallback<CharacterModel>() {
+        override fun areItemsTheSame(oldItem : CharacterModel, newItem : CharacterModel) : Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
 
         override fun areContentsTheSame(
-            oldItem : ComicModel,
-            newItem : ComicModel
+            oldItem : CharacterModel,
+            newItem : CharacterModel
         ) : Boolean {
             return oldItem.id == newItem.id &&
                     oldItem.name == newItem.name &&
@@ -36,7 +37,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
 
     private val differ = AsyncListDiffer(this, differCallback)
 
-    private var characters : List<ComicModel>
+    var characters : List<CharacterModel>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
@@ -71,9 +72,9 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
         }
     }
 
-    private var onItemClickListener : ((ComicModel) -> Unit)? = null
+    private var onItemClickListener : ((CharacterModel) -> Unit)? = null
 
-    fun setonClickListener(listener : (ComicModel) -> Unit) {
+    fun setOnClickListener(listener : (CharacterModel) -> Unit) {
         onItemClickListener = listener
     }
 }

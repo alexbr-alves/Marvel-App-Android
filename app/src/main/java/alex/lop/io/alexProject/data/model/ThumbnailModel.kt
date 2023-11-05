@@ -6,6 +6,6 @@ data class ThumbnailModel(
     @SerializedName("path")
     val path: String,
 
-    @SerializedName("path")
+    @SerializedName("extension")
     val extension: String
 )

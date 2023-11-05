@@ -34,4 +34,9 @@
     <string name="an_error_occurred">Um erro ocorreu!</string>
     <string name="saved_successfully">Salvo com sucesso!</string>
 
+    <!--    Error -->
+    <string name="error_internet_connection">Erro de conexão com a internet!</string>
+    <string name="error_data_conversion_failure">Falha na conversão dos dados!</string>
+
+
 </resources>
