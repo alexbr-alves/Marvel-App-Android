@@ -2,6 +2,7 @@ package alex.lop.io.alexProject.ui.adapters
 
 import alex.lop.io.alexProject.data.model.comic.ComicModel
 import alex.lop.io.alexProject.databinding.ItemComicBinding
+import alex.lop.io.alexProject.util.loadImage
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -57,9 +58,11 @@ class ComicAdapter : RecyclerView.Adapter<ComicAdapter.ComicViewHolder>() {
             tvNameComic.text = comic.title
             tvDescriptionComic.text = comic.description
 
-            Glide.with(holder.itemView.context)
-                .load(comic.thumbnailModel.path + "." + comic.thumbnailModel.extension)
-                .into(imgComic)
+            loadImage(
+                imgComic,
+                comic.thumbnailModel.path,
+                comic.thumbnailModel.extension
+            )
         }
 
     }

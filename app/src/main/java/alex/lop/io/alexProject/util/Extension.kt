@@ -1,8 +1,10 @@
 package alex.lop.io.alexProject.util
 
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 
 fun Fragment.toast(message: String, duration: Int = Toast.LENGTH_LONG){
     Toast.makeText(
@@ -18,6 +20,16 @@ fun View.show() {
 
 fun View.hide() {
     visibility = View.INVISIBLE
+}
+
+fun loadImage(
+    imageView : ImageView,
+    path: String,
+    extension: String
+) {
+    Glide.with(imageView)
+        .load("$path.$extension")
+        .into(imageView)
 }
 
 fun String.limitDescription(characters: Int): String {
