@@ -1,4 +1,4 @@
-package alex.lop.io.alexProject.ui.adapters
+package alex.lop.io.alexProject.adapters
 
 
 import alex.lop.io.alexProject.data.model.character.CharacterModel

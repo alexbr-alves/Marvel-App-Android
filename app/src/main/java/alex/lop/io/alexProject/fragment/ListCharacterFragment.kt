@@ -1,10 +1,10 @@
-package alex.lop.io.alexProject.ui.list
+package alex.lop.io.alexProject.fragment
 
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.databinding.FragmentListCharacterBinding
-import alex.lop.io.alexProject.ui.adapters.CharacterAdapter
-import alex.lop.io.alexProject.ui.base.BaseFragment
-import alex.lop.io.alexProject.ui.state.ResourceState
+import alex.lop.io.alexProject.adapters.CharacterAdapter
+import alex.lop.io.alexProject.viewModel.ListCharacterViewModel
+import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.hide
 import alex.lop.io.alexProject.util.show
 import alex.lop.io.alexProject.util.toast

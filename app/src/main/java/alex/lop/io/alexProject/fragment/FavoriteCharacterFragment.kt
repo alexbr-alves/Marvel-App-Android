@@ -1,10 +1,10 @@
-package alex.lop.io.alexProject.ui.favorite
+package alex.lop.io.alexProject.fragment
 
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.databinding.FragmentFavoriteCharacterBinding
-import alex.lop.io.alexProject.ui.adapters.CharacterAdapter
-import alex.lop.io.alexProject.ui.base.BaseFragment
-import alex.lop.io.alexProject.ui.state.ResourceState
+import alex.lop.io.alexProject.adapters.CharacterAdapter
+import alex.lop.io.alexProject.viewModel.FavoriteCharacterViewModel
+import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.hide
 import alex.lop.io.alexProject.util.show
 import alex.lop.io.alexProject.util.toast
@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @AndroidEntryPoint
 class FavoriteCharacterFragment :

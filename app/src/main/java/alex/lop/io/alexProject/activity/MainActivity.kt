@@ -1,4 +1,4 @@
-package alex.lop.io.alexProject.ui.activity
+package alex.lop.io.alexProject.activity
 
 import alex.lop.io.alexProject.R
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initViews(binding)
+        supportActionBar?.hide()
     }
 
     private fun initViews(binding : ActivityMainBinding) {

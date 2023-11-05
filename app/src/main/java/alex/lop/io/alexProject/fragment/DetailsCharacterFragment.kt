@@ -1,11 +1,11 @@
-package alex.lop.io.alexProject.ui.details
+package alex.lop.io.alexProject.fragment
 
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.databinding.FragmentDetailsCharacterBinding
-import alex.lop.io.alexProject.ui.adapters.ComicAdapter
-import alex.lop.io.alexProject.ui.base.BaseFragment
-import alex.lop.io.alexProject.ui.state.ResourceState
+import alex.lop.io.alexProject.adapters.ComicAdapter
+import alex.lop.io.alexProject.viewModel.DetailsCharacterViewModel
+import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.hide
 import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
@@ -22,7 +22,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect

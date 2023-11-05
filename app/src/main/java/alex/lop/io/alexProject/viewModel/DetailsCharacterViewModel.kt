@@ -1,10 +1,10 @@
-package alex.lop.io.alexProject.ui.details
+package alex.lop.io.alexProject.viewModel
 
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.data.model.comic.ComicModelResponse
 import alex.lop.io.alexProject.repository.MarvelRepository
-import alex.lop.io.alexProject.ui.state.ResourceState
+import alex.lop.io.alexProject.state.ResourceState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel

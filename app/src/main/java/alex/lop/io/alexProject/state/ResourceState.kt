@@ -1,4 +1,4 @@
-package alex.lop.io.alexProject.ui.state
+package alex.lop.io.alexProject.state
 
 sealed class ResourceState<T> (
     val data: T? = null,
