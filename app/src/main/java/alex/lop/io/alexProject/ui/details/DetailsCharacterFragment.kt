@@ -8,6 +8,7 @@ import alex.lop.io.alexProject.ui.base.BaseFragment
 import alex.lop.io.alexProject.ui.state.ResourceState
 import alex.lop.io.alexProject.util.hide
 import alex.lop.io.alexProject.util.limitDescription
+import alex.lop.io.alexProject.util.loadImage
 import alex.lop.io.alexProject.util.show
 import alex.lop.io.alexProject.util.toast
 import android.os.Bundle
@@ -49,6 +50,10 @@ class DetailsCharacterFragment :
         setupRecycleView()
         onLoadCharacter(characterModel)
         collectObserver()
+        descriptionCharacter()
+    }
+
+    private fun descriptionCharacter() {
         binding.tvDescriptionCharacterDetails.setOnClickListener {
             onShowDialog(characterModel)
         }
@@ -58,7 +63,7 @@ class DetailsCharacterFragment :
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(characterModel.name)
             .setMessage(characterModel.description)
-            .setNegativeButton(getString(R.string.close_dialog)){ dialog, _ ->
+            .setNegativeButton(getString(R.string.close_dialog)) { dialog, _ ->
                 dialog.dismiss()
             }
             .show()
@@ -71,7 +76,7 @@ class DetailsCharacterFragment :
                     binding.progressBarDetail.hide()
                     resource.data?.let { values ->
                         if (values.data.result.isNotEmpty()) {
-                           comicAdapter.comics = values.data.result.toList()
+                            comicAdapter.comics = values.data.result.toList()
                         } else {
                             toast(getString(R.string.empty_list_comics))
                         }
@@ -101,9 +106,9 @@ class DetailsCharacterFragment :
     }
 
     override fun onOptionsItemSelected(item : MenuItem) : Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.favorite -> {
-                //viewModel.insert(characterModel)
+                viewModel.insert(characterModel)
                 toast(getString(R.string.saved_successfully))
             }
         }
@@ -118,9 +123,11 @@ class DetailsCharacterFragment :
         } else {
             tvDescriptionCharacterDetails.text = characterModel.description.limitDescription(100)
         }
-        Glide.with(requireContext())
-            .load(characterModel.thumbnailModel.path + "." + characterModel.thumbnailModel.extension)
-            .into(imgCharacterDetails)
+        loadImage(
+            imgCharacterDetails,
+            characterModel.thumbnailModel.path,
+            characterModel.thumbnailModel.extension
+        )
     }
 
     override fun getViewBinding(

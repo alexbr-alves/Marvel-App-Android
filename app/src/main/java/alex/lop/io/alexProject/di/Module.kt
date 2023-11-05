@@ -1,15 +1,20 @@
 package alex.lop.io.alexProject.di
 
+import alex.lop.io.alexProject.data.local.MarvelDatabase
 import alex.lop.io.alexProject.data.remote.ServiceApi
 import alex.lop.io.alexProject.util.Constants.APIKEY
 import alex.lop.io.alexProject.util.Constants.BASE_URL
+import alex.lop.io.alexProject.util.Constants.DATABASE_NAME
 import alex.lop.io.alexProject.util.Constants.HASH
 import alex.lop.io.alexProject.util.Constants.PRIVATE_KEY
 import alex.lop.io.alexProject.util.Constants.PUBLIC_KEY
 import alex.lop.io.alexProject.util.Constants.TS
+import android.content.Context
+import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -27,18 +32,32 @@ object Module {
 
     @Singleton
     @Provides
+    fun providerMarvelDatabase(
+        @ApplicationContext context : Context
+    ) = Room.databaseBuilder(
+        context,
+        MarvelDatabase::class.java,
+        DATABASE_NAME
+    ).build()
+
+
+    @Singleton
+    @Provides
     fun provideOkHttpClient() : OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
 
         return OkHttpClient().newBuilder()
-            .addInterceptor{ chain ->
+            .addInterceptor { chain ->
                 val currentTimestamp = System.currentTimeMillis()
                 val newUrl = chain.request().url
                     .newBuilder()
                     .addQueryParameter(TS, currentTimestamp.toString())
                     .addQueryParameter(APIKEY, PUBLIC_KEY)
-                    .addQueryParameter(HASH, provideToMd5Hash(currentTimestamp.toString() + PRIVATE_KEY + PUBLIC_KEY))
+                    .addQueryParameter(
+                        HASH,
+                        provideToMd5Hash(currentTimestamp.toString() + PRIVATE_KEY + PUBLIC_KEY)
+                    )
                     .build()
 
                 val newRequest = chain.request()
@@ -50,6 +69,10 @@ object Module {
             .addInterceptor(logging)
             .build()
     }
+
+    @Singleton
+    @Provides
+    fun provideMarvelDao(database : MarvelDatabase) = database.MarvelDao()
 
     @Singleton
     @Provides

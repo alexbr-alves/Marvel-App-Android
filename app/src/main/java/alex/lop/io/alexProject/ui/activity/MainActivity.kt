@@ -1,5 +1,6 @@
-package alex.lop.io.alexProject
+package alex.lop.io.alexProject.ui.activity
 
+import alex.lop.io.alexProject.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import alex.lop.io.alexProject.databinding.ActivityMainBinding

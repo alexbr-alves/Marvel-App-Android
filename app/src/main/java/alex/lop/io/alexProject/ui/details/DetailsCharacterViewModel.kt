@@ -1,6 +1,7 @@
 package alex.lop.io.alexProject.ui.details
 
 import alex.lop.io.alexProject.R
+import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.data.model.comic.ComicModelResponse
 import alex.lop.io.alexProject.repository.MarvelRepository
 import alex.lop.io.alexProject.ui.state.ResourceState
@@ -52,6 +53,11 @@ class DetailsCharacterViewModel @Inject constructor(
         }
         return ResourceState.Error(response.message())
     }
+
+    fun insert(characterModel : CharacterModel) = viewModelScope.launch {
+        repository.insert(characterModel)
+    }
+
 
 
 }

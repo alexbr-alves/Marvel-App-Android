@@ -5,6 +5,7 @@ import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.data.model.comic.ComicModel
 import alex.lop.io.alexProject.databinding.ItemCharacterBinding
 import alex.lop.io.alexProject.util.limitDescription
+import alex.lop.io.alexProject.util.loadImage
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -61,9 +62,11 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
                 tvDescriptionCharacter.text = character.description.limitDescription(100)
             }
 
-            Glide.with(holder.itemView.context)
-                .load(character.thumbnailModel.path + "." + character.thumbnailModel.extension)
-                .into(imgCharacter)
+            loadImage(
+                imgCharacter,
+                character.thumbnailModel.path,
+                character.thumbnailModel.extension
+            )
         }
         holder.itemView.setOnClickListener {
             onItemClickListener?.let {
@@ -76,5 +79,9 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
 
     fun setOnClickListener(listener : (CharacterModel) -> Unit) {
         onItemClickListener = listener
+    }
+
+    fun getCharacterPosition(position : Int) : CharacterModel {
+        return characters[position]
     }
 }
