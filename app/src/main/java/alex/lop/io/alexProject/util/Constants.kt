@@ -1,6 +1,7 @@
 package alex.lop.io.alexProject.util
 
 object Constants {
+    const val DATABASE_NAME = "marvel.db"
     const val BASE_URL = "https://gateway.marvel.com/v1/public/"
 
     const val PUBLIC_KEY = "fb45e4a1d488d0095bd174a01cbdece6"
