@@ -26,12 +26,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     ) : FragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
     private fun clickEvents() = with(binding) {
-        imageCharacter1.setOnClickListener {
+        menuCharacter.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToListCharacterFragment()
             findNavController().navigate(action)
         }
-        imageCharacter2.setOnClickListener {
+        menuComic.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToComicsFragment()
+            findNavController().navigate(action)
+        }
+        menuCreator.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToCreatorFragment()
             findNavController().navigate(action)
         }
     }
