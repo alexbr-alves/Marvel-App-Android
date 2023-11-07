@@ -6,142 +6,90 @@
     android:background="@color/red_marvel">
 
 
-    <ImageView
-        android:id="@+id/image_character1"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        android:contentDescription="@string/app_name"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img_marvel_characters" />
-
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/menu_character"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="10dp"
         android:background="@color/white"
         android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp"
         android:text="Characters"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/image_character1"
+       app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/image_character2"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        android:contentDescription="@string/app_name"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_character1"
-        app:srcCompat="@drawable/img_marvel_characters" />
-
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/menu_comic"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="10dp"
+        android:paddingVertical="10dp"
         android:background="@color/white"
         android:paddingHorizontal="10dp"
         android:text="Comics"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/image_character2"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/menu_character"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/image_character3"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        android:contentDescription="@string/app_name"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_character2"
-        app:srcCompat="@drawable/img_marvel_characters" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:background="@color/white"
-        android:paddingHorizontal="10dp"
-        android:text="Events"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/image_character3"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/image_character4"
+        android:id="@+id/menu_creator"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        android:contentDescription="@string/app_name"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_character3"
-        app:srcCompat="@drawable/img_marvel_characters" />
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_margin="10dp"
+        android:paddingVertical="10dp"
         android:background="@color/white"
         android:paddingHorizontal="10dp"
         android:text="Creators"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/image_character4"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/menu_comic"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/image_character5"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        android:contentDescription="@string/app_name"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_character4"
-        app:srcCompat="@drawable/img_marvel_characters" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/menu_event"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="10dp"
+        android:paddingVertical="10dp"
+        android:background="@color/white"
+        android:paddingHorizontal="10dp"
+        android:text="Events"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/menu_creator"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/menu_series"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:paddingVertical="10dp"
         android:background="@color/white"
         android:paddingHorizontal="10dp"
         android:text="Series"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/image_character5"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/menu_event"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/image_character6"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        android:contentDescription="@string/app_name"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_character5"
-        app:srcCompat="@drawable/img_marvel_characters" />
-
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/menu_stores"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="10dp"
+        android:paddingVertical="10dp"
         android:background="@color/white"
         android:paddingHorizontal="10dp"
         android:text="Stores"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/image_character6"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/menu_series"
         app:layout_constraintStart_toStartOf="parent" />
 
 

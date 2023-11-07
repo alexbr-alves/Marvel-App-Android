@@ -53,10 +53,18 @@
         <action
             android:id="@+id/action_homeFragment_to_comicsFragment"
             app:destination="@id/comicsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_creatorFragment"
+            app:destination="@id/creatorFragment" />
     </fragment>
     <fragment
         android:id="@+id/comicsFragment"
         tools:layout="@layout/fragment_comic"
         android:name="alex.lop.io.alexProject.fragment.ComicsFragment"
         android:label="ComicsFragment" />
+    <fragment
+        android:id="@+id/creatorFragment"
+        tools:layout="@layout/fragment_creator"
+        android:name="alex.lop.io.alexProject.fragment.CreatorFragment"
+        android:label="CreatorFragment" />
 </navigation>
