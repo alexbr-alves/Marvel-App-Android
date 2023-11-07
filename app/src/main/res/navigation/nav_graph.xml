@@ -48,11 +48,10 @@
         android:name="alex.lop.io.alexProject.fragment.HomeFragment"
         android:label="HomeFragment" >
         <action
-            android:id="@+id/action_homeFragment_to_listCharacterFragment"
-            app:destination="@id/homerFragment" />
-
+            android:id="@+id/action_homeFragment_to_ListCharacterFragment"
+            app:destination="@id/ListCharacterFragment" />
         <action
-            android:id="@+id/action_homerFragment_to_comicsFragment"
+            android:id="@+id/action_homeFragment_to_comicsFragment"
             app:destination="@id/comicsFragment" />
     </fragment>
     <fragment

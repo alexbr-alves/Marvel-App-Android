@@ -29,4 +29,8 @@ abstract class BaseFragment<VB: ViewBinding, VM: ViewModel>: Fragment() {
         _binding = null
     }
 
+    private fun setupUI() = with(binding) {
+
+    }
+
 }

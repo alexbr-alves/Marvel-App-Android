@@ -2,7 +2,6 @@ package alex.lop.io.alexProject.data.remote
 
 import alex.lop.io.alexProject.data.model.character.CharacterModelResponse
 import alex.lop.io.alexProject.data.model.comic.ComicModelResponse
-import alex.lop.io.alexProject.data.model.comicsCharacter.ComicsCharacterModelResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -26,5 +25,5 @@ interface ServiceApi {
             value = "characterId",
             encoded = true
         ) characterId: Int
-    ): Response<ComicsCharacterModelResponse>
+    ): Response<ComicModelResponse>
 }

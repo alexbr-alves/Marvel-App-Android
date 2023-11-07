@@ -35,7 +35,6 @@ class ComicsFragment: BaseFragment<FragmentComicBinding, ComicViewModel>()  {
         super.onViewCreated(view, savedInstanceState)
         setupRecycleView()
         collectObserver()
-
     }
 
     private fun collectObserver() = lifecycleScope.launch {

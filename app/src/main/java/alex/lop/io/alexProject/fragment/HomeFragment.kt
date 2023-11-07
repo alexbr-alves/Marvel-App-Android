@@ -31,7 +31,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             findNavController().navigate(action)
         }
         imageCharacter2.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomerFragmentToComicsFragment()
+            val action = HomeFragmentDirections.actionHomeFragmentToComicsFragment()
             findNavController().navigate(action)
         }
     }

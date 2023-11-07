@@ -1,9 +1,8 @@
 package alex.lop.io.alexProject.adapters
 
 import alex.lop.io.alexProject.data.model.comic.ComicModel
-import alex.lop.io.alexProject.data.model.comicsCharacter.ComicsCharacterModel
 import alex.lop.io.alexProject.databinding.ItemComicBinding
-import alex.lop.io.alexProject.databinding.ItemComicsCharacterBinding
+import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -56,8 +55,9 @@ class ComicsAdapter : RecyclerView.Adapter<ComicsAdapter.ComicsViewHolder>() {
         val comic = comicList[position]
         holder.binding.apply {
             tvNameComic.text = comic.title
-            tvDescriptionComic.text = comic.description
-
+            if (tvDescriptionComic.text != null) {
+                tvDescriptionComic.text = comic.description
+            }
             loadImage(
                 imgComic,
                 comic.thumbnailModel.path,
