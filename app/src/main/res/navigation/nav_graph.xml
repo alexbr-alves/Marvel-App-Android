@@ -24,13 +24,14 @@
             app:destination="@id/detailsCharacterFragment" />
     </fragment>
     <fragment
-        android:id="@+id/homerFragment"
+        android:id="@+id/ListCharacterFragment"
         tools:layout="@layout/fragment_list_character"
         android:name="alex.lop.io.alexProject.fragment.ListCharacterFragment"
         android:label="ListCharacterFragment" >
         <action
             android:id="@+id/action_listCharacterFragment_to_detailsCharacterFragment"
             app:destination="@id/detailsCharacterFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/searchCharacterFragment"
@@ -49,5 +50,14 @@
         <action
             android:id="@+id/action_homeFragment_to_listCharacterFragment"
             app:destination="@id/homerFragment" />
+
+        <action
+            android:id="@+id/action_homerFragment_to_comicsFragment"
+            app:destination="@id/comicsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/comicsFragment"
+        tools:layout="@layout/fragment_comic"
+        android:name="alex.lop.io.alexProject.fragment.ComicsFragment"
+        android:label="ComicsFragment" />
 </navigation>

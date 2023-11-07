@@ -3,7 +3,7 @@ package alex.lop.io.alexProject.fragment
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.databinding.FragmentDetailsCharacterBinding
-import alex.lop.io.alexProject.adapters.ComicAdapter
+import alex.lop.io.alexProject.adapters.ComicCharacterAdapter
 import alex.lop.io.alexProject.viewModel.DetailsCharacterViewModel
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.hide
@@ -34,7 +34,7 @@ class DetailsCharacterFragment :
     override val viewModel : DetailsCharacterViewModel by viewModels()
 
     private val args : DetailsCharacterFragmentArgs by navArgs()
-    private val comicAdapter by lazy { ComicAdapter() }
+    private val comicCharacterAdapter by lazy { ComicCharacterAdapter() }
     private lateinit var characterModel : CharacterModel
 
     override fun onCreate(savedInstanceState : Bundle?) {
@@ -75,7 +75,7 @@ class DetailsCharacterFragment :
                     binding.progressBarDetail.hide()
                     resource.data?.let { values ->
                         if (values.data.result.isNotEmpty()) {
-                            comicAdapter.comics = values.data.result.toList()
+                            comicCharacterAdapter.comics = values.data.result.toList()
                         } else {
                             toast(getString(R.string.empty_list_comics))
                         }
@@ -137,7 +137,7 @@ class DetailsCharacterFragment :
 
     private fun setupRecycleView() = with(binding) {
         rvComics.apply {
-            adapter = comicAdapter
+            adapter = comicCharacterAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }

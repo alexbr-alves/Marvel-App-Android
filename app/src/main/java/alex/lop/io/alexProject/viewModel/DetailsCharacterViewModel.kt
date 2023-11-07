@@ -2,7 +2,7 @@ package alex.lop.io.alexProject.viewModel
 
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.data.model.character.CharacterModel
-import alex.lop.io.alexProject.data.model.comic.ComicModelResponse
+import alex.lop.io.alexProject.data.model.comicsCharacter.ComicsCharacterModelResponse
 import alex.lop.io.alexProject.repository.MarvelRepository
 import alex.lop.io.alexProject.state.ResourceState
 import androidx.lifecycle.ViewModel
@@ -22,8 +22,8 @@ class DetailsCharacterViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _details =
-        MutableStateFlow<ResourceState<ComicModelResponse>>(ResourceState.Loading())
-    val details : StateFlow<ResourceState<ComicModelResponse>> = _details
+        MutableStateFlow<ResourceState<ComicsCharacterModelResponse>>(ResourceState.Loading())
+    val details : StateFlow<ResourceState<ComicsCharacterModelResponse>> = _details
 
     fun fetch(characterId : Int) = viewModelScope.launch {
         safeFetch(characterId)
@@ -32,7 +32,7 @@ class DetailsCharacterViewModel @Inject constructor(
     private suspend fun safeFetch(characterId : Int) {
         _details.value = ResourceState.Loading()
         try {
-            val response = repository.getComics(characterId)
+            val response = repository.getComicsCharacter(characterId)
             _details.value = handleResponse(response)
         } catch (t : Throwable) {
             when (t) {
@@ -45,7 +45,7 @@ class DetailsCharacterViewModel @Inject constructor(
         }
     }
 
-    private fun handleResponse(response : Response<ComicModelResponse>) : ResourceState<ComicModelResponse> {
+    private fun handleResponse(response : Response<ComicsCharacterModelResponse>) : ResourceState<ComicsCharacterModelResponse> {
         if (response.isSuccessful) {
             response.body()?.let { values ->
                 return ResourceState.Success(values)

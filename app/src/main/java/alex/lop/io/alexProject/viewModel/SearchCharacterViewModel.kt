@@ -29,7 +29,7 @@ class SearchCharacterViewModel @Inject constructor(
     private suspend fun safeFetch(nameStartsWith : String) {
         _searchCharacter.value = ResourceState.Loading()
         try {
-            val response = repository.list(nameStartsWith)
+            val response = repository.characters(nameStartsWith)
             _searchCharacter.value = handleResponse(response)
         } catch (t : Throwable) {
             when (t) {
