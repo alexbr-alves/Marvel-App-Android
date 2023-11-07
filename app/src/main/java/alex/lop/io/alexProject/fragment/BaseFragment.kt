@@ -1,4 +1,4 @@
-package alex.lop.io.alexProject.ui.base
+package alex.lop.io.alexProject.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -27,6 +27,10 @@ abstract class BaseFragment<VB: ViewBinding, VM: ViewModel>: Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun setupUI() = with(binding) {
+
     }
 
 }

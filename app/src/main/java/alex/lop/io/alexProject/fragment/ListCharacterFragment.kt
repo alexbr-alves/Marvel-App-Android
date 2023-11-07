@@ -1,10 +1,10 @@
-package alex.lop.io.alexProject.ui.list
+package alex.lop.io.alexProject.fragment
 
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.databinding.FragmentListCharacterBinding
-import alex.lop.io.alexProject.ui.adapters.CharacterAdapter
-import alex.lop.io.alexProject.ui.base.BaseFragment
-import alex.lop.io.alexProject.ui.state.ResourceState
+import alex.lop.io.alexProject.adapters.CharacterAdapter
+import alex.lop.io.alexProject.viewModel.ListCharacterViewModel
+import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.hide
 import alex.lop.io.alexProject.util.show
 import alex.lop.io.alexProject.util.toast
@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -69,6 +70,7 @@ class ListCharacterFragment : BaseFragment<FragmentListCharacterBinding, ListCha
         rvCharacters.apply {
             adapter = characterAdapter
             layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = GridLayoutManager(requireContext(), 2)
         }
     }
 

@@ -1,4 +1,4 @@
-package alex.lop.io.alexProject.ui.adapters
+package alex.lop.io.alexProject.adapters
 
 import alex.lop.io.alexProject.data.model.comic.ComicModel
 import alex.lop.io.alexProject.databinding.ItemComicBinding
@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 
-class ComicAdapter : RecyclerView.Adapter<ComicAdapter.ComicViewHolder>() {
+class ComicCharacterAdapter : RecyclerView.Adapter<ComicCharacterAdapter.ComicViewHolder>() {
 
     inner class ComicViewHolder(val binding : ItemComicBinding) :
         RecyclerView.ViewHolder(binding.root)

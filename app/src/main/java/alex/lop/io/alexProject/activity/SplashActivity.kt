@@ -1,4 +1,4 @@
-package alex.lop.io.alexProject.ui.activity
+package alex.lop.io.alexProject.activity
 
 import alex.lop.io.alexProject.R
 import androidx.appcompat.app.AppCompatActivity

@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/listCharacterFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/detailsCharacterFragment"
         tools:layout="@layout/fragment_details_character"
-        android:name="alex.lop.io.alexProject.ui.details.DetailsCharacterFragment"
+        android:name="alex.lop.io.alexProject.fragment.DetailsCharacterFragment"
         android:label="DetailsCharacterFragment" >
         <argument
             android:name="character"
@@ -17,28 +17,46 @@
     <fragment
         android:id="@+id/favoriteCharacterFragment"
         tools:layout="@layout/fragment_favorite_character"
-        android:name="alex.lop.io.alexProject.ui.favorite.FavoriteCharacterFragment"
+        android:name="alex.lop.io.alexProject.fragment.FavoriteCharacterFragment"
         android:label="FavoriteCharacterFragment" >
         <action
             android:id="@+id/action_favoriteCharacterFragment_to_detailsCharacterFragment"
             app:destination="@id/detailsCharacterFragment" />
     </fragment>
     <fragment
-        android:id="@+id/listCharacterFragment"
+        android:id="@+id/ListCharacterFragment"
         tools:layout="@layout/fragment_list_character"
-        android:name="alex.lop.io.alexProject.ui.list.ListCharacterFragment"
+        android:name="alex.lop.io.alexProject.fragment.ListCharacterFragment"
         android:label="ListCharacterFragment" >
         <action
             android:id="@+id/action_listCharacterFragment_to_detailsCharacterFragment"
             app:destination="@id/detailsCharacterFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/searchCharacterFragment"
         tools:layout="@layout/fragment_search_character"
-        android:name="alex.lop.io.alexProject.ui.search.SearchCharacterFragment"
+        android:name="alex.lop.io.alexProject.fragment.SearchCharacterFragment"
         android:label="SearchCharacterFragment" >
         <action
             android:id="@+id/action_searchCharacterFragment_to_detailsCharacterFragment"
             app:destination="@id/detailsCharacterFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        tools:layout="@layout/fragment_home"
+        android:name="alex.lop.io.alexProject.fragment.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_ListCharacterFragment"
+            app:destination="@id/ListCharacterFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_comicsFragment"
+            app:destination="@id/comicsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/comicsFragment"
+        tools:layout="@layout/fragment_comic"
+        android:name="alex.lop.io.alexProject.fragment.ComicsFragment"
+        android:label="ComicsFragment" />
 </navigation>

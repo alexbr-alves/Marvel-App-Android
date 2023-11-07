@@ -1,22 +1,23 @@
-package alex.lop.io.alexProject.ui.adapters
+package alex.lop.io.alexProject.adapters
 
-import alex.lop.io.alexProject.R
+
 import alex.lop.io.alexProject.data.model.character.CharacterModel
-import alex.lop.io.alexProject.data.model.comic.ComicModel
+
 import alex.lop.io.alexProject.databinding.ItemCharacterBinding
-import alex.lop.io.alexProject.util.limitDescription
+
 import alex.lop.io.alexProject.util.loadImage
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 
 class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
 
     inner class CharacterViewHolder(val binding : ItemCharacterBinding) :
         RecyclerView.ViewHolder(binding.root)
+
 
     private val differCallback = object : DiffUtil.ItemCallback<CharacterModel>() {
         override fun areItemsTheSame(oldItem : CharacterModel, newItem : CharacterModel) : Boolean {
@@ -55,12 +56,6 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
         val character = characters[position]
         holder.binding.apply {
             tvNameCharacter.text = character.name
-            if (character.description == "") {
-                tvDescriptionCharacter.text =
-                    holder.itemView.context.getString(R.string.text_description_empty)
-            } else {
-                tvDescriptionCharacter.text = character.description.limitDescription(100)
-            }
 
             loadImage(
                 imgCharacter,

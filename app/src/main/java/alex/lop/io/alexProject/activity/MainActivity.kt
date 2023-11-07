@@ -1,14 +1,16 @@
-package alex.lop.io.alexProject.ui.activity
+package alex.lop.io.alexProject.activity
 
 import alex.lop.io.alexProject.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import alex.lop.io.alexProject.databinding.ActivityMainBinding
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 
-@Suppress("DEPRECATION")
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -29,9 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation.apply {
             setupWithNavController(navController)
-            setOnNavigationItemReselectedListener {
-
-            }
         }
     }
 }

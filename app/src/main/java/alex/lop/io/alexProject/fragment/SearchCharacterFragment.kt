@@ -1,10 +1,10 @@
-package alex.lop.io.alexProject.ui.search
+package alex.lop.io.alexProject.fragment
 
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.databinding.FragmentSearchCharacterBinding
-import alex.lop.io.alexProject.ui.adapters.CharacterAdapter
-import alex.lop.io.alexProject.ui.base.BaseFragment
-import alex.lop.io.alexProject.ui.state.ResourceState
+import alex.lop.io.alexProject.adapters.CharacterAdapter
+import alex.lop.io.alexProject.viewModel.SearchCharacterViewModel
+import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.Constants.DEFAULT_QUERY
 import alex.lop.io.alexProject.util.Constants.LAST_SEARCH_QUERY
 import alex.lop.io.alexProject.util.hide
@@ -20,6 +20,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -114,7 +115,7 @@ class SearchCharacterFragment :
     private fun setupRecycleView() = with(binding) {
         rvSearchCharacter.apply {
             adapter = characterAdapter
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = GridLayoutManager(requireContext(), 2)
         }
     }
 
