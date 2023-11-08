@@ -38,5 +38,13 @@
     <string name="error_internet_connection">Erro de conexão com a internet!</string>
     <string name="error_data_conversion_failure">Falha na conversão dos dados!</string>
 
+    <!--    title fragments -->
+    <string name="title_fragment_comic">Comics</string>
+    <string name="title_fragment_favorites">Favorites</string>
+    <string name="title_fragment_search">Search</string>
+    <string name="title_fragment_event">Events</string>
+    <string name="title_fragment_creator">Creators</string>
+    <string name="title_fragment_detail">Details</string>
+    <string name="title_fragment_characters">Characters</string>
 
 </resources>
