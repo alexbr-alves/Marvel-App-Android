@@ -56,6 +56,9 @@
         <action
             android:id="@+id/action_homeFragment_to_creatorFragment"
             app:destination="@id/creatorFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_eventFragment2"
+            app:destination="@id/eventFragment" />
     </fragment>
     <fragment
         android:id="@+id/comicsFragment"
@@ -67,4 +70,9 @@
         tools:layout="@layout/fragment_creator"
         android:name="alex.lop.io.alexProject.fragment.CreatorFragment"
         android:label="CreatorFragment" />
+    <fragment
+        android:id="@+id/eventFragment"
+        tools:layout="@layout/fragment_event"
+        android:name="alex.lop.io.alexProject.fragment.EventFragment"
+        android:label="EventFragment" />
 </navigation>

@@ -6,7 +6,7 @@ import java.io.Serializable
 
 data class EventModel(
     @SerializedName("id")
-    val int : Int,
+    val id : Int,
     @SerializedName("title")
     val title : String,
     @SerializedName("description")

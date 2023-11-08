@@ -21,7 +21,7 @@ interface ServiceApi {
 
     @GET("creators")
     suspend fun creators() : Response<CreatorModelResponse>
-
+    @GET("events")
     suspend fun events() : Response<EventModelResponse>
 
     @GET("characters/{characterId}/comics")
