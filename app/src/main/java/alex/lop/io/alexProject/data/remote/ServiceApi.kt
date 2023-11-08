@@ -3,6 +3,7 @@ package alex.lop.io.alexProject.data.remote
 import alex.lop.io.alexProject.data.model.character.CharacterModelResponse
 import alex.lop.io.alexProject.data.model.comic.ComicModelResponse
 import alex.lop.io.alexProject.data.model.creator.CreatorModelResponse
+import alex.lop.io.alexProject.data.model.event.EventModelResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -20,6 +21,8 @@ interface ServiceApi {
 
     @GET("creators")
     suspend fun creators() : Response<CreatorModelResponse>
+    @GET("events")
+    suspend fun events() : Response<EventModelResponse>
 
     @GET("characters/{characterId}/comics")
     suspend fun getComicsCharacter(

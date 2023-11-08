@@ -2,6 +2,7 @@ package alex.lop.io.alexProject.adapters
 
 import alex.lop.io.alexProject.data.model.creator.CreatorModel
 import alex.lop.io.alexProject.databinding.ItemCreatorBinding
+import alex.lop.io.alexProject.util.hide
 import alex.lop.io.alexProject.util.loadImage
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -53,8 +54,9 @@ class CreatorAdapter : RecyclerView.Adapter<CreatorAdapter.CreatorViewHolder>() 
     override fun onBindViewHolder(holder : CreatorViewHolder, position : Int) {
         val creator = creatorList[position]
         holder.binding.apply {
-            tvNameComic.text = "${creator.firstName} ${creator.lastName}"
-            tvDescriptionComic.text = creator.suffix
+            tvNameComic.text = creator.fullName
+            tvDescriptionComic.text = ""
+
 
             loadImage(
                 imgComic,
