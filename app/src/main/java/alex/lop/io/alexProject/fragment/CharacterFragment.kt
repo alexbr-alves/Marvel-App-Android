@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class ListCharacterFragment : BaseFragment<FragmentListCharacterBinding, ListCharacterViewModel>() {
+class CharacterFragment : BaseFragment<FragmentListCharacterBinding, ListCharacterViewModel>() {
     override val viewModel : ListCharacterViewModel by viewModels()
     private val characterAdapter by lazy { CharacterAdapter() }
 
@@ -60,7 +60,7 @@ class ListCharacterFragment : BaseFragment<FragmentListCharacterBinding, ListCha
 
     private fun clickAdapter() {
         characterAdapter.setOnClickListener { characterModel ->
-            val action = ListCharacterFragmentDirections
+            val action = CharacterFragmentDirections
                 .actionListCharacterFragmentToDetailsCharacterFragment(characterModel)
             findNavController().navigate(action)
         }

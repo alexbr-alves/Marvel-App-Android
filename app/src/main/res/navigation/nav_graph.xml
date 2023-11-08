@@ -26,7 +26,7 @@
     <fragment
         android:id="@+id/ListCharacterFragment"
         tools:layout="@layout/fragment_list_character"
-        android:name="alex.lop.io.alexProject.fragment.ListCharacterFragment"
+        android:name="alex.lop.io.alexProject.fragment.CharacterFragment"
         android:label="ListCharacterFragment" >
         <action
             android:id="@+id/action_listCharacterFragment_to_detailsCharacterFragment"
