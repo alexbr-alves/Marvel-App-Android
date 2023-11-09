@@ -15,7 +15,7 @@ class SeriesAdapter : RecyclerView.Adapter<SeriesAdapter.SeriesViewHolder>() {
 
     private val differCallBack = object : DiffUtil.ItemCallback<SeriesModel>() {
         override fun areItemsTheSame(oldItem : SeriesModel, newItem : SeriesModel) : Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
+            return true
         }
 
         override fun areContentsTheSame(
@@ -23,8 +23,8 @@ class SeriesAdapter : RecyclerView.Adapter<SeriesAdapter.SeriesViewHolder>() {
             newItem : SeriesModel
         ) : Boolean {
             return oldItem.id == newItem.id &&
-                    oldItem.description == newItem.description &&
                     oldItem.title == newItem.title &&
+                    oldItem.description == newItem.description &&
                     oldItem.thumbnailModel.path == newItem.thumbnailModel.path &&
                     oldItem.thumbnailModel.extension == newItem.thumbnailModel.extension
         }
@@ -52,7 +52,7 @@ class SeriesAdapter : RecyclerView.Adapter<SeriesAdapter.SeriesViewHolder>() {
     override fun onBindViewHolder(holder : SeriesViewHolder, position : Int) {
         val series = seriesList[position]
         holder.binding.apply {
-            textName.text
+            textName.text = series.title
             loadImage(
                 image,
                 series.thumbnailModel.path,

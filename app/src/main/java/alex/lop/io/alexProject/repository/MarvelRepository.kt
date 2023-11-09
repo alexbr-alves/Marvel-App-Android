@@ -7,13 +7,13 @@ import javax.inject.Inject
 
 class MarvelRepository @Inject constructor(
     private val api : ServiceApi,
-    private val dao: MarvelDao
+    private val dao : MarvelDao
 ) {
     suspend fun characters(nameStartsWith : String? = null) = api.characters(nameStartsWith)
     suspend fun comics() = api.comics()
     suspend fun creators() = api.creators()
     suspend fun events() = api.events()
-    suspend fun series(titleStartsWith: String? = null) = api.series(titleStartsWith)
+    suspend fun series(titleStartsWith : String? = null) = api.series(titleStartsWith)
     suspend fun getComicsCharacter(characterId : Int) = api.getComicsCharacter(characterId)
 
     suspend fun insert(characterModel : CharacterModel) = dao.insert(characterModel)
