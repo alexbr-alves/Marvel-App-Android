@@ -2,20 +2,19 @@ package alex.lop.io.alexProject.adapters
 
 
 import alex.lop.io.alexProject.data.model.character.CharacterModel
+import alex.lop.io.alexProject.databinding.LayoutCardNameBinding
 
-import alex.lop.io.alexProject.databinding.ItemCharacterBinding
 
 import alex.lop.io.alexProject.util.loadImage
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
 
-    inner class CharacterViewHolder(val binding : ItemCharacterBinding) :
+    inner class CharacterViewHolder(val binding : LayoutCardNameBinding) :
         RecyclerView.ViewHolder(binding.root)
 
 
@@ -46,7 +45,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
     override fun getItemCount() : Int = characters.size
     override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : CharacterViewHolder {
         return CharacterViewHolder(
-            ItemCharacterBinding.inflate(
+            LayoutCardNameBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
@@ -55,10 +54,10 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
     override fun onBindViewHolder(holder : CharacterViewHolder, position : Int) {
         val character = characters[position]
         holder.binding.apply {
-            tvNameCharacter.text = character.name
+            textName.text = character.name
 
             loadImage(
-                imgCharacter,
+                image,
                 character.thumbnailModel.path,
                 character.thumbnailModel.extension
             )

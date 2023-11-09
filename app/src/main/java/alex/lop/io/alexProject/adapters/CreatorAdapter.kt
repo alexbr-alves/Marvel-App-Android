@@ -1,8 +1,7 @@
 package alex.lop.io.alexProject.adapters
 
 import alex.lop.io.alexProject.data.model.creator.CreatorModel
-import alex.lop.io.alexProject.databinding.ItemCreatorBinding
-import alex.lop.io.alexProject.util.hide
+import alex.lop.io.alexProject.databinding.LayoutCardNameDescriptionBinding
 import alex.lop.io.alexProject.util.loadImage
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class CreatorAdapter : RecyclerView.Adapter<CreatorAdapter.CreatorViewHolder>() {
 
-    inner class CreatorViewHolder(val binding : ItemCreatorBinding) :
+    inner class CreatorViewHolder(val binding : LayoutCardNameDescriptionBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object : DiffUtil.ItemCallback<CreatorModel>() {
@@ -41,7 +40,7 @@ class CreatorAdapter : RecyclerView.Adapter<CreatorAdapter.CreatorViewHolder>() 
 
     override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : CreatorViewHolder {
         return CreatorViewHolder(
-            ItemCreatorBinding.inflate(
+            LayoutCardNameDescriptionBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
@@ -54,12 +53,12 @@ class CreatorAdapter : RecyclerView.Adapter<CreatorAdapter.CreatorViewHolder>() 
     override fun onBindViewHolder(holder : CreatorViewHolder, position : Int) {
         val creator = creatorList[position]
         holder.binding.apply {
-            tvNameComic.text = creator.fullName
-            tvDescriptionComic.text = ""
+            name.text = creator.fullName
+            description.text = ""
 
 
             loadImage(
-                imgComic,
+                image,
                 creator.thumbnailModel.path,
                 creator.thumbnailModel.extension
             )

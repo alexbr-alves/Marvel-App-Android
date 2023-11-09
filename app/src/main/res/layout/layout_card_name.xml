@@ -17,7 +17,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imgCharacter"
+            android:id="@+id/image"
             android:layout_width="150dp"
             android:layout_height="200dp"
             android:layout_marginTop="12dp"
@@ -29,7 +29,7 @@
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvNameCharacter"
+            android:id="@+id/text_name"
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,9 +38,9 @@
             android:text="@string/tx_item_name"
             android:textColor="@color/white"
             android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="@+id/imgCharacter"
-            app:layout_constraintTop_toBottomOf="@+id/imgCharacter"
-            app:layout_constraintEnd_toEndOf="@+id/imgCharacter"
+            app:layout_constraintStart_toStartOf="@+id/image"
+            app:layout_constraintTop_toBottomOf="@+id/image"
+            app:layout_constraintEnd_toEndOf="@+id/image"
              />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

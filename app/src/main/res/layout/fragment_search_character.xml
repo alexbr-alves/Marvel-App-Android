@@ -45,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvInputLayout"
-        tools:listitem="@layout/item_character" />
+        tools:listitem="@layout/layout_card_name" />
 
     <ProgressBar
         android:id="@+id/progressbarSearch"
