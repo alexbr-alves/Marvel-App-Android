@@ -27,14 +27,14 @@ class ListCharacterViewModel @Inject constructor(
         fetch()
     }
 
-    private fun fetch() = viewModelScope.launch {
-        safeFetch()
+    fun fetch(nameStartsWith : String? = null) = viewModelScope.launch {
+        safeFetch(nameStartsWith)
     }
 
 
-    private suspend fun safeFetch() {
+    private suspend fun safeFetch(nameStartsWith : String? = null) {
         try {
-            val response = repository.characters()
+            val response = repository.characters(nameStartsWith)
             _list.value = handleResponse(response)
         } catch (t : Throwable) {
             when (t) {
