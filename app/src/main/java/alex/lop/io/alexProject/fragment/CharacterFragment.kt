@@ -5,8 +5,8 @@ import alex.lop.io.alexProject.databinding.FragmentListCharacterBinding
 import alex.lop.io.alexProject.adapters.CharacterAdapter
 import alex.lop.io.alexProject.viewModel.ListCharacterViewModel
 import alex.lop.io.alexProject.state.ResourceState
-import alex.lop.io.alexProject.util.hide
-import alex.lop.io.alexProject.util.show
+import alex.lop.io.alexProject.util.setInvisible
+import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
 import android.os.Bundle
 import android.text.Editable
@@ -42,13 +42,13 @@ class CharacterFragment : BaseFragment<FragmentListCharacterBinding, ListCharact
             when (resource) {
                 is ResourceState.Success -> {
                     resource.data?.let { values ->
-                        binding.progressCircular.hide()
+                        binding.progressCircular.setInvisible()
                         characterAdapter.characters = values.data.results.toList()
                     }
                 }
 
                 is ResourceState.Error -> {
-                    binding.progressCircular.hide()
+                    binding.progressCircular.setInvisible()
                     resource.message?.let { message ->
                         toast(getString(R.string.an_error_occurred))
                         Timber.tag("ListCharacterFragment").e("Error -> $message")
@@ -56,7 +56,7 @@ class CharacterFragment : BaseFragment<FragmentListCharacterBinding, ListCharact
                 }
 
                 is ResourceState.Loading -> {
-                    binding.progressCircular.show()
+                    binding.progressCircular.setVisible()
                 }
 
                 else -> {}

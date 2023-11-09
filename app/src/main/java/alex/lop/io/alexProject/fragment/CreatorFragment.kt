@@ -4,8 +4,8 @@ import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.adapters.CreatorAdapter
 import alex.lop.io.alexProject.databinding.FragmentCreatorBinding
 import alex.lop.io.alexProject.state.ResourceState
-import alex.lop.io.alexProject.util.hide
-import alex.lop.io.alexProject.util.show
+import alex.lop.io.alexProject.util.setInvisible
+import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
 import alex.lop.io.alexProject.viewModel.CreatorViewModel
 import android.os.Bundle
@@ -15,7 +15,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -42,7 +41,7 @@ class CreatorFragment : BaseFragment<FragmentCreatorBinding, CreatorViewModel>()
         viewModel.creatorList.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
-                    binding.progressBarDetail.hide()
+                    binding.progressBarDetail.setInvisible()
                     resource.data?.let { values ->
                         if (values.data.result.isNotEmpty()) {
                             creatorAdapter.creatorList = values.data.result.toList()
@@ -53,7 +52,7 @@ class CreatorFragment : BaseFragment<FragmentCreatorBinding, CreatorViewModel>()
                 }
 
                 is ResourceState.Error -> {
-                    binding.progressBarDetail.hide()
+                    binding.progressBarDetail.setInvisible()
                     resource.message?.let { message ->
                         toast(R.string.an_error_occurred.toString())
                         Timber.tag("CreatorFragment").e("Error -> $message")
@@ -61,7 +60,7 @@ class CreatorFragment : BaseFragment<FragmentCreatorBinding, CreatorViewModel>()
                 }
 
                 is ResourceState.Loading -> {
-                    binding.progressBarDetail.show()
+                    binding.progressBarDetail.setVisible()
                 }
 
                 else -> {}

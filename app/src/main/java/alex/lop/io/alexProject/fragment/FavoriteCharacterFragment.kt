@@ -5,8 +5,8 @@ import alex.lop.io.alexProject.databinding.FragmentFavoriteCharacterBinding
 import alex.lop.io.alexProject.adapters.CharacterAdapter
 import alex.lop.io.alexProject.viewModel.FavoriteCharacterViewModel
 import alex.lop.io.alexProject.state.ResourceState
-import alex.lop.io.alexProject.util.hide
-import alex.lop.io.alexProject.util.show
+import alex.lop.io.alexProject.util.setInvisible
+import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,7 +15,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,13 +42,13 @@ class FavoriteCharacterFragment :
             when (resource) {
                 is ResourceState.Success -> {
                     resource.data?.let {
-                        binding.tvEmptyList.hide()
+                        binding.tvEmptyList.setInvisible()
                         characterAdapter.characters = it.toList()
                     }
                 }
 
                 is ResourceState.Empty -> {
-                    binding.tvEmptyList.show()
+                    binding.tvEmptyList.setVisible()
                 }
 
                 else -> {}
