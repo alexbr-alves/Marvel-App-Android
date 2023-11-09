@@ -27,7 +27,9 @@ interface ServiceApi {
     suspend fun events() : Response<EventModelResponse>
 
     @GET("series")
-    suspend fun series() : Response<SeriesModelResponse>
+    suspend fun series(
+        @Query("titleStartsWith") titleStartsWith : String? = null
+    ) : Response<SeriesModelResponse>
 
     @GET("characters/{characterId}/comics")
     suspend fun getComicsCharacter(
