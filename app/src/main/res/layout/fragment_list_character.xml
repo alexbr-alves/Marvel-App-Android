@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvInputLayout"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
-        tools:listitem="@layout/item_character" />
+        tools:listitem="@layout/layout_card_name" />
 
     <ProgressBar
         android:id="@+id/progressCircular"

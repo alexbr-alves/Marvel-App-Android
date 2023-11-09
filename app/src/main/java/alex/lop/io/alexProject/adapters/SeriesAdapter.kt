@@ -1,6 +1,6 @@
 package alex.lop.io.alexProject.adapters
 
-import alex.lop.io.alexProject.data.model.event.EventModel
+import alex.lop.io.alexProject.data.model.serie.SeriesModel
 import alex.lop.io.alexProject.databinding.LayoutCardNameBinding
 import alex.lop.io.alexProject.util.loadImage
 import android.view.LayoutInflater
@@ -9,37 +9,36 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
-class EventAdapter : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
-
-    inner class EventViewHolder(val binding : LayoutCardNameBinding) :
+class SeriesAdapter : RecyclerView.Adapter<SeriesAdapter.SeriesViewHolder>() {
+    inner class SeriesViewHolder(val binding : LayoutCardNameBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback = object : DiffUtil.ItemCallback<EventModel>() {
-        override fun areItemsTheSame(oldItem : EventModel, newItem : EventModel) : Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
+    private val differCallBack = object : DiffUtil.ItemCallback<SeriesModel>() {
+        override fun areItemsTheSame(oldItem : SeriesModel, newItem : SeriesModel) : Boolean {
+            return true
         }
 
         override fun areContentsTheSame(
-            oldItem : EventModel,
-            newItem : EventModel
+            oldItem : SeriesModel,
+            newItem : SeriesModel
         ) : Boolean {
             return oldItem.id == newItem.id &&
-                    oldItem.description == newItem.description &&
                     oldItem.title == newItem.title &&
+                    oldItem.description == newItem.description &&
                     oldItem.thumbnailModel.path == newItem.thumbnailModel.path &&
                     oldItem.thumbnailModel.extension == newItem.thumbnailModel.extension
         }
 
     }
 
-    private val differ = AsyncListDiffer(this, differCallback)
+    private val differ = AsyncListDiffer(this, differCallBack)
 
-    var eventList: List<EventModel>
+    var seriesList: List<SeriesModel>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
-    override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : EventViewHolder {
-        return EventViewHolder(
+    override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : SeriesViewHolder {
+        return SeriesViewHolder(
             LayoutCardNameBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
@@ -47,17 +46,17 @@ class EventAdapter : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
     }
 
     override fun getItemCount() : Int {
-        return eventList.size
+        return seriesList.size
     }
 
-    override fun onBindViewHolder(holder : EventViewHolder, position : Int) {
-        val event = eventList[position]
+    override fun onBindViewHolder(holder : SeriesViewHolder, position : Int) {
+        val series = seriesList[position]
         holder.binding.apply {
-            textName.text = event.title
+            textName.text = series.title
             loadImage(
                 image,
-                event.thumbnailModel.path,
-                event.thumbnailModel.extension
+                series.thumbnailModel.path,
+                series.thumbnailModel.extension
             )
         }
     }

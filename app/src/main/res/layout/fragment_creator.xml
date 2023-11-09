@@ -30,7 +30,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:listitem="@layout/item_character" />
+                tools:listitem="@layout/layout_card_name" />
 
             <ProgressBar
                 android:id="@+id/progressBarDetail"

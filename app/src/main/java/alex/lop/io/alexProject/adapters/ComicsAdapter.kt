@@ -1,8 +1,7 @@
 package alex.lop.io.alexProject.adapters
 
 import alex.lop.io.alexProject.data.model.comic.ComicModel
-import alex.lop.io.alexProject.databinding.ItemComicBinding
-import alex.lop.io.alexProject.util.limitDescription
+import alex.lop.io.alexProject.databinding.LayoutCardNameDescriptionBinding
 import alex.lop.io.alexProject.util.loadImage
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ComicsAdapter : RecyclerView.Adapter<ComicsAdapter.ComicsViewHolder>() {
 
-    inner class ComicsViewHolder(val binding : ItemComicBinding) :
+    inner class ComicsViewHolder(val binding : LayoutCardNameDescriptionBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object : DiffUtil.ItemCallback<ComicModel>() {
@@ -45,7 +44,7 @@ class ComicsAdapter : RecyclerView.Adapter<ComicsAdapter.ComicsViewHolder>() {
 
     override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : ComicsViewHolder {
         return ComicsViewHolder(
-            ItemComicBinding.inflate(
+            LayoutCardNameDescriptionBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
@@ -54,12 +53,12 @@ class ComicsAdapter : RecyclerView.Adapter<ComicsAdapter.ComicsViewHolder>() {
     override fun onBindViewHolder(holder : ComicsViewHolder, position : Int) {
         val comic = comicList[position]
         holder.binding.apply {
-            tvNameComic.text = comic.title
-            if (tvDescriptionComic.text != null) {
-                tvDescriptionComic.text = comic.description
+            name.text = comic.title
+            if (description.text != null) {
+                description.text = comic.description
             }
             loadImage(
-                imgComic,
+                image,
                 comic.thumbnailModel.path,
                 comic.thumbnailModel.extension
             )
