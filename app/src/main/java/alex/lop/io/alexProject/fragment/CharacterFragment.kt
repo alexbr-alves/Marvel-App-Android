@@ -9,6 +9,8 @@ import alex.lop.io.alexProject.util.hide
 import alex.lop.io.alexProject.util.show
 import alex.lop.io.alexProject.util.toast
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +34,7 @@ class CharacterFragment : BaseFragment<FragmentListCharacterBinding, ListCharact
         setupRecycleView()
         clickAdapter()
         collectObserve()
+        searchInit()
     }
 
     private fun collectObserve() = lifecycleScope.launch {
@@ -43,16 +46,19 @@ class CharacterFragment : BaseFragment<FragmentListCharacterBinding, ListCharact
                         characterAdapter.characters = values.data.results.toList()
                     }
                 }
+
                 is ResourceState.Error -> {
                     binding.progressCircular.hide()
-                        resource.message?.let {  message ->
-                            toast(getString(R.string.an_error_occurred))
-                            Timber.tag("ListCharacterFragment").e("Error -> $message")
-                        }
+                    resource.message?.let { message ->
+                        toast(getString(R.string.an_error_occurred))
+                        Timber.tag("ListCharacterFragment").e("Error -> $message")
+                    }
                 }
+
                 is ResourceState.Loading -> {
                     binding.progressCircular.show()
                 }
+
                 else -> {}
             }
         }
@@ -79,4 +85,37 @@ class CharacterFragment : BaseFragment<FragmentListCharacterBinding, ListCharact
         container : ViewGroup?
     ) : FragmentListCharacterBinding =
         FragmentListCharacterBinding.inflate(inflater, container, false)
+
+    private fun searchInit(query : String? = null) = with(binding) {
+        editTextSearch.setText(query)
+        editTextSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                char : CharSequence?,
+                start : Int,
+                count : Int,
+                after : Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                char : CharSequence?,
+                start : Int,
+                before : Int,
+                count : Int
+            ) {
+                if (char.toString().isEmpty()) {
+                    updateCharacterList()
+                } else {
+                    updateCharacterList(char.toString())
+                }
+            }
+
+            override fun afterTextChanged(s : Editable?) {}
+        })
+    }
+
+    private fun updateCharacterList(query : String? = null) {
+        viewModel.fetch(query)
+    }
+
 }

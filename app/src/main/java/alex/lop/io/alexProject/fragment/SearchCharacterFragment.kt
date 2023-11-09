@@ -10,6 +10,7 @@ import alex.lop.io.alexProject.util.Constants.LAST_SEARCH_QUERY
 import alex.lop.io.alexProject.util.hide
 import alex.lop.io.alexProject.util.show
 import alex.lop.io.alexProject.util.toast
+import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent.ACTION_DOWN
 import android.view.KeyEvent.KEYCODE_ENTER
@@ -17,6 +18,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
