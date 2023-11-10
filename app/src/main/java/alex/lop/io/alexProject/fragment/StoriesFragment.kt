@@ -15,6 +15,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -70,7 +72,7 @@ class StoriesFragment : BaseFragment<FragmentStoriesBinding, StoriesViewModel>()
     private fun setupRecycleView() = with(binding) {
         recycleView.apply {
             adapter = storiesAdapter
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = LinearLayoutManager(context)
         }
     }
 
