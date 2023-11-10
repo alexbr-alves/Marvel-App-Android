@@ -6,10 +6,10 @@ import alex.lop.io.alexProject.databinding.FragmentDetailsCharacterBinding
 import alex.lop.io.alexProject.adapters.ComicCharacterAdapter
 import alex.lop.io.alexProject.viewModel.DetailsCharacterViewModel
 import alex.lop.io.alexProject.state.ResourceState
-import alex.lop.io.alexProject.util.hide
+import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
-import alex.lop.io.alexProject.util.show
+import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -72,7 +72,7 @@ class DetailsCharacterFragment :
         viewModel.details.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
-                    binding.progressBarDetail.hide()
+                    binding.progressBarDetail.setInvisible()
                     resource.data?.let { values ->
                         if (values.data.result.isNotEmpty()) {
                             comicCharacterAdapter.comics = values.data.result.toList()
@@ -83,7 +83,7 @@ class DetailsCharacterFragment :
                 }
 
                 is ResourceState.Error -> {
-                    binding.progressBarDetail.hide()
+                    binding.progressBarDetail.setInvisible()
                     resource.message?.let { message ->
                         toast(getString(R.string.an_error_occurred))
                         Timber.tag("ListCharacterFragment").e("Error -> $message")
@@ -91,7 +91,7 @@ class DetailsCharacterFragment :
                 }
 
                 is ResourceState.Loading -> {
-                    binding.progressBarDetail.show()
+                    binding.progressBarDetail.setVisible()
                 }
 
                 else -> {}

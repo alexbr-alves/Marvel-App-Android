@@ -5,8 +5,8 @@ import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.adapters.SeriesAdapter
 import alex.lop.io.alexProject.databinding.FragmentSeriesBinding
 import alex.lop.io.alexProject.state.ResourceState
-import alex.lop.io.alexProject.util.hide
-import alex.lop.io.alexProject.util.show
+import alex.lop.io.alexProject.util.setInvisible
+import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
 import alex.lop.io.alexProject.viewModel.SeriesViewModel
 import android.os.Bundle
@@ -49,13 +49,13 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
             when (resource) {
                 is ResourceState.Success -> {
                     resource.data?.let { values ->
-                        binding.progressBar.hide()
+                        binding.progressBar.setInvisible()
                         seriesAdapter.seriesList = values.data.result.toList()
                     }
                 }
 
                 is ResourceState.Error -> {
-                    binding.progressBar.hide()
+                    binding.progressBar.setInvisible()
                     resource.message?.let { message ->
                         toast(getString(R.string.an_error_occurred))
                         Timber.tag("ListCharacterFragment").e("Error -> $message")
@@ -63,7 +63,7 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
                 }
 
                 is ResourceState.Loading -> {
-                    binding.progressBar.show()
+                    binding.progressBar.setVisible()
                 }
 
                 else -> {}

@@ -7,10 +7,9 @@ import alex.lop.io.alexProject.viewModel.SearchCharacterViewModel
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.Constants.DEFAULT_QUERY
 import alex.lop.io.alexProject.util.Constants.LAST_SEARCH_QUERY
-import alex.lop.io.alexProject.util.hide
-import alex.lop.io.alexProject.util.show
+import alex.lop.io.alexProject.util.setInvisible
+import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
-import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent.ACTION_DOWN
 import android.view.KeyEvent.KEYCODE_ENTER
@@ -18,13 +17,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -50,20 +46,20 @@ class SearchCharacterFragment :
         viewModel.searchCharacter.collect { result ->
             when (result) {
                 is ResourceState.Success -> {
-                    binding.progressbarSearch.hide()
+                    binding.progressbarSearch.setInvisible()
                     result.data?.let {
                         characterAdapter.characters = it.data.results.toList()
                     }
                 }
                 is ResourceState.Error -> {
-                    binding.progressbarSearch.hide()
+                    binding.progressbarSearch.setInvisible()
                     result.message?.let { message ->
                         toast(getString(R.string.an_error_occurred))
                         Timber.tag("SearchCharacterFragment").e("Error -> $message")
                     }
                 }
                 is ResourceState.Loading -> {
-                    binding.progressbarSearch.show()
+                    binding.progressbarSearch.setVisible()
                 }
                 else -> {}
             }

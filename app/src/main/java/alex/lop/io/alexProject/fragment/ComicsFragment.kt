@@ -4,8 +4,8 @@ import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.adapters.ComicsAdapter
 import alex.lop.io.alexProject.databinding.FragmentComicBinding
 import alex.lop.io.alexProject.state.ResourceState
-import alex.lop.io.alexProject.util.hide
-import alex.lop.io.alexProject.util.show
+import alex.lop.io.alexProject.util.setInvisible
+import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
 import alex.lop.io.alexProject.viewModel.ComicViewModel
 import android.os.Bundle
@@ -41,7 +41,7 @@ class ComicsFragment: BaseFragment<FragmentComicBinding, ComicViewModel>()  {
         viewModel.comicList.collect { resource ->
             when(resource) {
                 is ResourceState.Success -> {
-                    binding.progressBarDetail.hide()
+                    binding.progressBarDetail.setInvisible()
                     resource.data?.let { values ->
                         if (values.data.result.isNotEmpty()) {
                             comicsAdapter.comicList = values.data.result.toList()
@@ -51,14 +51,14 @@ class ComicsFragment: BaseFragment<FragmentComicBinding, ComicViewModel>()  {
                     }
                 }
                 is ResourceState.Error -> {
-                    binding.progressBarDetail.hide()
+                    binding.progressBarDetail.setInvisible()
                     resource.message?.let { message ->
                         toast(getString(R.string.an_error_occurred))
                         Timber.tag("ComicsFragment").e("Error -> $message")
                     }
                 }
                 is ResourceState.Loading -> {
-                    binding.progressBarDetail.show()
+                    binding.progressBarDetail.setVisible()
                 }
                 else -> {}
             }

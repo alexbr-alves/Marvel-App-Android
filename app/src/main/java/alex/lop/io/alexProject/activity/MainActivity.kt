@@ -4,12 +4,8 @@ import alex.lop.io.alexProject.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import alex.lop.io.alexProject.databinding.ActivityMainBinding
-import alex.lop.io.alexProject.util.hide
-import alex.lop.io.alexProject.util.show
-import android.os.Build
-import android.text.Layout
-import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
+import alex.lop.io.alexProject.util.setInvisible
+import alex.lop.io.alexProject.util.setVisible
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,14 +29,14 @@ class MainActivity : AppCompatActivity() {
     private fun setupTitleToolbar(textVisible : Boolean, title : String = "") =
         with(binding.toolbar) {
             if (textVisible) {
-                text.show()
-                image.hide()
+                text.setVisible()
+                image.setInvisible()
                 text.text = title
-                back.show()
+                back.setVisible()
             } else {
-                text.hide()
-                image.show()
-                back.hide()
+                text.setInvisible()
+                image.setVisible()
+                back.setInvisible()
             }
         }
 

@@ -14,12 +14,16 @@ fun Fragment.toast(message: String, duration: Int = Toast.LENGTH_LONG){
     ).show()
 }
 
-fun View.show() {
+fun View.setVisible() {
     visibility = View.VISIBLE
 }
 
-fun View.hide() {
+fun View.setInvisible() {
     visibility = View.INVISIBLE
+}
+
+fun View.setGone() {
+    visibility = View.GONE
 }
 
 fun loadImage(
