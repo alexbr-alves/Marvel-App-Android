@@ -57,7 +57,7 @@
                 android:textSize="16sp" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/textView"
+                android:id="@+id/text_comic"
                 style="@style/TextAppearance.MaterialComponents.Subtitle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,9 +65,38 @@
                 android:text="@string/comics"
                 android:textColor="@color/red"
                 android:textAlignment="inherit"
+                android:layout_marginStart="12dp"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/imgCharacterDetails"
                 app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_event"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/title_fragment_event"
+                android:textColor="@color/white"
+                android:textAlignment="inherit"
+                android:textSize="16sp"
+                android:layout_marginStart="12dp"
+                app:layout_constraintStart_toEndOf="@+id/text_comic"
+                app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_series"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/title_fragment_series"
+                android:textColor="@color/white"
+                android:textAlignment="inherit"
+                android:textSize="16sp"
+                android:layout_marginStart="12dp"
+                app:layout_constraintStart_toEndOf="@+id/text_event"
+                app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails"/>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvComics"
@@ -80,7 +109,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintTop_toBottomOf="@+id/text_comic"
                 tools:listitem="@layout/layout_mini_cards" />
 
             <ProgressBar

@@ -34,7 +34,7 @@ class DetailsCharacterFragment :
     override val viewModel : DetailsCharacterViewModel by viewModels()
 
     private val args : DetailsCharacterFragmentArgs by navArgs()
-    private val comicCharacterAdapter by lazy { ComicCharacterAdapter() }
+    private var comicCharacterAdapter = ComicCharacterAdapter()
     private lateinit var characterModel : CharacterModel
 
     override fun onCreate(savedInstanceState : Bundle?) {
@@ -52,9 +52,26 @@ class DetailsCharacterFragment :
         descriptionCharacter()
     }
 
-    private fun descriptionCharacter() {
-        binding.tvDescriptionCharacterDetails.setOnClickListener {
+    private fun descriptionCharacter() = binding.run {
+        val redColor = resources.getColor(R.color.red)
+        val whiteColor = resources.getColor(R.color.white)
+        tvDescriptionCharacterDetails.setOnClickListener {
             onShowDialog(characterModel)
+        }
+        textComic.setOnClickListener {
+            textComic.setTextColor(redColor)
+            textEvent.setTextColor(whiteColor)
+            textSeries.setTextColor(whiteColor)
+        }
+        textEvent.setOnClickListener {
+            textComic.setTextColor(whiteColor)
+            textEvent.setTextColor(redColor)
+            textSeries.setTextColor(whiteColor)
+        }
+        textSeries.setOnClickListener {
+            textComic.setTextColor(whiteColor)
+            textEvent.setTextColor(whiteColor)
+            textSeries.setTextColor(redColor)
         }
     }
 
