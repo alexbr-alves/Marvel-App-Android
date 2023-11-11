@@ -46,7 +46,7 @@ class CreatorFragment : BaseFragment<FragmentCreatorBinding, CreatorViewModel>()
                         if (values.data.result.isNotEmpty()) {
                             creatorAdapter.creatorList = values.data.result.toList()
                         } else {
-                            toast("Lista vazia")
+                            toast(getString(R.string.error_empty_list))
                         }
                     }
                 }

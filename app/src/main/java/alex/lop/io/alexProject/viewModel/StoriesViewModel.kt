@@ -1,7 +1,6 @@
 package alex.lop.io.alexProject.viewModel
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.data.model.event.EventModelResponse
 import alex.lop.io.alexProject.data.model.stories.StoriesModelResponse
 import alex.lop.io.alexProject.repository.MarvelRepository
 import alex.lop.io.alexProject.state.ResourceState

@@ -46,7 +46,7 @@ class ComicsFragment: BaseFragment<FragmentComicBinding, ComicViewModel>()  {
                         if (values.data.result.isNotEmpty()) {
                             comicsAdapter.comicList = values.data.result.toList()
                         } else  {
-                            toast("Lista vazia")
+                            toast(getString(R.string.error_empty_list))
                         }
                     }
                 }

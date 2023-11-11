@@ -1,7 +1,6 @@
 package alex.lop.io.alexProject.adapters
 
 import alex.lop.io.alexProject.data.model.comic.ComicModel
-import alex.lop.io.alexProject.databinding.LayoutCardNameDescriptionBinding
 import alex.lop.io.alexProject.databinding.LayoutMiniCardsBinding
 import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
