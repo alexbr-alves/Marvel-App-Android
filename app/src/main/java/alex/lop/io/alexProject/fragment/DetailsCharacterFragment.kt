@@ -6,6 +6,7 @@ import alex.lop.io.alexProject.databinding.FragmentDetailsCharacterBinding
 import alex.lop.io.alexProject.adapters.ComicCharacterAdapter
 import alex.lop.io.alexProject.adapters.DetailsAdapter
 import alex.lop.io.alexProject.adapters.EventCharacterAdapter
+import alex.lop.io.alexProject.adapters.SeriesCharacterAdapter
 import alex.lop.io.alexProject.viewModel.DetailsCharacterViewModel
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.setInvisible
@@ -39,12 +40,11 @@ class DetailsCharacterFragment :
     override val viewModel : DetailsCharacterViewModel by viewModels()
     private val args : DetailsCharacterFragmentArgs by navArgs()
     private lateinit var characterModel : CharacterModel
-    private var viewPager2: ViewPager2? = null
+    private var viewPager2 : ViewPager2? = null
 
     override fun onCreate(savedInstanceState : Bundle?) {
         setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
@@ -57,39 +57,43 @@ class DetailsCharacterFragment :
         descriptionCharacter()
         onLoadCharacter(characterModel)
         handleClickViewpager()
+        handleViewPager()
+    }
 
+    private fun handleViewPager() {
         viewPager2?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position : Int) {
                 super.onPageSelected(position)
                 updateButtonColors(position)
             }
         })
-
     }
 
-    private fun updateButtonColors(position: Int) = binding.run {
-        val redColor = resources.getColor(R.color.red)
-        val whiteColor = resources.getColor(R.color.white)
-        when(position) {
-            0-> {
-                textComic.setTextColor(redColor)
-                textEvent.setTextColor(whiteColor)
-                textSeries.setTextColor(whiteColor)
-            }
-            1 -> {
-                textComic.setTextColor(whiteColor)
-                textEvent.setTextColor(redColor)
-                textSeries.setTextColor(whiteColor)
-            }
-            2 -> {
-                textComic.setTextColor(whiteColor)
-                textEvent.setTextColor(whiteColor)
-                textSeries.setTextColor(redColor)
-            }
+    private fun comicActive() = binding.run {
+        textComic.setTextColor(resources.getColor(R.color.red))
+        textEvent.setTextColor(resources.getColor(R.color.white))
+        textSeries.setTextColor(resources.getColor(R.color.white))
+    }
+
+    private fun eventActive() = binding.run {
+        textComic.setTextColor(resources.getColor(R.color.white))
+        textEvent.setTextColor(resources.getColor(R.color.red))
+        textSeries.setTextColor(resources.getColor(R.color.white))
+    }
+
+    private fun seriesActive() = binding.run {
+        textComic.setTextColor(resources.getColor(R.color.white))
+        textEvent.setTextColor(resources.getColor(R.color.white))
+        textSeries.setTextColor(resources.getColor(R.color.red))
+    }
+
+    private fun updateButtonColors(position : Int) = binding.run {
+        when (position) {
+            0 -> comicActive()
+            1 -> eventActive()
+            2 -> seriesActive()
         }
-
     }
-
 
     private fun handleClickViewpager() = binding.run {
         textComic.setOnClickListener {
@@ -120,7 +124,6 @@ class DetailsCharacterFragment :
             }
             .show()
     }
-
 
     override fun onCreateOptionsMenu(menu : Menu, inflater : MenuInflater) {
         inflater.inflate(R.menu.menu_details, menu)
