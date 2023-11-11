@@ -94,12 +94,12 @@ class DetailsCharacterFragment :
     private fun handleClickViewpager() = binding.run {
         textComic.setOnClickListener {
             viewPager2.currentItem = 0
-            updateButtonColors(viewPager2.currentItem)
         }
         textEvent.setOnClickListener {
             viewPager2.currentItem = 1
         }
         textSeries.setOnClickListener {
+            viewPager2.currentItem = 2
         }
         updateButtonColors(viewPager2.currentItem)
     }
