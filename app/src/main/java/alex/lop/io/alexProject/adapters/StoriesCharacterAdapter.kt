@@ -1,6 +1,6 @@
 package alex.lop.io.alexProject.adapters
 
-import alex.lop.io.alexProject.data.model.serie.SeriesModel
+import alex.lop.io.alexProject.data.model.stories.StoriesModel
 import alex.lop.io.alexProject.databinding.LayoutMiniCardsBinding
 import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
@@ -11,21 +11,21 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
-class SeriesCharacterAdapter : RecyclerView.Adapter<SeriesCharacterAdapter.SeriesViewHolder>()  {
+class StoriesCharacterAdapter : RecyclerView.Adapter<StoriesCharacterAdapter.StoriesViewHolder>() {
 
-    inner class SeriesViewHolder(val binding : LayoutMiniCardsBinding) :
+    inner class StoriesViewHolder(val binding: LayoutMiniCardsBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback = object : DiffUtil.ItemCallback<SeriesModel>() {
+    private val differCallback = object : DiffUtil.ItemCallback<StoriesModel>() {
 
-        override fun areItemsTheSame(oldItem : SeriesModel, newItem : SeriesModel) : Boolean {
+        override fun areItemsTheSame(oldItem: StoriesModel, newItem: StoriesModel): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
 
         override fun areContentsTheSame(
-            oldItem : SeriesModel,
-            newItem : SeriesModel
-        ) : Boolean {
+            oldItem: StoriesModel,
+            newItem: StoriesModel
+        ): Boolean {
             return oldItem.id == newItem.id &&
                     oldItem.title == newItem.title &&
                     oldItem.description == newItem.description &&
@@ -37,37 +37,28 @@ class SeriesCharacterAdapter : RecyclerView.Adapter<SeriesCharacterAdapter.Serie
 
     private val differ = AsyncListDiffer(this, differCallback)
 
-    var series : List<SeriesModel>
+    var stories: List<StoriesModel>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
     override fun getItemCount(): Int {
-        return series.size
+        return stories.size
     }
 
-    override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : SeriesViewHolder {
-        return SeriesViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoriesViewHolder {
+        return StoriesViewHolder(
             LayoutMiniCardsBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
     }
 
-    override fun onBindViewHolder(holder : SeriesViewHolder, position : Int) {
-        val serie = series[position]
+    override fun onBindViewHolder(holder: StoriesViewHolder, position: Int) {
+        val storie = stories[position]
         holder.binding.apply {
-            textName.text = serie.title
-            if (!serie.description.isNullOrEmpty()) {
-                textDescription.text = serie.description.limitDescription(50)
-            } else {
-                textDescription.setGone()
-            }
-
-            loadImage(
-                image,
-                serie.thumbnailModel.path,
-                serie.thumbnailModel.extension
-            )
+            textName.text = storie.title
+            textDescription.setGone()
+            image.setGone()
         }
     }
 }

@@ -5,9 +5,11 @@ import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.databinding.FragmentDetailsCharacterBinding
 import alex.lop.io.alexProject.adapters.DetailsAdapter
 import alex.lop.io.alexProject.adapters.EventCharacterAdapter
+import alex.lop.io.alexProject.util.Constants
 import alex.lop.io.alexProject.viewModel.DetailsCharacterViewModel
 import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
+import alex.lop.io.alexProject.util.setGone
 import alex.lop.io.alexProject.util.toast
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -65,18 +67,30 @@ class DetailsCharacterFragment :
         textComic.setTextColor(resources.getColor(R.color.red))
         textEvent.setTextColor(resources.getColor(R.color.white))
         textSeries.setTextColor(resources.getColor(R.color.white))
+        textStories.setTextColor(resources.getColor(R.color.white))
     }
 
     private fun eventActive() = binding.run {
         textComic.setTextColor(resources.getColor(R.color.white))
         textEvent.setTextColor(resources.getColor(R.color.red))
         textSeries.setTextColor(resources.getColor(R.color.white))
+        textStories.setTextColor(resources.getColor(R.color.white))
     }
 
     private fun seriesActive() = binding.run {
         textComic.setTextColor(resources.getColor(R.color.white))
         textEvent.setTextColor(resources.getColor(R.color.white))
         textSeries.setTextColor(resources.getColor(R.color.red))
+        textStories.setTextColor(resources.getColor(R.color.white))
+    }
+
+    private fun storiesActive() = binding.run {
+        textStories.setTextColor(resources.getColor(R.color.red))
+        textComic.setTextColor(resources.getColor(R.color.white))
+        textEvent.setTextColor(resources.getColor(R.color.white))
+        textSeries.setTextColor(resources.getColor(R.color.white))
+
+
     }
 
     private fun updateButtonColors(position : Int) = binding.run {
@@ -84,6 +98,7 @@ class DetailsCharacterFragment :
             0 -> comicActive()
             1 -> eventActive()
             2 -> seriesActive()
+            3 -> storiesActive()
         }
     }
 
@@ -96,6 +111,9 @@ class DetailsCharacterFragment :
         }
         textSeries.setOnClickListener {
             viewPager2.currentItem = 2
+        }
+        textStories.setOnClickListener {
+            viewPager2.currentItem = 3
         }
         updateButtonColors(viewPager2.currentItem)
     }
@@ -116,21 +134,6 @@ class DetailsCharacterFragment :
             .show()
     }
 
-    override fun onCreateOptionsMenu(menu : Menu, inflater : MenuInflater) {
-        inflater.inflate(R.menu.menu_details, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item : MenuItem) : Boolean {
-        when (item.itemId) {
-            R.id.favorite -> {
-                viewModel.insert(characterModel)
-                toast(getString(R.string.saved_successfully))
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     private fun onLoadCharacter(characterModel : CharacterModel) = with(binding) {
         tvNameCharacterDetails.text = characterModel.name
         if (characterModel.description.isEmpty()) {
@@ -146,10 +149,34 @@ class DetailsCharacterFragment :
         )
     }
 
+    fun hideBottom(const: String) = binding.run {
+        when(const) {
+            Constants.HIDE_COMIC -> textComic.setGone()
+            Constants.HIDE_EVENT -> textEvent.setGone()
+            Constants.HIDE_SERIES -> textSeries.setGone()
+            Constants.HIDE_STORIES -> textStories.setGone()
+        }
+    }
+
     override fun getViewBinding(
         inflater : LayoutInflater,
         container : ViewGroup?
     ) : FragmentDetailsCharacterBinding =
         FragmentDetailsCharacterBinding.inflate(inflater, container, false)
+
+    override fun onCreateOptionsMenu(menu : Menu, inflater : MenuInflater) {
+        inflater.inflate(R.menu.menu_details, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item : MenuItem) : Boolean {
+        when (item.itemId) {
+            R.id.favorite -> {
+                viewModel.insert(characterModel)
+                toast(getString(R.string.saved_successfully))
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
 }

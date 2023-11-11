@@ -13,4 +13,9 @@ object Constants {
 
     const val LAST_SEARCH_QUERY = "last_search_query"
     const val DEFAULT_QUERY = ""
+
+    const val HIDE_COMIC = "comic"
+    const val HIDE_STORIES = "stories"
+    const val HIDE_SERIES = "series"
+    const val HIDE_EVENT = "event"
 }

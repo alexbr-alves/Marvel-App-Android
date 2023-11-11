@@ -61,6 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="24dp"
+                android:padding="5dp"
                 android:text="@string/comics"
                 android:textAlignment="inherit"
                 android:textColor="@color/red"
@@ -75,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="24dp"
+                android:padding="5dp"
                 android:text="@string/title_fragment_event"
                 android:textAlignment="inherit"
                 android:textColor="@color/white"
@@ -89,11 +91,27 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="24dp"
+                android:padding="5dp"
                 android:text="@string/title_fragment_series"
                 android:textAlignment="inherit"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/text_event"
+                app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_stories"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="24dp"
+                android:padding="5dp"
+                android:text="Stories"
+                android:textAlignment="inherit"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/text_series"
                 app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails" />
 
             <androidx.viewpager2.widget.ViewPager2
