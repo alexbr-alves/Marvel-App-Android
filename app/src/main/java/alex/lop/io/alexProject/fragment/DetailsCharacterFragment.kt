@@ -3,17 +3,11 @@ package alex.lop.io.alexProject.fragment
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.databinding.FragmentDetailsCharacterBinding
-import alex.lop.io.alexProject.adapters.ComicCharacterAdapter
 import alex.lop.io.alexProject.adapters.DetailsAdapter
 import alex.lop.io.alexProject.adapters.EventCharacterAdapter
-import alex.lop.io.alexProject.adapters.SeriesCharacterAdapter
 import alex.lop.io.alexProject.viewModel.DetailsCharacterViewModel
-import alex.lop.io.alexProject.state.ResourceState
-import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
-import alex.lop.io.alexProject.util.setGone
-import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,16 +17,10 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @AndroidEntryPoint
 class DetailsCharacterFragment :
@@ -50,20 +38,24 @@ class DetailsCharacterFragment :
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         characterModel = args.character
-        viewPager2 = view.findViewById<ViewPager2>(R.id.viewPager2)
-        val detailsAdapter = DetailsAdapter(childFragmentManager, lifecycle, characterModel.id)
-        viewPager2?.adapter = detailsAdapter
-
         descriptionCharacter()
         onLoadCharacter(characterModel)
+        setupViewPager()
+    }
+
+    private fun setupViewPager() {
         handleClickViewpager()
         handleViewPager()
     }
 
     private fun handleViewPager() {
+        viewPager2 = view?.findViewById<ViewPager2>(R.id.viewPager2)
+        val detailsAdapter = DetailsAdapter(childFragmentManager, lifecycle, characterModel.id)
+        viewPager2?.adapter = detailsAdapter
         viewPager2?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position : Int) {
                 super.onPageSelected(position)
+                viewPager2?.offscreenPageLimit = 1
                 updateButtonColors(position)
             }
         })
@@ -109,7 +101,6 @@ class DetailsCharacterFragment :
     }
 
     private fun descriptionCharacter() = binding.run {
-
         tvDescriptionCharacterDetails.setOnClickListener {
             onShowDialog(characterModel)
         }

@@ -6,18 +6,32 @@
     android:layout_height="match_parent"
     android:layout_marginTop="10dp">
 
+    <TextView
+        android:id="@+id/text_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:flow_horizontalAlign="center"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:text="This character doesn't have comics"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvComics"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="8dp"
-        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/layout_mini_cards" />
+        android:nestedScrollingEnabled="false"
+        tools:listitem="@layout/layout_mini_cards" >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <ProgressBar
         android:id="@+id/progressBarDetail"
