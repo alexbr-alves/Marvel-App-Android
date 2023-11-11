@@ -14,6 +14,7 @@
         android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_constraint"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -42,7 +43,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvDescriptionCharacterDetails"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
                 android:layout_marginBottom="10dp"
@@ -51,8 +52,20 @@
                 android:textAlignment="inherit"
                 android:textColor="@color/white"
                 android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/image_favorite"
                 app:layout_constraintBottom_toBottomOf="@id/imgCharacterDetails"
                 app:layout_constraintStart_toStartOf="@id/imgCharacterDetails" />
+
+            <ImageView
+                android:id="@+id/image_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/favorite"
+                app:layout_constraintBottom_toBottomOf="@+id/imgCharacterDetails"
+                app:layout_constraintEnd_toEndOf="@+id/imgCharacterDetails"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:contentDescription="@string/app_name" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_comic"

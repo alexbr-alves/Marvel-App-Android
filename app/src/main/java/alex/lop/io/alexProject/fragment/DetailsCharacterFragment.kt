@@ -7,13 +7,10 @@ import alex.lop.io.alexProject.databinding.FragmentDetailsCharacterBinding
 import alex.lop.io.alexProject.adapters.DetailsAdapter
 import alex.lop.io.alexProject.adapters.EventCharacterAdapter
 import alex.lop.io.alexProject.adapters.SeriesCharacterAdapter
-import alex.lop.io.alexProject.adapters.StoriesCharacterAdapter
-import alex.lop.io.alexProject.util.Constants
 import alex.lop.io.alexProject.viewModel.DetailsCharacterViewModel
 import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
 import alex.lop.io.alexProject.util.setGone
-import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.toast
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -39,7 +36,6 @@ class DetailsCharacterFragment :
     private var comicCharacterAdapter = ComicCharacterAdapter()
     private var eventCharacterAdapter = EventCharacterAdapter()
     private var seriesCharacterAdapter = SeriesCharacterAdapter()
-    private var storiesCharacterAdapter = StoriesCharacterAdapter()
 
     override fun onCreate(savedInstanceState : Bundle?) {
         setHasOptionsMenu(true)
@@ -51,6 +47,7 @@ class DetailsCharacterFragment :
         characterModel = args.character
         descriptionCharacter()
         onLoadCharacter(characterModel)
+        viewModel.searchFavorite(characterModel.id)
         setupViewPager()
     }
 
@@ -132,6 +129,18 @@ class DetailsCharacterFragment :
         tvDescriptionCharacterDetails.setOnClickListener {
             onShowDialog(characterModel)
         }
+        imageFavorite.setOnClickListener {
+            viewModel.searchCharacter.observe(viewLifecycleOwner) {
+                if (it) {
+                    viewModel.delete(characterModel)
+                    binding.imageFavorite.setImageResource(R.drawable.favorite)
+                } else {
+                    viewModel.insert(characterModel)
+                    binding.imageFavorite.setImageResource(R.drawable.favorite_red)
+
+                }
+            }
+        }
     }
 
     private fun onShowDialog(characterModel : CharacterModel) {
@@ -145,17 +154,23 @@ class DetailsCharacterFragment :
     }
 
     private fun onLoadCharacter(characterModel : CharacterModel) = with(binding) {
-        tvNameCharacterDetails.text = characterModel.name
-        if (characterModel.description.isEmpty()) {
-            tvDescriptionCharacterDetails.setGone()
-        } else {
-            tvDescriptionCharacterDetails.text = characterModel.description.limitDescription(100)
+        viewModel.searchCharacter.observe(viewLifecycleOwner) {
+            val color = if (it) R.drawable.favorite_red else R.drawable.favorite
+            binding.imageFavorite.setImageResource(color)
+
+            tvNameCharacterDetails.text = characterModel.name
+            if (characterModel.description.isEmpty()) {
+                tvDescriptionCharacterDetails.setGone()
+            } else {
+                tvDescriptionCharacterDetails.text =
+                    characterModel.description.limitDescription(100)
+            }
+            loadImage(
+                imgCharacterDetails,
+                characterModel.thumbnailModel.path,
+                characterModel.thumbnailModel.extension
+            )
         }
-        loadImage(
-            imgCharacterDetails,
-            characterModel.thumbnailModel.path,
-            characterModel.thumbnailModel.extension
-        )
     }
 
     private fun hideButton() = binding.run {

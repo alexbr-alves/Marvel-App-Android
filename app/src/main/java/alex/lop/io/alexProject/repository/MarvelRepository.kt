@@ -27,4 +27,5 @@ class MarvelRepository @Inject constructor(
     suspend fun insert(characterModel : CharacterModel) = dao.insert(characterModel)
     fun getAll() = dao.getAll()
     suspend fun delete(characterModel : CharacterModel) = dao.delete(characterModel)
+    suspend fun searchFavorite(id : Int) = dao.searchFavorite(id)
 }
