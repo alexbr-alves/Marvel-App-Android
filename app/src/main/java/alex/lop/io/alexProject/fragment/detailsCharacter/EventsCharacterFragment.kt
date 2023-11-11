@@ -50,7 +50,7 @@ class EventsCharacterFragment( private val characterId: Int) :
                         if (values.data.result.isNotEmpty()) {
                             eventCharacterAdapter.events = values.data.result.toList()
                         } else {
-                            toast(getString(R.string.empty_list_comics))
+                            binding.textEmpty.setVisible()
                         }
                     }
                 }

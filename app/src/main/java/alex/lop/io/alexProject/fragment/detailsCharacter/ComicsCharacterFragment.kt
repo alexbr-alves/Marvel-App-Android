@@ -58,7 +58,7 @@ BaseFragment<FragmentComicsCharapterBinding,ComicsCharacterViewModel>(){
                         if (values.data.result.isNotEmpty()) {
                             comicCharacterAdapter.comics = values.data.result.toList()
                         } else {
-                            toast(getString(R.string.empty_list_comics))
+                            binding.textEmpty.setVisible()
                         }
                     }
                 }

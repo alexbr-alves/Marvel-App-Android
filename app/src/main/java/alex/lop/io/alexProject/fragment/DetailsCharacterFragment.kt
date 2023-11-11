@@ -1,15 +1,19 @@
 package alex.lop.io.alexProject.fragment
 
 import alex.lop.io.alexProject.R
+import alex.lop.io.alexProject.adapters.ComicCharacterAdapter
 import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.databinding.FragmentDetailsCharacterBinding
 import alex.lop.io.alexProject.adapters.DetailsAdapter
 import alex.lop.io.alexProject.adapters.EventCharacterAdapter
+import alex.lop.io.alexProject.adapters.SeriesCharacterAdapter
+import alex.lop.io.alexProject.adapters.StoriesCharacterAdapter
 import alex.lop.io.alexProject.util.Constants
 import alex.lop.io.alexProject.viewModel.DetailsCharacterViewModel
 import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
 import alex.lop.io.alexProject.util.setGone
+import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.toast
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -32,6 +36,11 @@ class DetailsCharacterFragment :
     private lateinit var characterModel : CharacterModel
     private var viewPager2 : ViewPager2? = null
 
+    private var comicCharacterAdapter = ComicCharacterAdapter()
+    private var eventCharacterAdapter = EventCharacterAdapter()
+    private var seriesCharacterAdapter = SeriesCharacterAdapter()
+    private var storiesCharacterAdapter = StoriesCharacterAdapter()
+
     override fun onCreate(savedInstanceState : Bundle?) {
         setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
@@ -46,6 +55,7 @@ class DetailsCharacterFragment :
     }
 
     private fun setupViewPager() {
+        hideButton()
         handleClickViewpager()
         handleViewPager()
     }
@@ -137,8 +147,7 @@ class DetailsCharacterFragment :
     private fun onLoadCharacter(characterModel : CharacterModel) = with(binding) {
         tvNameCharacterDetails.text = characterModel.name
         if (characterModel.description.isEmpty()) {
-            tvDescriptionCharacterDetails.text =
-                requireContext().getString(R.string.text_description_empty)
+            tvDescriptionCharacterDetails.setGone()
         } else {
             tvDescriptionCharacterDetails.text = characterModel.description.limitDescription(100)
         }
@@ -149,12 +158,13 @@ class DetailsCharacterFragment :
         )
     }
 
-    fun hideBottom(const: String) = binding.run {
-        when(const) {
-            Constants.HIDE_COMIC -> textComic.setGone()
-            Constants.HIDE_EVENT -> textEvent.setGone()
-            Constants.HIDE_SERIES -> textSeries.setGone()
-            Constants.HIDE_STORIES -> textStories.setGone()
+    private fun hideButton() = binding.run {
+        if (comicCharacterAdapter.itemCount == 0) {
+            eventActive()
+        } else if (eventCharacterAdapter.itemCount == 0) {
+            seriesActive()
+        } else if (seriesCharacterAdapter.itemCount == 0) {
+            storiesActive()
         }
     }
 

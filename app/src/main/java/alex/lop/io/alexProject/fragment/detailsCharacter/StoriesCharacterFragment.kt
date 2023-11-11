@@ -50,7 +50,7 @@ class StoriesCharacterFragment(private val characterId: Int) :
                         if (values.data.result.isNotEmpty()) {
                             storiesCharacterAdapter.stories = values.data.result.toList()
                         } else {
-                            toast(getString(R.string.empty_list_comics))
+                            binding.textEmpty.setVisible()
                         }
                     }
                 }
