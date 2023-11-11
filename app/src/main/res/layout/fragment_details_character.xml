@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/black"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/black">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -20,10 +20,8 @@
                 android:id="@+id/imgCharacterDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="500dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:contentDescription="@string/app_name"
-                android:scaleType="centerCrop"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
@@ -35,37 +33,37 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
                 android:layout_marginBottom="10dp"
+                android:background="@color/black"
                 android:text="@string/tx_item_name"
                 android:textColor="@color/white"
-                android:background="@color/black"
-                app:layout_constraintStart_toStartOf="@id/imgCharacterDetails"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@id/tvDescriptionCharacterDetails"
-                android:textSize="18sp" />
+                app:layout_constraintStart_toStartOf="@id/imgCharacterDetails" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvDescriptionCharacterDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/black"
                 android:text="@string/tv_item_description"
                 android:textAlignment="inherit"
-                android:layout_marginHorizontal="12dp"
-                android:background="@color/black"
-                android:layout_marginBottom="10dp"
-                app:layout_constraintStart_toStartOf="@id/imgCharacterDetails"
+                android:textColor="@color/white"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@id/imgCharacterDetails"
-                android:textSize="16sp" />
+                app:layout_constraintStart_toStartOf="@id/imgCharacterDetails" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_comic"
                 style="@style/TextAppearance.MaterialComponents.Subtitle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/comics"
-                android:textColor="@color/red"
                 android:textAlignment="inherit"
-                android:layout_marginStart="12dp"
+                android:textColor="@color/red"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/imgCharacterDetails"
                 app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails" />
@@ -75,53 +73,38 @@
                 style="@style/TextAppearance.MaterialComponents.Subtitle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/title_fragment_event"
-                android:textColor="@color/white"
                 android:textAlignment="inherit"
+                android:textColor="@color/white"
                 android:textSize="16sp"
-                android:layout_marginStart="12dp"
                 app:layout_constraintStart_toEndOf="@+id/text_comic"
-                app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails"/>
+                app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails" />
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_series"
                 style="@style/TextAppearance.MaterialComponents.Subtitle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/title_fragment_series"
-                android:textColor="@color/white"
                 android:textAlignment="inherit"
+                android:textColor="@color/white"
                 android:textSize="16sp"
-                android:layout_marginStart="12dp"
                 app:layout_constraintStart_toEndOf="@+id/text_event"
-                app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails"/>
+                app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails" />
 
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvComics"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginTop="8dp"
-                android:scrollbars="vertical"
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_comic"
-                tools:listitem="@layout/layout_mini_cards" />
+                app:layout_constraintTop_toBottomOf="@+id/text_comic" />
 
-            <ProgressBar
-                android:id="@+id/progressBarDetail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:indeterminateTint="@color/red"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
