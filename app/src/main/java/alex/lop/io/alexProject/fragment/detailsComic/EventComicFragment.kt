@@ -1,7 +1,7 @@
 package alex.lop.io.alexProject.fragment.detailsComic
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.adapters.EventComicAdapter
+import alex.lop.io.alexProject.adapters.EventDetailsAdapter
 import alex.lop.io.alexProject.databinding.FragmentEventComicBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.state.ResourceState
@@ -25,7 +25,7 @@ import timber.log.Timber
 class EventComicFragment(private val comicId: Int) :
 BaseFragment<FragmentEventComicBinding, EventComicViewModel>(){
     override val viewModel : EventComicViewModel by viewModels()
-    private val eventComicAdapter by lazy { EventComicAdapter() }
+    private val eventDetailsAdapter by lazy { EventDetailsAdapter() }
 
     override fun getViewBinding(
         inflater : LayoutInflater,
@@ -41,7 +41,7 @@ BaseFragment<FragmentEventComicBinding, EventComicViewModel>(){
 
     private fun setupRecyclerView() = with(binding) {
         rvEventCharacter.apply {
-            adapter = eventComicAdapter
+            adapter = eventDetailsAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
@@ -55,7 +55,7 @@ BaseFragment<FragmentEventComicBinding, EventComicViewModel>(){
                         if (values.data.result.isEmpty()) {
                             binding.textEmpty.setVisible()
                         } else {
-                            eventComicAdapter.events = values.data.result.toList()
+                            eventDetailsAdapter.events = values.data.result.toList()
                         }
                     }
                 }

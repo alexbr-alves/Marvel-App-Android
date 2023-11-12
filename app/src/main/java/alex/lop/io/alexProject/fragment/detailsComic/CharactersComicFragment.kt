@@ -2,7 +2,7 @@ package alex.lop.io.alexProject.fragment.detailsComic
 
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.adapters.CharacterComicAdapter
+import alex.lop.io.alexProject.adapters.CharacterDetailsAdapter
 import alex.lop.io.alexProject.databinding.FragmentCharacterComicBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.state.ResourceState
@@ -27,7 +27,7 @@ class CharactersComicFragment(private val comicId: Int) :
     BaseFragment<FragmentCharacterComicBinding, CharactersComicViewModel>() {
 
     override val viewModel: CharactersComicViewModel by viewModels()
-    private val characterComicAdapter by lazy { CharacterComicAdapter() }
+    private val characterDetailsAdapter by lazy { CharacterDetailsAdapter() }
 
     override fun getViewBinding(
         inflater: LayoutInflater,
@@ -44,7 +44,7 @@ class CharactersComicFragment(private val comicId: Int) :
 
     private fun setupRecyclerView() = with(binding) {
         rvComics.apply {
-            adapter = characterComicAdapter
+            adapter = characterDetailsAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
@@ -58,7 +58,7 @@ class CharactersComicFragment(private val comicId: Int) :
                         if (values.data.results.isEmpty()) {
                             binding.textEmpty.setVisible()
                         } else {
-                            characterComicAdapter.characters = values.data.results.toList()
+                            characterDetailsAdapter.characters = values.data.results.toList()
                         }
                     }
                 }

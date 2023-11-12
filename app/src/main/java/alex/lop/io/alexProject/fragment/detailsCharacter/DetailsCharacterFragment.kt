@@ -1,17 +1,12 @@
 package alex.lop.io.alexProject.fragment.detailsCharacter
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.adapters.ComicCharacterAdapter
 import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.databinding.FragmentDetailsCharacterBinding
 import alex.lop.io.alexProject.adapters.DetailsCharacterAdapter
-import alex.lop.io.alexProject.adapters.EventCharacterAdapter
-import alex.lop.io.alexProject.adapters.SeriesCharacterAdapter
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.viewModel.detailCharacter.DetailsCharacterViewModel
-import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
-import alex.lop.io.alexProject.util.setGone
 import alex.lop.io.alexProject.util.toast
 import android.os.Bundle
 import android.view.LayoutInflater

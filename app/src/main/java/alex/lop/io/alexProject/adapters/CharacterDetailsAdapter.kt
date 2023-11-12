@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
-class CharacterComicAdapter : RecyclerView.Adapter<CharacterComicAdapter.CharacterViewHolder>() {
+class CharacterDetailsAdapter : RecyclerView.Adapter<CharacterDetailsAdapter.CharacterViewHolder>() {
 
     inner class CharacterViewHolder(val binding: LayoutMiniCardsBinding) :
         RecyclerView.ViewHolder(binding.root)

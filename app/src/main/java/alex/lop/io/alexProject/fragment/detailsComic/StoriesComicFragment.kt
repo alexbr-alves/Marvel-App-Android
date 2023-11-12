@@ -1,16 +1,13 @@
 package alex.lop.io.alexProject.fragment.detailsComic
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.adapters.CreatorComicAdapter
-import alex.lop.io.alexProject.adapters.StoriesComicAdapter
-import alex.lop.io.alexProject.databinding.FragmentCreatorComicBinding
+import alex.lop.io.alexProject.adapters.StoriesDetailsAdapter
 import alex.lop.io.alexProject.databinding.FragmentStoriesComicBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
-import alex.lop.io.alexProject.viewModel.detailsComics.CreatorComicViewModel
 import alex.lop.io.alexProject.viewModel.detailsComics.StoriesComicViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -28,7 +25,7 @@ import timber.log.Timber
 class StoriesComicFragment (private val comicId: Int) :
     BaseFragment<FragmentStoriesComicBinding, StoriesComicViewModel>(){
     override val viewModel : StoriesComicViewModel by viewModels()
-    private val storiesComicAdapter by lazy { StoriesComicAdapter() }
+    private val storiesDetailsAdapter by lazy { StoriesDetailsAdapter() }
 
     override fun getViewBinding(
         inflater : LayoutInflater,
@@ -44,7 +41,7 @@ class StoriesComicFragment (private val comicId: Int) :
 
     private fun setupRecyclerView() = with(binding) {
         rvStoriesCharacter.apply {
-            adapter = storiesComicAdapter
+            adapter = storiesDetailsAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
@@ -58,7 +55,7 @@ class StoriesComicFragment (private val comicId: Int) :
                         if (values.data.result.isEmpty()) {
                             binding.textEmpty.setVisible()
                         } else {
-                            storiesComicAdapter.stories = values.data.result.toList()
+                            storiesDetailsAdapter.stories = values.data.result.toList()
                         }
                     }
                 }
