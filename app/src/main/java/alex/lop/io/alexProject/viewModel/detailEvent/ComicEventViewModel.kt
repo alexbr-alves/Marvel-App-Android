@@ -1,4 +1,4 @@
-package alex.lop.io.alexProject.viewModel.detailCharacter
+package alex.lop.io.alexProject.viewModel.detailEvent
 
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.data.model.comic.ComicModelResponse
@@ -15,33 +15,32 @@ import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
-class ComicsCharacterViewModel @Inject constructor(
+class ComicEventViewModel @Inject constructor(
     private val repository : MarvelRepository
 ) : ViewModel() {
-    private val _comicList =
+    private val _list =
         MutableStateFlow<ResourceState<ComicModelResponse>>(ResourceState.Loading())
-    val comicList : StateFlow<ResourceState<ComicModelResponse>> = _comicList
+    val list : StateFlow<ResourceState<ComicModelResponse>> = _list
 
-    fun fetchComic(characterId : Int) = viewModelScope.launch {
-        safeFetchComic(characterId)
+    fun fetch(eventId : Int) = viewModelScope.launch {
+        safeFetchComic(eventId)
     }
 
-    private suspend fun safeFetchComic(characterId : Int) {
-        _comicList.value = ResourceState.Loading()
+    private suspend fun safeFetchComic(eventId : Int) {
+        _list.value = ResourceState.Loading()
         try {
-            val response = repository.getComicsCharacter(characterId)
-            _comicList.value = handleComicResponse(response)
+            val response = repository.getComicEvent(eventId)
+            _list.value = handleComicResponse(response)
         } catch (t : Throwable) {
             when (t) {
-                is IOException -> _comicList.value =
+                is IOException -> _list.value =
                     ResourceState.Error(R.string.error_internet_connection.toString())
 
-                else -> _comicList.value =
+                else -> _list.value =
                     ResourceState.Error(R.string.error_data_conversion_failure.toString())
             }
         }
     }
-
 
     private fun handleComicResponse(response : Response<ComicModelResponse>) : ResourceState<ComicModelResponse> {
         if (response.isSuccessful) {
