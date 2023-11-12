@@ -3,27 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/black"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/black">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_details"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
         android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_constraint"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/imgCharacterDetails"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="500dp"
                 android:contentDescription="@string/app_name"
-                android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
@@ -33,68 +32,111 @@
                 style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/black"
                 android:text="@string/tx_item_name"
                 android:textColor="@color/white"
                 android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/imgCharacterDetails"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintBottom_toTopOf="@id/tvDescriptionCharacterDetails"
+                app:layout_constraintStart_toStartOf="@id/imgCharacterDetails" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvDescriptionCharacterDetails"
-                style="@style/TextAppearance.MaterialComponents.Caption"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:textColor="@color/white"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/black"
                 android:text="@string/tv_item_description"
                 android:textAlignment="inherit"
+                android:textColor="@color/white"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tvNameCharacterDetails"
-                app:layout_constraintTop_toBottomOf="@+id/tvNameCharacterDetails" />
+                app:layout_constraintEnd_toStartOf="@+id/image_favorite"
+                app:layout_constraintBottom_toBottomOf="@id/imgCharacterDetails"
+                app:layout_constraintStart_toStartOf="@id/imgCharacterDetails" />
+
+            <ImageView
+                android:id="@+id/image_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/favorite"
+                app:layout_constraintBottom_toBottomOf="@+id/imgCharacterDetails"
+                app:layout_constraintEnd_toEndOf="@+id/imgCharacterDetails"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:contentDescription="@string/app_name" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/textView"
+                android:id="@+id/text_comic"
                 style="@style/TextAppearance.MaterialComponents.Subtitle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="24dp"
+                android:padding="5dp"
                 android:text="@string/comics"
-                android:textColor="@color/red"
                 android:textAlignment="inherit"
+                android:textColor="@color/red"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/imgCharacterDetails"
                 app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvComics"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginTop="8dp"
-                android:scrollbars="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
-                tools:listitem="@layout/item_comics_character" />
-
-            <ProgressBar
-                android:id="@+id/progressBarDetail"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_event"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:indeterminateTint="@color/red"
-                android:visibility="gone"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="24dp"
+                android:padding="5dp"
+                android:text="@string/title_fragment_event"
+                android:textAlignment="inherit"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/text_comic"
+                app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_series"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="24dp"
+                android:padding="5dp"
+                android:text="@string/title_fragment_series"
+                android:textAlignment="inherit"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/text_event"
+                app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_stories"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="24dp"
+                android:padding="5dp"
+                android:text="Stories"
+                android:textAlignment="inherit"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/text_series"
+                app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintTop_toBottomOf="@+id/text_stories" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.core.widget.NestedScrollView>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

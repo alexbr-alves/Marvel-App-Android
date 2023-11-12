@@ -20,4 +20,7 @@ interface MarvelDao {
 
     @Delete
     suspend fun delete(characterModel : CharacterModel)
+
+    @Query("Select COUNT(*) from characterModel WHERE id = :characterId")
+    suspend fun searchFavorite(characterId: Int) : Boolean
 }

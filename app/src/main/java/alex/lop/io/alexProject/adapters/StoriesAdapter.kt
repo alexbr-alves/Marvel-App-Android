@@ -2,10 +2,8 @@ package alex.lop.io.alexProject.adapters
 
 
 import alex.lop.io.alexProject.data.model.stories.StoriesModel
-import alex.lop.io.alexProject.databinding.LayoutCardNameBinding
 import alex.lop.io.alexProject.databinding.LayoutNameDescritionBinding
 import alex.lop.io.alexProject.util.limitDescription
-import alex.lop.io.alexProject.util.setGone
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer

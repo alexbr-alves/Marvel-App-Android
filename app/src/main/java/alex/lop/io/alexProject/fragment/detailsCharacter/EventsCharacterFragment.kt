@@ -1,52 +1,56 @@
-package alex.lop.io.alexProject.fragment
+package alex.lop.io.alexProject.fragment.detailsCharacter
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.adapters.CreatorAdapter
-import alex.lop.io.alexProject.databinding.FragmentCreatorBinding
+import alex.lop.io.alexProject.adapters.EventCharacterAdapter
+import alex.lop.io.alexProject.databinding.FragmentEventsCharapterBinding
+import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
-import alex.lop.io.alexProject.viewModel.CreatorViewModel
+import alex.lop.io.alexProject.viewModel.detailCharacter.EventsCharacterViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class CreatorFragment : BaseFragment<FragmentCreatorBinding, CreatorViewModel>() {
-    override val viewModel : CreatorViewModel by viewModels()
-    private val creatorAdapter by lazy { CreatorAdapter() }
+class EventsCharacterFragment( private val characterId: Int) :
+    BaseFragment<FragmentEventsCharapterBinding, EventsCharacterViewModel>() {
+
+    private val eventCharacterAdapter by lazy { EventCharacterAdapter() }
+    override val viewModel : EventsCharacterViewModel by viewModels()
 
     override fun getViewBinding(
         inflater : LayoutInflater,
         container : ViewGroup?
-    ) : FragmentCreatorBinding =
-        FragmentCreatorBinding.inflate(inflater, container, false)
+    ) : FragmentEventsCharapterBinding =
+        FragmentEventsCharapterBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.fetchEvent(characterId)
         setupRecycleView()
         collectObserver()
     }
 
-    private fun collectObserver() = lifecycleScope.launch {
-        viewModel.creatorList.collect { resource ->
+    private fun collectObserver() = lifecycleScope.launch{
+        viewModel.eventList.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
                     binding.progressBarDetail.setInvisible()
                     resource.data?.let { values ->
                         if (values.data.result.isNotEmpty()) {
-                            creatorAdapter.creatorList = values.data.result.toList()
+                            eventCharacterAdapter.events = values.data.result.toList()
                         } else {
-                            toast(getString(R.string.error_empty_list))
+                            binding.textEmpty.setVisible()
                         }
                     }
                 }
@@ -54,8 +58,8 @@ class CreatorFragment : BaseFragment<FragmentCreatorBinding, CreatorViewModel>()
                 is ResourceState.Error -> {
                     binding.progressBarDetail.setInvisible()
                     resource.message?.let { message ->
-                        toast(R.string.an_error_occurred.toString())
-                        Timber.tag("CreatorFragment").e("Error -> $message")
+                        toast(getString(R.string.an_error_occurred))
+                        Timber.tag("ListCharacterFragment").e("Error -> $message")
                     }
                 }
 
@@ -65,14 +69,16 @@ class CreatorFragment : BaseFragment<FragmentCreatorBinding, CreatorViewModel>()
 
                 else -> {}
             }
+
         }
     }
 
     private fun setupRecycleView() = with(binding) {
-        rvCreatorList.apply {
-            adapter = creatorAdapter
-            layoutManager = GridLayoutManager(context, 2)
+        rvEvents.apply {
+            adapter = eventCharacterAdapter
+            layoutManager = LinearLayoutManager(context)
         }
     }
+
 
 }

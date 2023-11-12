@@ -52,4 +52,28 @@ interface ServiceApi {
             encoded = true
         ) characterId : Int
     ) : Response<ComicModelResponse>
+
+    @GET("characters/{characterId}/events")
+    suspend fun getEventsCharacter(
+        @Path(
+            value = "characterId",
+            encoded = true
+        ) characterId : Int
+    ) : Response<EventModelResponse>
+
+    @GET("characters/{characterId}/series")
+    suspend fun getSeriesCharacter(
+        @Path(
+            value = "characterId",
+            encoded = true
+        ) characterId : Int
+    ) : Response<SeriesModelResponse>
+
+    @GET("characters/{characterId}/stories")
+    suspend fun getStoriesCharacter(
+        @Path(
+            value = "characterId",
+            encoded = true
+        ) characterId : Int
+    ) : Response<StoriesModelResponse>
 }

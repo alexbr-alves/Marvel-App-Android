@@ -1,6 +1,6 @@
 package alex.lop.io.alexProject.adapters
 
-import alex.lop.io.alexProject.data.model.comic.ComicModel
+import alex.lop.io.alexProject.data.model.event.EventModel
 import alex.lop.io.alexProject.databinding.LayoutMiniCardsBinding
 import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
@@ -10,20 +10,20 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
-class ComicCharacterAdapter : RecyclerView.Adapter<ComicCharacterAdapter.ComicViewHolder>() {
+class EventCharacterAdapter : RecyclerView.Adapter<EventCharacterAdapter.EventViewHolder>()  {
 
-    inner class ComicViewHolder(val binding : LayoutMiniCardsBinding) :
+    inner class EventViewHolder(val binding : LayoutMiniCardsBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback = object : DiffUtil.ItemCallback<ComicModel>() {
+    private val differCallback = object : DiffUtil.ItemCallback<EventModel>() {
 
-        override fun areItemsTheSame(oldItem : ComicModel, newItem : ComicModel) : Boolean {
+        override fun areItemsTheSame(oldItem : EventModel, newItem : EventModel) : Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
 
         override fun areContentsTheSame(
-            oldItem : ComicModel,
-            newItem : ComicModel
+            oldItem : EventModel,
+            newItem : EventModel
         ) : Boolean {
             return oldItem.id == newItem.id &&
                     oldItem.title == newItem.title &&
@@ -36,37 +36,36 @@ class ComicCharacterAdapter : RecyclerView.Adapter<ComicCharacterAdapter.ComicVi
 
     private val differ = AsyncListDiffer(this, differCallback)
 
-    var comics : List<ComicModel>
+    var events : List<EventModel>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
     override fun getItemCount(): Int {
-        return comics.size
+        return events.size
     }
 
-    override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : ComicViewHolder {
-        return ComicViewHolder(
+    override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : EventViewHolder {
+        return EventViewHolder(
             LayoutMiniCardsBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
     }
 
-    override fun onBindViewHolder(holder : ComicViewHolder, position : Int) {
-        val comic = comics[position]
+    override fun onBindViewHolder(holder : EventViewHolder, position : Int) {
+        val event = events[position]
         holder.binding.apply {
-            textName.text = comic.title
-            if (!comic.description.isNullOrEmpty()) {
-                textDescription.text = comic.description.limitDescription(50)
+            textName.text = event.title
+            if (!event.description.isNullOrEmpty()) {
+                textDescription.text = event.description.limitDescription(50)
             }
 
             loadImage(
                 image,
-                comic.thumbnailModel.path,
-                comic.thumbnailModel.extension
+                event.thumbnailModel.path,
+                event.thumbnailModel.extension
             )
         }
 
     }
-
 }

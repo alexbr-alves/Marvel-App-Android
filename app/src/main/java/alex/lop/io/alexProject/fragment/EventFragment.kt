@@ -46,7 +46,7 @@ class EventFragment : BaseFragment<FragmentEventBinding,EventViewModel>(){
                         if (values.data.result.isNotEmpty()) {
                             eventAdapter.eventList = values.data.result.toList()
                         } else {
-                            toast("Lista vazia")
+                            toast(getString(R.string.error_empty_list))
                         }
                     }
                 }

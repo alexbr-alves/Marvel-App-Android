@@ -1,4 +1,4 @@
-package alex.lop.io.alexProject.viewModel
+package alex.lop.io.alexProject.viewModel.detailCharacter
 
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.data.model.stories.StoriesModelResponse
@@ -15,37 +15,35 @@ import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
-class StoriesViewModel @Inject constructor(
-    private val repository : MarvelRepository
-): ViewModel() {
+class StoriesCharacterViewModel @Inject constructor(
+    val repository: MarvelRepository
+) : ViewModel() {
 
-    private val _storiesList =
+    private val _storyList =
         MutableStateFlow<ResourceState<StoriesModelResponse>>(ResourceState.Loading())
-    val storiesList : StateFlow<ResourceState<StoriesModelResponse>> = _storiesList
+    val storyList: StateFlow<ResourceState<StoriesModelResponse>> = _storyList
 
-    init {
-        fetch()
+    fun fetchStory(characterId: Int) = viewModelScope.launch {
+        safeFetchStory(characterId)
     }
 
-    private fun fetch() = viewModelScope.launch {
-        safeFetch()
-    }
-
-    private suspend fun safeFetch() {
+    private suspend fun safeFetchStory(characterId: Int) {
+        _storyList.value = ResourceState.Loading()
         try {
-            val response = repository.stories()
-            _storiesList.value = handleResponse(response)
+            val response = repository.getStoriesCharacter(characterId)
+            _storyList.value = handleStoryResponse(response)
         } catch (t: Throwable) {
-            when(t) {
-                is IOException -> _storiesList.value =
+            when (t) {
+                is IOException -> _storyList.value =
                     ResourceState.Error(R.string.error_internet_connection.toString())
 
-                else -> _storiesList.value =
+                else -> _storyList.value =
                     ResourceState.Error(R.string.error_data_conversion_failure.toString())
             }
         }
     }
-    private fun handleResponse(response : Response<StoriesModelResponse>) : ResourceState<StoriesModelResponse> {
+
+    private fun handleStoryResponse(response: Response<StoriesModelResponse>): ResourceState<StoriesModelResponse> {
         if (response.isSuccessful) {
             response.body()?.let { values ->
                 return ResourceState.Success(values)
@@ -53,5 +51,4 @@ class StoriesViewModel @Inject constructor(
         }
         return ResourceState.Error(response.message())
     }
-
 }
