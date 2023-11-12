@@ -50,6 +50,12 @@ class ComicsAdapter : RecyclerView.Adapter<ComicsAdapter.ComicsViewHolder>() {
         )
     }
 
+    private var onItemClickListener : ((ComicModel) -> Unit)? = null
+
+    fun setOnClickListener(listener : (ComicModel) -> Unit) {
+        onItemClickListener = listener
+    }
+
     override fun onBindViewHolder(holder : ComicsViewHolder, position : Int) {
         val comic = comicList[position]
         holder.binding.apply {

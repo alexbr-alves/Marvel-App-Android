@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_constraint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/image_comic"
+                android:layout_width="wrap_content"
+                android:layout_height="500dp"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_name"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/black"
+                android:text="@string/tx_item_name"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/text_description"
+                app:layout_constraintStart_toStartOf="@id/image_comic" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/black"
+                android:text="@string/tv_item_description"
+                android:textAlignment="inherit"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/image_favorite"
+                app:layout_constraintBottom_toBottomOf="@id/image_comic"
+                app:layout_constraintStart_toStartOf="@id/image_comic" />
+
+            <ImageView
+                android:id="@+id/image_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/favorite"
+                app:layout_constraintBottom_toBottomOf="@+id/image_comic"
+                app:layout_constraintEnd_toEndOf="@+id/image_comic"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:contentDescription="@string/app_name" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_comic"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="24dp"
+                android:padding="5dp"
+                android:text="@string/comics"
+                android:textAlignment="inherit"
+                android:textColor="@color/red"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/image_comic"
+                app:layout_constraintTop_toBottomOf="@+id/image_comic" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_event"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="24dp"
+                android:padding="5dp"
+                android:text="@string/title_fragment_event"
+                android:textAlignment="inherit"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/text_comic"
+                app:layout_constraintTop_toBottomOf="@+id/image_comic" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_series"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="24dp"
+                android:padding="5dp"
+                android:text="@string/title_fragment_series"
+                android:textAlignment="inherit"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/text_event"
+                app:layout_constraintTop_toBottomOf="@+id/image_comic" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_stories"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="24dp"
+                android:padding="5dp"
+                android:text="Stories"
+                android:textAlignment="inherit"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/text_series"
+                app:layout_constraintTop_toBottomOf="@+id/image_comic" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintTop_toBottomOf="@+id/text_stories" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

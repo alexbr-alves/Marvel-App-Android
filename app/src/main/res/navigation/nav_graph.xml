@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/detailsCharacterFragment"
         tools:layout="@layout/fragment_details_character"
-        android:name="alex.lop.io.alexProject.fragment.DetailsCharacterFragment"
+        android:name="alex.lop.io.alexProject.fragment.detailsCharacter.DetailsCharacterFragment"
         android:label="DetailsCharacterFragment" >
         <argument
             android:name="character"
@@ -70,7 +70,11 @@
         android:id="@+id/comicsFragment"
         tools:layout="@layout/fragment_comic"
         android:name="alex.lop.io.alexProject.fragment.ComicsFragment"
-        android:label="ComicsFragment" />
+        android:label="ComicsFragment" >
+        <action
+            android:id="@+id/action_comicsFragment_to_detailsComicFragment"
+            app:destination="@id/detailsComicFragment" />
+    </fragment>
     <fragment
         android:id="@+id/creatorFragment"
         tools:layout="@layout/fragment_creator"
@@ -91,4 +95,13 @@
         tools:layout="@layout/fragment_stories"
         android:name="alex.lop.io.alexProject.fragment.StoriesFragment"
         android:label="StoriesFragment" />
+    <fragment
+        tools:layout="@layout/fragment_details_comic"
+        android:id="@+id/detailsComicFragment"
+        android:name="alex.lop.io.alexProject.fragment.detailsComic.DetailsComicFragment"
+        android:label="DetailsComicFragment" >
+        <argument
+            android:name="comic"
+            app:argType="alex.lop.io.alexProject.data.model.comic.ComicModel" />
+    </fragment>
 </navigation>

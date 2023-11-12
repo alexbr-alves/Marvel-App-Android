@@ -29,6 +29,12 @@ class CharacterFragment : BaseFragment<FragmentListCharacterBinding, ListCharact
     override val viewModel : ListCharacterViewModel by viewModels()
     private val characterAdapter by lazy { CharacterAdapter() }
 
+    override fun getViewBinding(
+        inflater : LayoutInflater,
+        container : ViewGroup?
+    ) : FragmentListCharacterBinding =
+        FragmentListCharacterBinding.inflate(inflater, container, false)
+
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecycleView()
@@ -79,12 +85,6 @@ class CharacterFragment : BaseFragment<FragmentListCharacterBinding, ListCharact
             layoutManager = GridLayoutManager(requireContext(), 2)
         }
     }
-
-    override fun getViewBinding(
-        inflater : LayoutInflater,
-        container : ViewGroup?
-    ) : FragmentListCharacterBinding =
-        FragmentListCharacterBinding.inflate(inflater, container, false)
 
     private fun searchInit(query : String? = null) = with(binding) {
         editTextSearch.setText(query)

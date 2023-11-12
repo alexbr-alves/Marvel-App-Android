@@ -9,11 +9,14 @@ import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
 import alex.lop.io.alexProject.viewModel.ComicViewModel
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -35,6 +38,7 @@ class ComicsFragment: BaseFragment<FragmentComicBinding, ComicViewModel>()  {
         super.onViewCreated(view, savedInstanceState)
         setupRecycleView()
         collectObserver()
+
     }
 
     private fun collectObserver() = lifecycleScope.launch {
@@ -68,10 +72,8 @@ class ComicsFragment: BaseFragment<FragmentComicBinding, ComicViewModel>()  {
     private fun setupRecycleView() = with(binding) {
         rvComicList.apply {
             adapter = comicsAdapter
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = LinearLayoutManager(context)
         }
     }
-
-
 
 }

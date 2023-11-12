@@ -27,7 +27,7 @@ class ComicViewModel @Inject constructor(
         fetch()
     }
 
-    private fun fetch() = viewModelScope.launch {
+    fun fetch() = viewModelScope.launch {
         safeFetch()
     }
 
