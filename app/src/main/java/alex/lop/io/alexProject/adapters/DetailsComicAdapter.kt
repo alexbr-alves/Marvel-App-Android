@@ -1,6 +1,7 @@
 package alex.lop.io.alexProject.adapters
 
 import alex.lop.io.alexProject.fragment.detailsComic.CharactersComicFragment
+import alex.lop.io.alexProject.fragment.detailsComic.EventComicFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -14,6 +15,7 @@ class DetailsComicAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> CharactersComicFragment(id)
+            1 -> EventComicFragment(id)
             else -> CharactersComicFragment(id)
         }
     }

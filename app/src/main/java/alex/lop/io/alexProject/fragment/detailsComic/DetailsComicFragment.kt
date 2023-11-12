@@ -4,6 +4,7 @@ import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.adapters.CharacterComicAdapter
 import alex.lop.io.alexProject.adapters.DetailsComicAdapter
 import alex.lop.io.alexProject.adapters.EventCharacterAdapter
+import alex.lop.io.alexProject.adapters.EventComicAdapter
 import alex.lop.io.alexProject.adapters.SeriesCharacterAdapter
 import alex.lop.io.alexProject.adapters.StoriesCharacterAdapter
 import alex.lop.io.alexProject.data.model.comic.ComicModel
@@ -18,6 +19,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
@@ -32,7 +35,7 @@ class DetailsComicFragment :
     private var viewPager2 : ViewPager2? = null
 
     private var characterComicAdapter = CharacterComicAdapter()
-    private var eventCharacterAdapter = EventCharacterAdapter()
+    private var eventComicAdapter = EventComicAdapter()
     private var seriesCharacterAdapter = SeriesCharacterAdapter()
     private var storiesCharacterAdapter = StoriesCharacterAdapter()
 
@@ -60,6 +63,10 @@ class DetailsComicFragment :
         if (characterComicAdapter.itemCount == 0) {
             textCharacter.setGone()
             viewPagerComic.currentItem = 1
+        }
+        if (eventComicAdapter.itemCount == 0) {
+            textEvent.setGone()
+            viewPagerComic.currentItem = 2
         }
     }
 
@@ -93,14 +100,14 @@ class DetailsComicFragment :
 
     private fun updateButtonColors(position : Int) = binding.run {
         when (position) {
-            0 -> comicActive()
+            0 -> characterActive()
             1 -> eventActive()
             2 -> seriesActive()
             3 -> storiesActive()
         }
     }
 
-    private fun comicActive() = binding.run {
+    private fun characterActive() = binding.run {
         textCharacter.setTextColor(resources.getColor(R.color.red))
         textEvent.setTextColor(resources.getColor(R.color.white))
         textSeries.setTextColor(resources.getColor(R.color.white))

@@ -1,5 +1,6 @@
 package alex.lop.io.alexProject.fragment.detailsComic
 
+
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.adapters.CharacterComicAdapter
 import alex.lop.io.alexProject.databinding.FragmentCharacterComicBinding
