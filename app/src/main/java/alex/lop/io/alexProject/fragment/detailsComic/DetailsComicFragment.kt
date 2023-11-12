@@ -1,14 +1,18 @@
 package alex.lop.io.alexProject.fragment.detailsComic
 
 import alex.lop.io.alexProject.R
+import alex.lop.io.alexProject.adapters.CharacterComicAdapter
 import alex.lop.io.alexProject.adapters.DetailsComicAdapter
-import alex.lop.io.alexProject.data.model.character.CharacterModel
+import alex.lop.io.alexProject.adapters.EventCharacterAdapter
+import alex.lop.io.alexProject.adapters.SeriesCharacterAdapter
+import alex.lop.io.alexProject.adapters.StoriesCharacterAdapter
 import alex.lop.io.alexProject.data.model.comic.ComicModel
 import alex.lop.io.alexProject.databinding.FragmentDetailsComicBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
 import alex.lop.io.alexProject.util.setGone
+import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.viewModel.detailsComics.DetailsComicsViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -27,6 +31,11 @@ class DetailsComicFragment :
     private lateinit var comicModel : ComicModel
     private var viewPager2 : ViewPager2? = null
 
+    private var characterComicAdapter = CharacterComicAdapter()
+    private var eventCharacterAdapter = EventCharacterAdapter()
+    private var seriesCharacterAdapter = SeriesCharacterAdapter()
+    private var storiesCharacterAdapter = StoriesCharacterAdapter()
+
 
     override fun getViewBinding(
         inflater : LayoutInflater,
@@ -44,6 +53,14 @@ class DetailsComicFragment :
     private fun setupViewPager() {
         handleClickViewpager()
         handleViewPager()
+        handleEmptyButton()
+    }
+
+    private fun handleEmptyButton() = binding.run {
+        if (characterComicAdapter.itemCount == 0) {
+            textCharacter.setGone()
+            viewPagerComic.currentItem = 1
+        }
     }
 
     private fun handleViewPager() {
@@ -61,7 +78,7 @@ class DetailsComicFragment :
 
     private fun onLoadComic(comic : ComicModel) = with(binding) {
         textName.text = comic.title
-        if (comic.description.isEmpty()) {
+        if (comic.description.isNullOrEmpty()) {
             textDescription.setGone()
         } else {
             textDescription.text =
@@ -84,21 +101,21 @@ class DetailsComicFragment :
     }
 
     private fun comicActive() = binding.run {
-        textComic.setTextColor(resources.getColor(R.color.red))
+        textCharacter.setTextColor(resources.getColor(R.color.red))
         textEvent.setTextColor(resources.getColor(R.color.white))
         textSeries.setTextColor(resources.getColor(R.color.white))
         textStories.setTextColor(resources.getColor(R.color.white))
     }
 
     private fun eventActive() = binding.run {
-        textComic.setTextColor(resources.getColor(R.color.white))
+        textCharacter.setTextColor(resources.getColor(R.color.white))
         textEvent.setTextColor(resources.getColor(R.color.red))
         textSeries.setTextColor(resources.getColor(R.color.white))
         textStories.setTextColor(resources.getColor(R.color.white))
     }
 
     private fun seriesActive() = binding.run {
-        textComic.setTextColor(resources.getColor(R.color.white))
+        textCharacter.setTextColor(resources.getColor(R.color.white))
         textEvent.setTextColor(resources.getColor(R.color.white))
         textSeries.setTextColor(resources.getColor(R.color.red))
         textStories.setTextColor(resources.getColor(R.color.white))
@@ -106,13 +123,13 @@ class DetailsComicFragment :
 
     private fun storiesActive() = binding.run {
         textStories.setTextColor(resources.getColor(R.color.red))
-        textComic.setTextColor(resources.getColor(R.color.white))
+        textCharacter.setTextColor(resources.getColor(R.color.white))
         textEvent.setTextColor(resources.getColor(R.color.white))
         textSeries.setTextColor(resources.getColor(R.color.white))
     }
 
     private fun handleClickViewpager() = binding.run {
-        textComic.setOnClickListener {
+        textCharacter.setOnClickListener {
             viewPagerComic.currentItem = 0
         }
         textEvent.setOnClickListener {

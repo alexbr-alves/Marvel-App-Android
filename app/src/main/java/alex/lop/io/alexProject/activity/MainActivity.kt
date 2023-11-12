@@ -28,6 +28,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupTitleToolbar(textVisible : Boolean, title : String = "") =
         with(binding.toolbar) {
+            back.setOnClickListener {
+                onBackPressed()
+            }
             if (textVisible) {
                 text.setVisible()
                 image.setInvisible()
@@ -39,10 +42,6 @@ class MainActivity : AppCompatActivity() {
                 back.setInvisible()
             }
         }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
 
     private fun setupToolbar() {
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
@@ -85,6 +84,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.seriesFragment -> setupTitleToolbar(
                     true,
                     getString(R.string.title_fragment_series)
+                )
+                R.id.detailsComicFragment -> setupTitleToolbar(
+                    true,
+                    getString(R.string.title_fragment_detail)
                 )
             }
         }

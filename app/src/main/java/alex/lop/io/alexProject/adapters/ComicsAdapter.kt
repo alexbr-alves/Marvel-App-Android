@@ -17,7 +17,7 @@ class ComicsAdapter : RecyclerView.Adapter<ComicsAdapter.ComicsViewHolder>() {
 
     private val differCallback = object : DiffUtil.ItemCallback<ComicModel>() {
         override fun areItemsTheSame(oldItem : ComicModel, newItem : ComicModel) : Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
+            return true
         }
 
         override fun areContentsTheSame(
