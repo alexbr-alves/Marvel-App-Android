@@ -1,4 +1,4 @@
-package alex.lop.io.alexProject.viewModel
+package alex.lop.io.alexProject.viewModel.detailCharacter
 
 import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.repository.MarvelRepository

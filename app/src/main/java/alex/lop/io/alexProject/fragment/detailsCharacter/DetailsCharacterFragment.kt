@@ -1,13 +1,14 @@
-package alex.lop.io.alexProject.fragment
+package alex.lop.io.alexProject.fragment.detailsCharacter
 
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.adapters.ComicCharacterAdapter
 import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.databinding.FragmentDetailsCharacterBinding
-import alex.lop.io.alexProject.adapters.DetailsAdapter
+import alex.lop.io.alexProject.adapters.DetailsCharacterAdapter
 import alex.lop.io.alexProject.adapters.EventCharacterAdapter
 import alex.lop.io.alexProject.adapters.SeriesCharacterAdapter
-import alex.lop.io.alexProject.viewModel.DetailsCharacterViewModel
+import alex.lop.io.alexProject.fragment.BaseFragment
+import alex.lop.io.alexProject.viewModel.detailCharacter.DetailsCharacterViewModel
 import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
 import alex.lop.io.alexProject.util.setGone
@@ -33,15 +34,6 @@ class DetailsCharacterFragment :
     private lateinit var characterModel : CharacterModel
     private var viewPager2 : ViewPager2? = null
 
-    private var comicCharacterAdapter = ComicCharacterAdapter()
-    private var eventCharacterAdapter = EventCharacterAdapter()
-    private var seriesCharacterAdapter = SeriesCharacterAdapter()
-
-    override fun onCreate(savedInstanceState : Bundle?) {
-        setHasOptionsMenu(true)
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         characterModel = args.character
@@ -52,15 +44,14 @@ class DetailsCharacterFragment :
     }
 
     private fun setupViewPager() {
-        hideButton()
         handleClickViewpager()
         handleViewPager()
     }
 
     private fun handleViewPager() {
         viewPager2 = view?.findViewById<ViewPager2>(R.id.viewPager2)
-        val detailsAdapter = DetailsAdapter(childFragmentManager, lifecycle, characterModel.id)
-        viewPager2?.adapter = detailsAdapter
+        val detailsCharacterAdapter = DetailsCharacterAdapter(childFragmentManager, lifecycle, characterModel.id)
+        viewPager2?.adapter = detailsCharacterAdapter
         viewPager2?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position : Int) {
                 super.onPageSelected(position)
@@ -96,8 +87,6 @@ class DetailsCharacterFragment :
         textComic.setTextColor(resources.getColor(R.color.white))
         textEvent.setTextColor(resources.getColor(R.color.white))
         textSeries.setTextColor(resources.getColor(R.color.white))
-
-
     }
 
     private fun updateButtonColors(position : Int) = binding.run {
@@ -137,20 +126,17 @@ class DetailsCharacterFragment :
                 } else {
                     viewModel.insert(characterModel)
                     binding.imageFavorite.setImageResource(R.drawable.favorite_red)
-
                 }
             }
         }
     }
 
     private fun onShowDialog(characterModel : CharacterModel) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(characterModel.name)
+        MaterialAlertDialogBuilder(requireContext()).setTitle(characterModel.name)
             .setMessage(characterModel.description)
             .setNegativeButton(getString(R.string.close_dialog)) { dialog, _ ->
                 dialog.dismiss()
-            }
-            .show()
+            }.show()
     }
 
     private fun onLoadCharacter(characterModel : CharacterModel) = with(binding) {
@@ -173,19 +159,9 @@ class DetailsCharacterFragment :
         }
     }
 
-    private fun hideButton() = binding.run {
-        if (comicCharacterAdapter.itemCount == 0) {
-            eventActive()
-        } else if (eventCharacterAdapter.itemCount == 0) {
-            seriesActive()
-        } else if (seriesCharacterAdapter.itemCount == 0) {
-            storiesActive()
-        }
-    }
 
     override fun getViewBinding(
-        inflater : LayoutInflater,
-        container : ViewGroup?
+        inflater : LayoutInflater, container : ViewGroup?
     ) : FragmentDetailsCharacterBinding =
         FragmentDetailsCharacterBinding.inflate(inflater, container, false)
 

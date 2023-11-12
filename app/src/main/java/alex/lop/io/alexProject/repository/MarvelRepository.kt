@@ -15,13 +15,17 @@ class MarvelRepository @Inject constructor(
     suspend fun events() = api.events()
     suspend fun series(titleStartsWith : String? = null) = api.series(titleStartsWith)
     suspend fun stories() = api.stories()
-    suspend fun getComicsCharacter(characterId : Int) = api.getComicsCharacter(characterId)
 
+
+    suspend fun getComicsCharacter(characterId : Int) = api.getComicsCharacter(characterId)
     suspend fun getEventsCharacter(characterId : Int) = api.getEventsCharacter(characterId)
     suspend fun getSeriesCharacter(characterId : Int) = api.getSeriesCharacter(characterId)
     suspend fun getStoriesCharacter(characterId : Int) = api.getStoriesCharacter(characterId)
 
-
+    suspend fun getCharacterComics(comicId : Int) = api.getCharacterComics(comicId)
+    suspend fun getCreatorComics(comicId : Int) = api.getCreatorComics(comicId)
+    suspend fun getEventComics(comicId : Int) = api.getEventComics(comicId)
+    suspend fun getStoriesComics(comicId : Int) = api.getStoriesComics(comicId)
 
 
     suspend fun insert(characterModel : CharacterModel) = dao.insert(characterModel)
