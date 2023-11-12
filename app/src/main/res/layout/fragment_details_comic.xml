@@ -20,8 +20,9 @@
 
             <ImageView
                 android:id="@+id/image_comic"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="500dp"
+
                 android:contentDescription="@string/app_name"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -75,7 +76,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="24dp"
                 android:padding="5dp"
-                android:text="@string/comics"
+                android:text="@string/title_fragment_characters"
                 android:textAlignment="inherit"
                 android:textColor="@color/red"
                 android:textSize="16sp"
@@ -128,7 +129,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/image_comic" />
 
             <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager2"
+                android:id="@+id/viewPagerComic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -62,7 +62,11 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
                 character.thumbnailModel.extension
             )
         }
-
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.let {
+                it(character)
+            }
+        }
     }
 
     private var onItemClickListener : ((CharacterModel) -> Unit)? = null
