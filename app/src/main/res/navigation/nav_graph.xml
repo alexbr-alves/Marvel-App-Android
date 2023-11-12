@@ -101,7 +101,7 @@
         android:name="alex.lop.io.alexProject.fragment.detailsComic.DetailsComicFragment"
         android:label="DetailsComicFragment" >
         <argument
-            android:name="comic"
+            android:name="Comic"
             app:argType="alex.lop.io.alexProject.data.model.comic.ComicModel" />
     </fragment>
 </navigation>

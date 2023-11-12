@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class ComicsFragment: BaseFragment<FragmentComicBinding, ComicViewModel>()  {
+class ComicsFragment : BaseFragment<FragmentComicBinding, ComicViewModel>() {
     override val viewModel : ComicViewModel by viewModels()
     private val comicsAdapter by lazy { ComicsAdapter() }
 
@@ -38,22 +38,23 @@ class ComicsFragment: BaseFragment<FragmentComicBinding, ComicViewModel>()  {
         super.onViewCreated(view, savedInstanceState)
         setupRecycleView()
         collectObserver()
-
+        clickAdapter()
     }
 
     private fun collectObserver() = lifecycleScope.launch {
         viewModel.comicList.collect { resource ->
-            when(resource) {
+            when (resource) {
                 is ResourceState.Success -> {
                     binding.progressBarDetail.setInvisible()
                     resource.data?.let { values ->
                         if (values.data.result.isNotEmpty()) {
                             comicsAdapter.comicList = values.data.result.toList()
-                        } else  {
+                        } else {
                             toast(getString(R.string.error_empty_list))
                         }
                     }
                 }
+
                 is ResourceState.Error -> {
                     binding.progressBarDetail.setInvisible()
                     resource.message?.let { message ->
@@ -61,9 +62,11 @@ class ComicsFragment: BaseFragment<FragmentComicBinding, ComicViewModel>()  {
                         Timber.tag("ComicsFragment").e("Error -> $message")
                     }
                 }
+
                 is ResourceState.Loading -> {
                     binding.progressBarDetail.setVisible()
                 }
+
                 else -> {}
             }
         }
@@ -73,6 +76,14 @@ class ComicsFragment: BaseFragment<FragmentComicBinding, ComicViewModel>()  {
         rvComicList.apply {
             adapter = comicsAdapter
             layoutManager = LinearLayoutManager(context)
+        }
+    }
+
+    private fun clickAdapter() {
+        comicsAdapter.setOnClickListener {
+            val action = ComicsFragmentDirections
+                .actionComicsFragmentToDetailsComicFragment(it)
+            findNavController().navigate(action)
         }
     }
 
