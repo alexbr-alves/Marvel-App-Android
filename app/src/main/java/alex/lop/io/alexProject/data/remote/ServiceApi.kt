@@ -76,4 +76,37 @@ interface ServiceApi {
             encoded = true
         ) characterId : Int
     ) : Response<StoriesModelResponse>
+
+    @GET("comics/{comicId}/characters")
+    suspend fun getCharacterComics(
+        @Path(
+            value = "comicId",
+            encoded = true
+        ) comicId : Int
+    ) : Response<CharacterModelResponse>
+
+    @GET("comics/{comicId}/creators")
+    suspend fun getCreatorComics(
+        @Path(
+            value = "comicId",
+            encoded = true
+        ) comicId : Int
+    ) : Response<CreatorModelResponse>
+
+    @GET("comics/{comicId}/events")
+    suspend fun getEventComics(
+        @Path(
+            value = "comicId",
+            encoded = true
+        ) comicId : Int
+    ) : Response<EventModelResponse>
+
+    @GET("comics/{comicId}/stories")
+    suspend fun getStoriesComics(
+        @Path(
+            value = "comicId",
+            encoded = true
+        ) comicId : Int
+    ) : Response<EventModelResponse>
+
 }
