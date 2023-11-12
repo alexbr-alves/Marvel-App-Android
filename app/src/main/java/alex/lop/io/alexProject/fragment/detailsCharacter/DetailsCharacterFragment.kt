@@ -50,7 +50,8 @@ class DetailsCharacterFragment :
 
     private fun handleViewPager() {
         viewPager2 = view?.findViewById<ViewPager2>(R.id.viewPager2)
-        val detailsCharacterAdapter = DetailsCharacterAdapter(childFragmentManager, lifecycle, characterModel.id)
+        val characterDescription = if (!characterModel.description.isNullOrEmpty()) characterModel.description else ""
+        val detailsCharacterAdapter = DetailsCharacterAdapter(childFragmentManager, lifecycle, characterModel.id, characterDescription)
         viewPager2?.adapter = detailsCharacterAdapter
         viewPager2?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position : Int) {
@@ -61,7 +62,26 @@ class DetailsCharacterFragment :
         })
     }
 
-    private fun comicActive() = binding.run {
+    private fun updateButtonColors(position : Int) = binding.run {
+        when (position) {
+            0 -> aboutActive()
+            1 -> characterActive()
+            2 -> eventActive()
+            3 -> seriesActive()
+            4 -> storiesActive()
+        }
+    }
+
+    private fun aboutActive() = binding.run {
+        textAbout.setTextColor(resources.getColor(R.color.red))
+        textComic.setTextColor(resources.getColor(R.color.white))
+        textEvent.setTextColor(resources.getColor(R.color.white))
+        textSeries.setTextColor(resources.getColor(R.color.white))
+        textStories.setTextColor(resources.getColor(R.color.white))
+    }
+
+    private fun characterActive() = binding.run {
+        textAbout.setTextColor(resources.getColor(R.color.white))
         textComic.setTextColor(resources.getColor(R.color.red))
         textEvent.setTextColor(resources.getColor(R.color.white))
         textSeries.setTextColor(resources.getColor(R.color.white))
@@ -69,6 +89,7 @@ class DetailsCharacterFragment :
     }
 
     private fun eventActive() = binding.run {
+        textAbout.setTextColor(resources.getColor(R.color.white))
         textComic.setTextColor(resources.getColor(R.color.white))
         textEvent.setTextColor(resources.getColor(R.color.red))
         textSeries.setTextColor(resources.getColor(R.color.white))
@@ -76,6 +97,7 @@ class DetailsCharacterFragment :
     }
 
     private fun seriesActive() = binding.run {
+        textAbout.setTextColor(resources.getColor(R.color.white))
         textComic.setTextColor(resources.getColor(R.color.white))
         textEvent.setTextColor(resources.getColor(R.color.white))
         textSeries.setTextColor(resources.getColor(R.color.red))
@@ -83,41 +105,33 @@ class DetailsCharacterFragment :
     }
 
     private fun storiesActive() = binding.run {
+        textAbout.setTextColor(resources.getColor(R.color.white))
         textStories.setTextColor(resources.getColor(R.color.red))
         textComic.setTextColor(resources.getColor(R.color.white))
         textEvent.setTextColor(resources.getColor(R.color.white))
         textSeries.setTextColor(resources.getColor(R.color.white))
     }
 
-    private fun updateButtonColors(position : Int) = binding.run {
-        when (position) {
-            0 -> comicActive()
-            1 -> eventActive()
-            2 -> seriesActive()
-            3 -> storiesActive()
-        }
-    }
-
     private fun handleClickViewpager() = binding.run {
-        textComic.setOnClickListener {
+        textAbout.setOnClickListener {
             viewPager2.currentItem = 0
         }
-        textEvent.setOnClickListener {
+        textComic.setOnClickListener {
             viewPager2.currentItem = 1
         }
-        textSeries.setOnClickListener {
+        textEvent.setOnClickListener {
             viewPager2.currentItem = 2
         }
-        textStories.setOnClickListener {
+        textSeries.setOnClickListener {
             viewPager2.currentItem = 3
+        }
+        textStories.setOnClickListener {
+            viewPager2.currentItem = 4
         }
         updateButtonColors(viewPager2.currentItem)
     }
 
     private fun descriptionCharacter() = binding.run {
-        tvDescriptionCharacterDetails.setOnClickListener {
-            onShowDialog(characterModel)
-        }
         imageFavorite.setOnClickListener {
             viewModel.searchCharacter.observe(viewLifecycleOwner) {
                 if (it) {
@@ -145,12 +159,6 @@ class DetailsCharacterFragment :
             binding.imageFavorite.setImageResource(color)
 
             tvNameCharacterDetails.text = characterModel.name
-            if (characterModel.description.isEmpty()) {
-                tvDescriptionCharacterDetails.setGone()
-            } else {
-                tvDescriptionCharacterDetails.text =
-                    characterModel.description.limitDescription(100)
-            }
             loadImage(
                 imgCharacterDetails,
                 characterModel.thumbnailModel.path,

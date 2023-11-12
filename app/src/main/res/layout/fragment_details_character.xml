@@ -21,7 +21,7 @@
             <ImageView
                 android:id="@+id/imgCharacterDetails"
                 android:layout_width="wrap_content"
-                android:layout_height="500dp"
+                android:layout_height="400dp"
                 android:contentDescription="@string/app_name"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -38,30 +38,31 @@
                 android:text="@string/tx_item_name"
                 android:textColor="@color/white"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@id/tvDescriptionCharacterDetails"
-                app:layout_constraintStart_toStartOf="@id/imgCharacterDetails" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvDescriptionCharacterDetails"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/black"
-                android:text="@string/tv_item_description"
-                android:textAlignment="inherit"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toStartOf="@+id/image_favorite"
-                app:layout_constraintBottom_toBottomOf="@id/imgCharacterDetails"
+                app:layout_constraintTop_toBottomOf="@id/imgCharacterDetails"
                 app:layout_constraintStart_toStartOf="@id/imgCharacterDetails" />
 
             <LinearLayout
                 android:id="@+id/layout_buttons"
                 android:layout_width="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvDescriptionCharacterDetails"
+                app:layout_constraintTop_toBottomOf="@id/tvNameCharacterDetails"
                 android:layout_height="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_about"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="24dp"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="2dp"
+                    android:text="@string/title_about"
+                    android:textAlignment="inherit"
+                    android:textColor="@color/red"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/image_comic"
+                    app:layout_constraintTop_toBottomOf="@+id/image_comic" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_comic"
@@ -73,7 +74,7 @@
                 android:padding="5dp"
                 android:text="@string/comics"
                 android:textAlignment="inherit"
-                android:textColor="@color/red"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/imgCharacterDetails"
                 app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails" />
@@ -116,7 +117,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="24dp"
                 android:padding="5dp"
-                android:text="Stories"
+                android:text="@string/title_fragment_stories"
                 android:textAlignment="inherit"
                 android:textColor="@color/white"
                 android:textSize="16sp"
@@ -131,7 +132,7 @@
                 android:src="@drawable/favorite"
                 app:layout_constraintStart_toEndOf="@+id/layout_buttons"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="@id/layout_buttons"
+                app:layout_constraintTop_toBottomOf="@id/imgCharacterDetails"
                 android:contentDescription="@string/app_name" />
 
             <androidx.viewpager2.widget.ViewPager2
