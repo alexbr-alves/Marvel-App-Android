@@ -131,14 +131,6 @@ interface ServiceApi {
         ) comicId : Int
     ) : Response<ComicModelResponse>
 
-    @GET("events/{eventId}/creator")
-    suspend fun getCreatorEvent(
-        @Path(
-            value = "comicId",
-            encoded = true
-        ) comicId : Int
-    ) : Response<CreatorModelResponse>
-
     @GET("events/{eventId}/series")
     suspend fun getSeriesEvent(
         @Path(

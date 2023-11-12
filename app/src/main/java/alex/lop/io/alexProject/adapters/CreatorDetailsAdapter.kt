@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
-class CreatorComicAdapter : RecyclerView.Adapter<CreatorComicAdapter.CreatorViewHolder>() {
+class CreatorDetailsAdapter : RecyclerView.Adapter<CreatorDetailsAdapter.CreatorViewHolder>() {
 
     inner class CreatorViewHolder(val binding: LayoutMiniCardsBinding) :
         RecyclerView.ViewHolder(binding.root)

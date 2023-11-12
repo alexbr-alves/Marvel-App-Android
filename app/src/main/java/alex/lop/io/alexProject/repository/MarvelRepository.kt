@@ -34,7 +34,6 @@ class MarvelRepository @Inject constructor(
 
     suspend fun getCharacterEvent(eventId: Int) = api.getCharacterEvent(eventId)
     suspend fun getComicEvent(eventId: Int) = api.getComicEvent(eventId)
-    suspend fun getCreatorEvent(eventId: Int) = api.getCreatorEvent(eventId)
     suspend fun getSeriesEvent(eventId: Int) = api.getSeriesEvent(eventId)
     suspend fun getStoriesEvent(eventId: Int) = api.getStoriesEvent(eventId)
 

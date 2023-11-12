@@ -1,7 +1,7 @@
 package alex.lop.io.alexProject.fragment.detailsCharacter
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.adapters.SeriesCharacterAdapter
+import alex.lop.io.alexProject.adapters.SeriesDetailsAdapter
 import alex.lop.io.alexProject.databinding.FragmentSeriesCharacterBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.state.ResourceState
@@ -25,7 +25,7 @@ import timber.log.Timber
 class SeriesCharacterFragment(private val characterId: Int) :
     BaseFragment<FragmentSeriesCharacterBinding, SeriesCharacterViewModel>() {
 
-    private val seriesCharacterAdapter by lazy { SeriesCharacterAdapter() }
+    private val seriesDetailsAdapter by lazy { SeriesDetailsAdapter() }
     override val viewModel: SeriesCharacterViewModel by viewModels()
 
     override fun getViewBinding(
@@ -48,7 +48,7 @@ class SeriesCharacterFragment(private val characterId: Int) :
                     binding.progressBarDetail.setInvisible()
                     resource.data?.let { values ->
                         if (values.data.result.isNotEmpty()) {
-                            seriesCharacterAdapter.series = values.data.result.toList()
+                            seriesDetailsAdapter.series = values.data.result.toList()
                         } else {
                             binding.textEmpty.setVisible()
                         }
@@ -76,7 +76,7 @@ class SeriesCharacterFragment(private val characterId: Int) :
 
     private fun setupRecyclerView() = with(binding) {
         rvSeries.apply {
-            adapter = seriesCharacterAdapter
+            adapter = seriesDetailsAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
