@@ -1,12 +1,12 @@
-package alex.lop.io.alexProject.fragment.detailsComic
+package alex.lop.io.alexProject.fragment.detailsEvent
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.adapters.DetailsComicAdapter
-import alex.lop.io.alexProject.data.model.comic.ComicModel
-import alex.lop.io.alexProject.databinding.FragmentDetailsComicBinding
+import alex.lop.io.alexProject.adapters.DetailsEventAdapter
+import alex.lop.io.alexProject.data.model.event.EventModel
+import alex.lop.io.alexProject.databinding.FragmentDetailsEventBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.util.loadImage
-import alex.lop.io.alexProject.viewModel.detailsComics.DetailsComicsViewModel
+import alex.lop.io.alexProject.viewModel.detailEvent.DetailsEventViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,25 +17,23 @@ import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailsComicFragment :
-    BaseFragment<FragmentDetailsComicBinding, DetailsComicsViewModel>() {
-    override val viewModel : DetailsComicsViewModel by viewModels()
-    private val args : DetailsComicFragmentArgs by navArgs()
-    private lateinit var comicModel : ComicModel
-    private var viewPager2 : ViewPager2? = null
-
+class DetailsEventFragment :
+    BaseFragment<FragmentDetailsEventBinding, DetailsEventViewModel>() {
+    override val viewModel : DetailsEventViewModel by viewModels()
+    private val args : DetailsEventFragmentArgs by navArgs()
+    private lateinit var eventModel : EventModel
+    private var viewPagerEvent : ViewPager2? = null
 
     override fun getViewBinding(
         inflater : LayoutInflater,
         container : ViewGroup?
-    ) : FragmentDetailsComicBinding =
-        FragmentDetailsComicBinding.inflate(inflater, container, false)
+    ) : FragmentDetailsEventBinding = FragmentDetailsEventBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        comicModel = args.Comic
-        onLoadComic(comicModel)
+        eventModel = args.eventModel
         setupViewPager()
+        onLoadEvent(eventModel)
     }
 
     private fun setupViewPager() {
@@ -43,27 +41,27 @@ class DetailsComicFragment :
         handleViewPager()
     }
 
-    private fun handleViewPager() {
-        viewPager2 = view?.findViewById<ViewPager2>(R.id.viewPagerComic)
-        val comicDescription = if (!comicModel.description.isNullOrEmpty()) comicModel.description else ""
-        val detailsComicAdapter = DetailsComicAdapter(childFragmentManager, lifecycle, comicModel.id, comicDescription)
-        viewPager2?.adapter = detailsComicAdapter
-        viewPager2?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                viewPager2?.offscreenPageLimit = 1
-                updateButtonColors(position)
-            }
-        })
-    }
-
-    private fun onLoadComic(comic : ComicModel) = with(binding) {
+    private fun onLoadEvent(comic : EventModel) = with(binding) {
         textName.text = comic.title
         loadImage(
-            imageComic,
+            imageEvent,
             comic.thumbnailModel.path,
             comic.thumbnailModel.extension
         )
+    }
+
+    private fun handleViewPager() {
+        viewPagerEvent = view?.findViewById<ViewPager2>(R.id.viewPagerComic)
+        val comicDescription = if (!eventModel.description.isNullOrEmpty()) eventModel.description else ""
+        val detailsComicAdapter = DetailsEventAdapter(childFragmentManager, lifecycle, eventModel.id, comicDescription)
+        viewPagerEvent?.adapter = detailsComicAdapter
+        viewPagerEvent?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                viewPagerEvent?.offscreenPageLimit = 1
+                updateButtonColors(position)
+            }
+        })
     }
 
     private fun updateButtonColors(position : Int) = binding.run {
@@ -79,7 +77,7 @@ class DetailsComicFragment :
     private fun aboutActive() = binding.run {
         textAbout.setTextColor(resources.getColor(R.color.red))
         textCharacter.setTextColor(resources.getColor(R.color.white))
-        textEvent.setTextColor(resources.getColor(R.color.white))
+        textComic.setTextColor(resources.getColor(R.color.white))
         textSeries.setTextColor(resources.getColor(R.color.white))
         textStories.setTextColor(resources.getColor(R.color.white))
     }
@@ -87,7 +85,7 @@ class DetailsComicFragment :
     private fun characterActive() = binding.run {
         textAbout.setTextColor(resources.getColor(R.color.white))
         textCharacter.setTextColor(resources.getColor(R.color.red))
-        textEvent.setTextColor(resources.getColor(R.color.white))
+        textComic.setTextColor(resources.getColor(R.color.white))
         textSeries.setTextColor(resources.getColor(R.color.white))
         textStories.setTextColor(resources.getColor(R.color.white))
     }
@@ -95,7 +93,7 @@ class DetailsComicFragment :
     private fun eventActive() = binding.run {
         textAbout.setTextColor(resources.getColor(R.color.white))
         textCharacter.setTextColor(resources.getColor(R.color.white))
-        textEvent.setTextColor(resources.getColor(R.color.red))
+        textComic.setTextColor(resources.getColor(R.color.red))
         textSeries.setTextColor(resources.getColor(R.color.white))
         textStories.setTextColor(resources.getColor(R.color.white))
     }
@@ -103,7 +101,7 @@ class DetailsComicFragment :
     private fun seriesActive() = binding.run {
         textAbout.setTextColor(resources.getColor(R.color.white))
         textCharacter.setTextColor(resources.getColor(R.color.white))
-        textEvent.setTextColor(resources.getColor(R.color.white))
+        textComic.setTextColor(resources.getColor(R.color.white))
         textSeries.setTextColor(resources.getColor(R.color.red))
         textStories.setTextColor(resources.getColor(R.color.white))
     }
@@ -112,27 +110,27 @@ class DetailsComicFragment :
         textAbout.setTextColor(resources.getColor(R.color.white))
         textStories.setTextColor(resources.getColor(R.color.red))
         textCharacter.setTextColor(resources.getColor(R.color.white))
-        textEvent.setTextColor(resources.getColor(R.color.white))
+        textComic.setTextColor(resources.getColor(R.color.white))
         textSeries.setTextColor(resources.getColor(R.color.white))
     }
 
     private fun handleClickViewpager() = binding.run {
         textAbout.setOnClickListener {
-            viewPagerComic.currentItem = 0
+            viewPagerEvent.currentItem = 0
         }
         textCharacter.setOnClickListener {
-            viewPagerComic.currentItem = 1
+            viewPagerEvent.currentItem = 1
         }
-        textEvent.setOnClickListener {
-            viewPagerComic.currentItem = 2
+        textComic.setOnClickListener {
+            viewPagerEvent.currentItem = 2
         }
         textSeries.setOnClickListener {
-            viewPagerComic.currentItem = 3
+            viewPagerEvent.currentItem = 3
         }
         textStories.setOnClickListener {
-            viewPagerComic.currentItem = 4
+            viewPagerEvent.currentItem = 4
         }
-        updateButtonColors(viewPagerComic.currentItem)
+        updateButtonColors(viewPagerEvent.currentItem)
     }
 
 }
