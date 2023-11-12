@@ -107,6 +107,6 @@ interface ServiceApi {
             value = "comicId",
             encoded = true
         ) comicId : Int
-    ) : Response<EventModelResponse>
+    ) : Response<StoriesModelResponse>
 
 }
