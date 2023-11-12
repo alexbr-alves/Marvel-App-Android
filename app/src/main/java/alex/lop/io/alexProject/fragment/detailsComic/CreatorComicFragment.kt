@@ -1,15 +1,14 @@
 package alex.lop.io.alexProject.fragment.detailsComic
 
-
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.adapters.CharacterComicAdapter
-import alex.lop.io.alexProject.databinding.FragmentCharacterComicBinding
+import alex.lop.io.alexProject.adapters.CreatorComicAdapter
+import alex.lop.io.alexProject.databinding.FragmentCreatorComicBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
-import alex.lop.io.alexProject.viewModel.detailsComics.CharactersComicViewModel
+import alex.lop.io.alexProject.viewModel.detailsComics.CreatorComicViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,42 +22,40 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class CharactersComicFragment(private val comicId: Int) :
-    BaseFragment<FragmentCharacterComicBinding, CharactersComicViewModel>() {
-
-    override val viewModel: CharactersComicViewModel by viewModels()
-    private val characterComicAdapter by lazy { CharacterComicAdapter() }
+class CreatorComicFragment(private val comicId: Int) :
+    BaseFragment<FragmentCreatorComicBinding, CreatorComicViewModel>(){
+    override val viewModel : CreatorComicViewModel by viewModels()
+    private val creatorComicAdapter by lazy { CreatorComicAdapter() }
 
     override fun getViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): FragmentCharacterComicBinding =
-        FragmentCharacterComicBinding.inflate(inflater, container, false)
+        inflater : LayoutInflater,
+        container : ViewGroup?
+    ) : FragmentCreatorComicBinding = FragmentCreatorComicBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.fetchCharacterComic(comicId)
+        viewModel.fetch(comicId)
         setupRecyclerView()
         collectObserver()
     }
 
     private fun setupRecyclerView() = with(binding) {
-        rvComics.apply {
-            adapter = characterComicAdapter
+        rvCreatorCharacter.apply {
+            adapter = creatorComicAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
 
     private fun collectObserver() = lifecycleScope.launch {
-        viewModel.comicCharacterList.collect { resource ->
+        viewModel.list.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
                     binding.progressBarDetail.setInvisible()
                     resource.data?.let { values ->
-                        if (values.data.results.isEmpty()) {
+                        if (values.data.result.isEmpty()) {
                             binding.textEmpty.setVisible()
                         } else {
-                            characterComicAdapter.characters = values.data.results.toList()
+                            creatorComicAdapter.creators = values.data.result.toList()
                         }
                     }
                 }
@@ -67,7 +64,7 @@ class CharactersComicFragment(private val comicId: Int) :
                     binding.progressBarDetail.setInvisible()
                     resource.message?.let { message ->
                         toast(getString(R.string.an_error_occurred))
-                        Timber.tag("CharactersComicFragment").e("Error -> $message")
+                        Timber.tag("CreatorComicFragment").e("Error -> $message")
                     }
                 }
 
@@ -80,4 +77,5 @@ class CharactersComicFragment(private val comicId: Int) :
             }
         }
     }
+
 }

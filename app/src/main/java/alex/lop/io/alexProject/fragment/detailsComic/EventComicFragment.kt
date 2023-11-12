@@ -53,9 +53,9 @@ BaseFragment<FragmentEventComicBinding, EventComicViewModel>(){
                     binding.progressBarDetail.setInvisible()
                     resource.data?.let { values ->
                         if (values.data.result.isEmpty()) {
-                            eventComicAdapter.events = values.data.result.toList()
-                        } else {
                             binding.textEmpty.setVisible()
+                        } else {
+                            eventComicAdapter.events = values.data.result.toList()
                         }
                     }
                 }

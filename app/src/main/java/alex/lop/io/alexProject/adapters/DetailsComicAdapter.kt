@@ -1,6 +1,7 @@
 package alex.lop.io.alexProject.adapters
 
 import alex.lop.io.alexProject.fragment.detailsComic.CharactersComicFragment
+import alex.lop.io.alexProject.fragment.detailsComic.CreatorComicFragment
 import alex.lop.io.alexProject.fragment.detailsComic.DescriptionComicFragment
 import alex.lop.io.alexProject.fragment.detailsComic.EventComicFragment
 import androidx.fragment.app.Fragment
@@ -17,7 +18,8 @@ class DetailsComicAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle
         return when (position) {
             0 -> DescriptionComicFragment(description)
             1 -> CharactersComicFragment(id)
-            2 -> EventComicFragment(id)
+            2 -> CreatorComicFragment(id)
+            3 -> EventComicFragment(id)
             else -> CharactersComicFragment(id)
         }
     }
