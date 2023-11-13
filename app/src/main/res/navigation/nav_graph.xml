@@ -84,7 +84,11 @@
         android:id="@+id/eventFragment"
         tools:layout="@layout/fragment_event"
         android:name="alex.lop.io.alexProject.fragment.EventFragment"
-        android:label="EventFragment" />
+        android:label="EventFragment" >
+        <action
+            android:id="@+id/action_eventFragment_to_detailsEventFragment"
+            app:destination="@id/detailsEventFragment" />
+    </fragment>
     <fragment
         android:id="@+id/seriesFragment"
         tools:layout="@layout/fragment_series"
@@ -103,5 +107,14 @@
         <argument
             android:name="Comic"
             app:argType="alex.lop.io.alexProject.data.model.comic.ComicModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsEventFragment"
+        tools:layout="@layout/fragment_details_event"
+        android:name="alex.lop.io.alexProject.fragment.detailsEvent.DetailsEventFragment"
+        android:label="DetailsEventFragment" >
+        <argument
+            android:name="eventModel"
+            app:argType="alex.lop.io.alexProject.data.model.event.EventModel" />
     </fragment>
 </navigation>

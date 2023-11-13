@@ -1,31 +1,30 @@
 package alex.lop.io.alexProject.adapters
 
-import alex.lop.io.alexProject.data.model.event.EventModel
+import alex.lop.io.alexProject.data.model.comic.ComicModel
 import alex.lop.io.alexProject.databinding.LayoutMiniCardsBinding
 import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
-import alex.lop.io.alexProject.util.setGone
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
-class EventComicAdapter : RecyclerView.Adapter<EventComicAdapter.EventViewHolder>() {
+class ComicDetailsAdapter : RecyclerView.Adapter<ComicDetailsAdapter.ComicViewHolder>() {
 
-    inner class EventViewHolder(val binding: LayoutMiniCardsBinding) :
+    inner class ComicViewHolder(val binding : LayoutMiniCardsBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback = object : DiffUtil.ItemCallback<EventModel>() {
+    private val differCallback = object : DiffUtil.ItemCallback<ComicModel>() {
 
-        override fun areItemsTheSame(oldItem: EventModel, newItem: EventModel): Boolean {
+        override fun areItemsTheSame(oldItem : ComicModel, newItem : ComicModel) : Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
 
         override fun areContentsTheSame(
-            oldItem: EventModel,
-            newItem: EventModel
-        ): Boolean {
+            oldItem : ComicModel,
+            newItem : ComicModel
+        ) : Boolean {
             return oldItem.id == newItem.id &&
                     oldItem.title == newItem.title &&
                     oldItem.description == newItem.description &&
@@ -37,37 +36,37 @@ class EventComicAdapter : RecyclerView.Adapter<EventComicAdapter.EventViewHolder
 
     private val differ = AsyncListDiffer(this, differCallback)
 
-    var events: List<EventModel>
+    var comics : List<ComicModel>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
     override fun getItemCount(): Int {
-        return events.size
+        return comics.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
-        return EventViewHolder(
+    override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : ComicViewHolder {
+        return ComicViewHolder(
             LayoutMiniCardsBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
     }
 
-    override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
-        val event = events[position]
+    override fun onBindViewHolder(holder : ComicViewHolder, position : Int) {
+        val comic = comics[position]
         holder.binding.apply {
-            textName.text = event.title
-            if (event.description.isNullOrEmpty()) {
-                textDescription.setGone()
-            } else {
-                textDescription.text = event.description.limitDescription(50)
+            textName.text = comic.title
+            if (!comic.description.isNullOrEmpty()) {
+                textDescription.text = comic.description.limitDescription(50)
             }
 
             loadImage(
                 image,
-                event.thumbnailModel.path,
-                event.thumbnailModel.extension
+                comic.thumbnailModel.path,
+                comic.thumbnailModel.extension
             )
         }
+
     }
+
 }

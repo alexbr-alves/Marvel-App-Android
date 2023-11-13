@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
-class StoriesComicAdapter: RecyclerView.Adapter<StoriesComicAdapter.StoriesViewHolder>() {
+class StoriesDetailsAdapter : RecyclerView.Adapter<StoriesDetailsAdapter.StoriesViewHolder>() {
 
     inner class StoriesViewHolder(val binding: LayoutNameDescritionBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -52,9 +52,9 @@ class StoriesComicAdapter: RecyclerView.Adapter<StoriesComicAdapter.StoriesViewH
     }
 
     override fun onBindViewHolder(holder: StoriesViewHolder, position: Int) {
-        val story = stories[position]
+        val storie = stories[position]
         holder.binding.apply {
-            textName.text = story.title
+            textName.text = storie.title
             textDescription.setGone()
         }
     }

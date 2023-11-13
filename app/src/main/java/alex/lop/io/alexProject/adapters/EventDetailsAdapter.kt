@@ -1,6 +1,6 @@
 package alex.lop.io.alexProject.adapters
 
-import alex.lop.io.alexProject.data.model.creator.CreatorModel
+import alex.lop.io.alexProject.data.model.event.EventModel
 import alex.lop.io.alexProject.databinding.LayoutMiniCardsBinding
 import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
@@ -11,24 +11,24 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
-class CreatorComicAdapter : RecyclerView.Adapter<CreatorComicAdapter.CreatorViewHolder>() {
+class EventDetailsAdapter : RecyclerView.Adapter<EventDetailsAdapter.EventViewHolder>() {
 
-    inner class CreatorViewHolder(val binding: LayoutMiniCardsBinding) :
+    inner class EventViewHolder(val binding: LayoutMiniCardsBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback = object : DiffUtil.ItemCallback<CreatorModel>() {
+    private val differCallback = object : DiffUtil.ItemCallback<EventModel>() {
 
-        override fun areItemsTheSame(oldItem: CreatorModel, newItem: CreatorModel): Boolean {
+        override fun areItemsTheSame(oldItem: EventModel, newItem: EventModel): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
 
         override fun areContentsTheSame(
-            oldItem: CreatorModel,
-            newItem: CreatorModel
+            oldItem: EventModel,
+            newItem: EventModel
         ): Boolean {
             return oldItem.id == newItem.id &&
-                    oldItem.firstName == newItem.firstName &&
-                    oldItem.fullName == newItem.fullName &&
+                    oldItem.title == newItem.title &&
+                    oldItem.description == newItem.description &&
                     oldItem.thumbnailModel.path == newItem.thumbnailModel.path &&
                     oldItem.thumbnailModel.extension == newItem.thumbnailModel.extension
         }
@@ -37,36 +37,36 @@ class CreatorComicAdapter : RecyclerView.Adapter<CreatorComicAdapter.CreatorView
 
     private val differ = AsyncListDiffer(this, differCallback)
 
-    var creators: List<CreatorModel>
+    var events: List<EventModel>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
     override fun getItemCount(): Int {
-        return creators.size
+        return events.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreatorViewHolder {
-        return CreatorViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
+        return EventViewHolder(
             LayoutMiniCardsBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
     }
 
-    override fun onBindViewHolder(holder: CreatorViewHolder, position: Int) {
-        val creator = creators[position]
+    override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
+        val event = events[position]
         holder.binding.apply {
-            textName.text = creator.firstName
-            if (creator.fullName.isNullOrEmpty()) {
+            textName.text = event.title
+            if (event.description.isNullOrEmpty()) {
                 textDescription.setGone()
             } else {
-                textDescription.text = creator.fullName.limitDescription(50)
+                textDescription.text = event.description.limitDescription(50)
             }
 
             loadImage(
                 image,
-                creator.thumbnailModel.path,
-                creator.thumbnailModel.extension
+                event.thumbnailModel.path,
+                event.thumbnailModel.extension
             )
         }
     }

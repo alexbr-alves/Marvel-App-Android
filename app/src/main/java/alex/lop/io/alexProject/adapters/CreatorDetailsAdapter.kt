@@ -1,6 +1,6 @@
 package alex.lop.io.alexProject.adapters
 
-import alex.lop.io.alexProject.data.model.serie.SeriesModel
+import alex.lop.io.alexProject.data.model.creator.CreatorModel
 import alex.lop.io.alexProject.databinding.LayoutMiniCardsBinding
 import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
@@ -11,24 +11,24 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
-class SeriesCharacterAdapter : RecyclerView.Adapter<SeriesCharacterAdapter.SeriesViewHolder>()  {
+class CreatorDetailsAdapter : RecyclerView.Adapter<CreatorDetailsAdapter.CreatorViewHolder>() {
 
-    inner class SeriesViewHolder(val binding : LayoutMiniCardsBinding) :
+    inner class CreatorViewHolder(val binding: LayoutMiniCardsBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback = object : DiffUtil.ItemCallback<SeriesModel>() {
+    private val differCallback = object : DiffUtil.ItemCallback<CreatorModel>() {
 
-        override fun areItemsTheSame(oldItem : SeriesModel, newItem : SeriesModel) : Boolean {
+        override fun areItemsTheSame(oldItem: CreatorModel, newItem: CreatorModel): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
 
         override fun areContentsTheSame(
-            oldItem : SeriesModel,
-            newItem : SeriesModel
-        ) : Boolean {
+            oldItem: CreatorModel,
+            newItem: CreatorModel
+        ): Boolean {
             return oldItem.id == newItem.id &&
-                    oldItem.title == newItem.title &&
-                    oldItem.description == newItem.description &&
+                    oldItem.firstName == newItem.firstName &&
+                    oldItem.fullName == newItem.fullName &&
                     oldItem.thumbnailModel.path == newItem.thumbnailModel.path &&
                     oldItem.thumbnailModel.extension == newItem.thumbnailModel.extension
         }
@@ -37,36 +37,36 @@ class SeriesCharacterAdapter : RecyclerView.Adapter<SeriesCharacterAdapter.Serie
 
     private val differ = AsyncListDiffer(this, differCallback)
 
-    var series : List<SeriesModel>
+    var creators: List<CreatorModel>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
     override fun getItemCount(): Int {
-        return series.size
+        return creators.size
     }
 
-    override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : SeriesViewHolder {
-        return SeriesViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreatorViewHolder {
+        return CreatorViewHolder(
             LayoutMiniCardsBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
     }
 
-    override fun onBindViewHolder(holder : SeriesViewHolder, position : Int) {
-        val serie = series[position]
+    override fun onBindViewHolder(holder: CreatorViewHolder, position: Int) {
+        val creator = creators[position]
         holder.binding.apply {
-            textName.text = serie.title
-            if (!serie.description.isNullOrEmpty()) {
-                textDescription.text = serie.description.limitDescription(50)
-            } else {
+            textName.text = creator.firstName
+            if (creator.fullName.isNullOrEmpty()) {
                 textDescription.setGone()
+            } else {
+                textDescription.text = creator.fullName.limitDescription(50)
             }
 
             loadImage(
                 image,
-                serie.thumbnailModel.path,
-                serie.thumbnailModel.extension
+                creator.thumbnailModel.path,
+                creator.thumbnailModel.extension
             )
         }
     }

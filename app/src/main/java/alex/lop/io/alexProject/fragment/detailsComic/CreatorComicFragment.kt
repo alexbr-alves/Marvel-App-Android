@@ -1,7 +1,7 @@
 package alex.lop.io.alexProject.fragment.detailsComic
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.adapters.CreatorComicAdapter
+import alex.lop.io.alexProject.adapters.CreatorDetailsAdapter
 import alex.lop.io.alexProject.databinding.FragmentCreatorComicBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.state.ResourceState
@@ -25,7 +25,7 @@ import timber.log.Timber
 class CreatorComicFragment(private val comicId: Int) :
     BaseFragment<FragmentCreatorComicBinding, CreatorComicViewModel>(){
     override val viewModel : CreatorComicViewModel by viewModels()
-    private val creatorComicAdapter by lazy { CreatorComicAdapter() }
+    private val creatorDetailsAdapter by lazy { CreatorDetailsAdapter() }
 
     override fun getViewBinding(
         inflater : LayoutInflater,
@@ -41,7 +41,7 @@ class CreatorComicFragment(private val comicId: Int) :
 
     private fun setupRecyclerView() = with(binding) {
         rvCreatorCharacter.apply {
-            adapter = creatorComicAdapter
+            adapter = creatorDetailsAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
@@ -55,7 +55,7 @@ class CreatorComicFragment(private val comicId: Int) :
                         if (values.data.result.isEmpty()) {
                             binding.textEmpty.setVisible()
                         } else {
-                            creatorComicAdapter.creators = values.data.result.toList()
+                            creatorDetailsAdapter.creators = values.data.result.toList()
                         }
                     }
                 }

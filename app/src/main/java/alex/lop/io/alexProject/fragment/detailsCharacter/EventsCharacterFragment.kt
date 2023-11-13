@@ -1,7 +1,7 @@
 package alex.lop.io.alexProject.fragment.detailsCharacter
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.adapters.EventCharacterAdapter
+import alex.lop.io.alexProject.adapters.EventDetailsAdapter
 import alex.lop.io.alexProject.databinding.FragmentEventsCharapterBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.state.ResourceState
@@ -25,7 +25,7 @@ import timber.log.Timber
 class EventsCharacterFragment( private val characterId: Int) :
     BaseFragment<FragmentEventsCharapterBinding, EventsCharacterViewModel>() {
 
-    private val eventCharacterAdapter by lazy { EventCharacterAdapter() }
+    private val eventDetailsAdapter by lazy { EventDetailsAdapter() }
     override val viewModel : EventsCharacterViewModel by viewModels()
 
     override fun getViewBinding(
@@ -48,7 +48,7 @@ class EventsCharacterFragment( private val characterId: Int) :
                     binding.progressBarDetail.setInvisible()
                     resource.data?.let { values ->
                         if (values.data.result.isNotEmpty()) {
-                            eventCharacterAdapter.events = values.data.result.toList()
+                            eventDetailsAdapter.events = values.data.result.toList()
                         } else {
                             binding.textEmpty.setVisible()
                         }
@@ -75,7 +75,7 @@ class EventsCharacterFragment( private val characterId: Int) :
 
     private fun setupRecycleView() = with(binding) {
         rvEvents.apply {
-            adapter = eventCharacterAdapter
+            adapter = eventDetailsAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }

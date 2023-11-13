@@ -45,6 +45,8 @@ interface ServiceApi {
         @Query("limit") limit : Int = 100
     ) : Response<StoriesModelResponse>
 
+    //Character details
+
     @GET("characters/{characterId}/comics")
     suspend fun getComicsCharacter(
         @Path(
@@ -77,6 +79,8 @@ interface ServiceApi {
         ) characterId : Int
     ) : Response<StoriesModelResponse>
 
+    //Comic details
+
     @GET("comics/{comicId}/characters")
     suspend fun getCharacterComics(
         @Path(
@@ -107,6 +111,40 @@ interface ServiceApi {
             value = "comicId",
             encoded = true
         ) comicId : Int
+    ) : Response<StoriesModelResponse>
+
+    //Event details
+
+    @GET("events/{eventId}/characters")
+    suspend fun getCharacterEvent(
+        @Path(
+            value = "eventId",
+            encoded = true
+        ) eventId : Int
+    ) : Response<CharacterModelResponse>
+
+    @GET("events/{eventId}/comics")
+    suspend fun getComicEvent(
+        @Path(
+            value = "eventId",
+            encoded = true
+        ) eventId : Int
+    ) : Response<ComicModelResponse>
+
+    @GET("events/{eventId}/series")
+    suspend fun getSeriesEvent(
+        @Path(
+            value = "eventId",
+            encoded = true
+        ) eventId : Int
+    ) : Response<SeriesModelResponse>
+
+    @GET("events/{eventId}/stories")
+    suspend fun getStoriesEvent(
+        @Path(
+            value = "eventId",
+            encoded = true
+        ) eventId : Int
     ) : Response<StoriesModelResponse>
 
 }

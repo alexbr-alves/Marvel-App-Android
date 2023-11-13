@@ -1,14 +1,20 @@
-package alex.lop.io.alexProject.fragment.detailsComic
+package alex.lop.io.alexProject.fragment.detailsEvent
+
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.adapters.StoriesDetailsAdapter
-import alex.lop.io.alexProject.databinding.FragmentStoriesComicBinding
+import alex.lop.io.alexProject.adapters.CharacterDetailsAdapter
+import alex.lop.io.alexProject.adapters.SeriesDetailsAdapter
+import alex.lop.io.alexProject.databinding.FragmentCharacterComicBinding
+import alex.lop.io.alexProject.databinding.FragmentCharacterEventBinding
+import alex.lop.io.alexProject.databinding.FragmentSeriesEventBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
-import alex.lop.io.alexProject.viewModel.detailsComics.StoriesComicViewModel
+import alex.lop.io.alexProject.viewModel.detailEvent.CharacterEventViewModel
+import alex.lop.io.alexProject.viewModel.detailEvent.SeriesEventViewModel
+import alex.lop.io.alexProject.viewModel.detailsComics.CharactersComicViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,15 +28,17 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class StoriesComicFragment (private val comicId: Int) :
-    BaseFragment<FragmentStoriesComicBinding, StoriesComicViewModel>(){
-    override val viewModel : StoriesComicViewModel by viewModels()
-    private val storiesDetailsAdapter by lazy { StoriesDetailsAdapter() }
+class SeriesEventFragment(private val comicId: Int) :
+    BaseFragment<FragmentSeriesEventBinding, SeriesEventViewModel>() {
+
+    override val viewModel : SeriesEventViewModel by viewModels()
+    private val seriesDetailsAdapter by lazy { SeriesDetailsAdapter() }
 
     override fun getViewBinding(
-        inflater : LayoutInflater,
-        container : ViewGroup?
-    ) : FragmentStoriesComicBinding = FragmentStoriesComicBinding.inflate(inflater, container, false)
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentSeriesEventBinding =
+        FragmentSeriesEventBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,8 +48,8 @@ class StoriesComicFragment (private val comicId: Int) :
     }
 
     private fun setupRecyclerView() = with(binding) {
-        rvStoriesCharacter.apply {
-            adapter = storiesDetailsAdapter
+        recycle.apply {
+            adapter = seriesDetailsAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
@@ -55,7 +63,7 @@ class StoriesComicFragment (private val comicId: Int) :
                         if (values.data.result.isEmpty()) {
                             binding.textEmpty.setVisible()
                         } else {
-                            storiesDetailsAdapter.stories = values.data.result.toList()
+                            seriesDetailsAdapter.series = values.data.result.toList()
                         }
                     }
                 }
@@ -64,7 +72,7 @@ class StoriesComicFragment (private val comicId: Int) :
                     binding.progressBarDetail.setInvisible()
                     resource.message?.let { message ->
                         toast(getString(R.string.an_error_occurred))
-                        Timber.tag("StoriesComicFragment").e("Error -> $message")
+                        Timber.tag("CharactersComicFragment").e("Error -> $message")
                     }
                 }
 
@@ -77,5 +85,4 @@ class StoriesComicFragment (private val comicId: Int) :
             }
         }
     }
-
 }

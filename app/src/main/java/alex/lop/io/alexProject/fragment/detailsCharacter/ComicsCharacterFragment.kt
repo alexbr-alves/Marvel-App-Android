@@ -1,7 +1,7 @@
 package alex.lop.io.alexProject.fragment.detailsCharacter
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.adapters.ComicCharacterAdapter
+import alex.lop.io.alexProject.adapters.ComicDetailsAdapter
 import alex.lop.io.alexProject.databinding.FragmentComicsCharapterBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.state.ResourceState
@@ -26,7 +26,7 @@ class ComicsCharacterFragment(private val characterId: Int):
 BaseFragment<FragmentComicsCharapterBinding,ComicsCharacterViewModel>(){
 
     override val viewModel : ComicsCharacterViewModel by viewModels()
-    private val comicCharacterAdapter by lazy { ComicCharacterAdapter() }
+    private val comicDetailsAdapter by lazy { ComicDetailsAdapter() }
 
     override fun getViewBinding(
         inflater : LayoutInflater,
@@ -42,7 +42,7 @@ BaseFragment<FragmentComicsCharapterBinding,ComicsCharacterViewModel>(){
     }
     private fun setupRecycleView() = with(binding) {
         rvComics.apply {
-            adapter = comicCharacterAdapter
+            adapter = comicDetailsAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
@@ -56,7 +56,7 @@ BaseFragment<FragmentComicsCharapterBinding,ComicsCharacterViewModel>(){
                     binding.progressBarDetail.setInvisible()
                     resource.data?.let { values ->
                         if (values.data.result.isNotEmpty()) {
-                            comicCharacterAdapter.comics = values.data.result.toList()
+                            comicDetailsAdapter.comics = values.data.result.toList()
                         } else {
                             binding.textEmpty.setVisible()
                         }
