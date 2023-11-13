@@ -4,6 +4,7 @@ import alex.lop.io.alexProject.fragment.detailsEvent.CharactersEventFragment
 import alex.lop.io.alexProject.fragment.detailsEvent.ComicEventFragment
 import alex.lop.io.alexProject.fragment.detailsEvent.DescriptionEventFragment
 import alex.lop.io.alexProject.fragment.detailsEvent.SeriesEventFragment
+import alex.lop.io.alexProject.fragment.detailsEvent.StoriesEventFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -20,6 +21,7 @@ class DetailsEventAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle
             1 -> CharactersEventFragment(id)
             2 -> ComicEventFragment(id)
             3 -> SeriesEventFragment(id)
+            4 -> StoriesEventFragment(id)
             else -> DescriptionEventFragment(description)
         }
     }
