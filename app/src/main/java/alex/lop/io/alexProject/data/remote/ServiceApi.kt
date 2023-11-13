@@ -123,7 +123,7 @@ interface ServiceApi {
         ) eventId : Int
     ) : Response<CharacterModelResponse>
 
-    @GET("events/{eventId}/comic")
+    @GET("events/{eventId}/comics")
     suspend fun getComicEvent(
         @Path(
             value = "eventId",
