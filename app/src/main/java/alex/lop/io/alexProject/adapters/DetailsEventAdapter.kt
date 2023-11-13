@@ -1,10 +1,7 @@
 package alex.lop.io.alexProject.adapters
 
-import alex.lop.io.alexProject.fragment.detailsComic.CharactersComicFragment
-import alex.lop.io.alexProject.fragment.detailsComic.CreatorComicFragment
-import alex.lop.io.alexProject.fragment.detailsComic.DescriptionComicFragment
-import alex.lop.io.alexProject.fragment.detailsComic.EventComicFragment
-import alex.lop.io.alexProject.fragment.detailsComic.StoriesComicFragment
+import alex.lop.io.alexProject.fragment.detailsEvent.CharactersEventFragment
+import alex.lop.io.alexProject.fragment.detailsEvent.DescriptionEventFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -17,12 +14,9 @@ class DetailsEventAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> DescriptionComicFragment(description)
-            1 -> CharactersComicFragment(id)
-            2 -> CreatorComicFragment(id)
-            3 -> EventComicFragment(id)
-            4 -> StoriesComicFragment(id)
-            else -> DescriptionComicFragment(description)
+            0 -> DescriptionEventFragment(description)
+            1 -> CharactersEventFragment(id)
+            else -> DescriptionEventFragment(description)
         }
     }
 }

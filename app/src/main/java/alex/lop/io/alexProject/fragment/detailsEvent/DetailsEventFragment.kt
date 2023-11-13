@@ -51,7 +51,7 @@ class DetailsEventFragment :
     }
 
     private fun handleViewPager() {
-        viewPagerEvent = view?.findViewById<ViewPager2>(R.id.viewPagerComic)
+        viewPagerEvent = view?.findViewById<ViewPager2>(R.id.viewPagerEvent)
         val comicDescription = if (!eventModel.description.isNullOrEmpty()) eventModel.description else ""
         val detailsComicAdapter = DetailsEventAdapter(childFragmentManager, lifecycle, eventModel.id, comicDescription)
         viewPagerEvent?.adapter = detailsComicAdapter

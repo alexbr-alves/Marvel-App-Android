@@ -1,5 +1,6 @@
 package alex.lop.io.alexProject.adapters
 
+import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.data.model.event.EventModel
 import alex.lop.io.alexProject.databinding.LayoutCardNameBinding
 import alex.lop.io.alexProject.util.loadImage
@@ -59,6 +60,17 @@ class EventAdapter : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
                 event.thumbnailModel.path,
                 event.thumbnailModel.extension
             )
-        }
+
+            holder.itemView.setOnClickListener {
+                onItemClickListener?.let {
+                    it(event)
+                }
+            } }
+    }
+
+    private var onItemClickListener : ((EventModel) -> Unit)? = null
+
+    fun setOnClickListener(listener : (EventModel) -> Unit) {
+        onItemClickListener = listener
     }
 }

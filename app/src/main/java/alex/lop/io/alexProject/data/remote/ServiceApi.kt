@@ -118,33 +118,33 @@ interface ServiceApi {
     @GET("events/{eventId}/characters")
     suspend fun getCharacterEvent(
         @Path(
-            value = "comicId",
+            value = "eventId",
             encoded = true
-        ) comicId : Int
+        ) eventId : Int
     ) : Response<CharacterModelResponse>
 
     @GET("events/{eventId}/comic")
     suspend fun getComicEvent(
         @Path(
-            value = "comicId",
+            value = "eventId",
             encoded = true
-        ) comicId : Int
+        ) eventId : Int
     ) : Response<ComicModelResponse>
 
     @GET("events/{eventId}/series")
     suspend fun getSeriesEvent(
         @Path(
-            value = "comicId",
+            value = "eventId",
             encoded = true
-        ) comicId : Int
+        ) eventId : Int
     ) : Response<SeriesModelResponse>
 
     @GET("events/{eventId}/stories")
     suspend fun getStoriesEvent(
         @Path(
-            value = "comicId",
+            value = "eventId",
             encoded = true
-        ) comicId : Int
+        ) eventId : Int
     ) : Response<StoriesModelResponse>
 
 }
