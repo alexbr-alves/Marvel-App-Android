@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/red_marvel">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_details"
@@ -33,20 +33,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/black"
+                android:layout_marginVertical="10dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/marvel"
                 android:text="@string/tx_item_name"
                 android:textColor="@color/white"
                 android:textSize="18sp"
-                app:layout_constraintTop_toBottomOf="@id/imgCharacterDetails"
-                app:layout_constraintStart_toStartOf="@id/imgCharacterDetails" />
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/image_favorite"
+                app:layout_constraintHorizontal_bias="0.01"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgCharacterDetails" />
 
             <LinearLayout
                 android:id="@+id/layout_buttons"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvNameCharacterDetails"
-                android:layout_height="wrap_content">
+                app:layout_constraintTop_toBottomOf="@id/tvNameCharacterDetails">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/text_about"
@@ -55,70 +60,78 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="24dp"
-                    android:paddingVertical="5dp"
+                    android:fontFamily="@font/marvel"
+                    android:textStyle="bold"
                     android:paddingHorizontal="2dp"
+                    android:paddingVertical="5dp"
                     android:text="@string/title_about"
                     android:textAlignment="inherit"
-                    android:textColor="@color/red"
-                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@+id/image_comic"
                     app:layout_constraintTop_toBottomOf="@+id/image_comic" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/text_comic"
-                style="@style/TextAppearance.MaterialComponents.Subtitle2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="24dp"
-                android:padding="5dp"
-                android:text="@string/comics"
-                android:textAlignment="inherit"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/imgCharacterDetails"
-                app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_comic"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="24dp"
+                    android:padding="5dp"
+                    android:text="@string/comics"
+                    android:fontFamily="@font/marvel"
+                    android:textStyle="bold"
+                    android:textAlignment="inherit"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/imgCharacterDetails"
+                    app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/text_event"
-                style="@style/TextAppearance.MaterialComponents.Subtitle2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="24dp"
-                android:padding="5dp"
-                android:text="@string/title_fragment_event"
-                android:textAlignment="inherit"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/text_comic"
-                app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_event"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="24dp"
+                    android:padding="5dp"
+                    android:text="@string/title_fragment_event"
+                    android:fontFamily="@font/marvel"
+                    android:textStyle="bold"
+                    android:textAlignment="inherit"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/text_comic"
+                    app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/text_series"
-                style="@style/TextAppearance.MaterialComponents.Subtitle2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="24dp"
-                android:padding="5dp"
-                android:text="@string/title_fragment_series"
-                android:textAlignment="inherit"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/text_event"
-                app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_series"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="24dp"
+                    android:padding="5dp"
+                    android:text="@string/title_fragment_series"
+                    android:fontFamily="@font/marvel"
+                    android:textStyle="bold"
+                    android:textAlignment="inherit"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/text_event"
+                    app:layout_constraintTop_toBottomOf="@+id/imgCharacterDetails" />
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/image_favorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
                 android:src="@drawable/favorite"
-                app:layout_constraintStart_toEndOf="@+id/layout_buttons"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imgCharacterDetails"
-                android:contentDescription="@string/app_name" />
+                app:layout_constraintStart_toEndOf="@+id/layout_buttons"
+                app:layout_constraintTop_toBottomOf="@id/imgCharacterDetails" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager2"
@@ -127,8 +140,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintTop_toBottomOf="@+id/layout_buttons" />
+                app:layout_constraintTop_toBottomOf="@+id/layout_buttons"
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

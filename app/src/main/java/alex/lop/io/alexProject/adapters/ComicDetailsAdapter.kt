@@ -2,6 +2,7 @@ package alex.lop.io.alexProject.adapters
 
 import alex.lop.io.alexProject.data.model.comic.ComicModel
 import alex.lop.io.alexProject.databinding.LayoutMiniCardsBinding
+import alex.lop.io.alexProject.util.Constants
 import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
 import android.view.LayoutInflater
@@ -38,7 +39,9 @@ class ComicDetailsAdapter : RecyclerView.Adapter<ComicDetailsAdapter.ComicViewHo
 
     var comics : List<ComicModel>
         get() = differ.currentList
-        set(value) = differ.submitList(value)
+        set(value) = differ.submitList(value.filter {
+            it.thumbnailModel.path != Constants.IMAGE_NOT_AVAILABLE
+        })
 
     override fun getItemCount(): Int {
         return comics.size
@@ -55,9 +58,9 @@ class ComicDetailsAdapter : RecyclerView.Adapter<ComicDetailsAdapter.ComicViewHo
     override fun onBindViewHolder(holder : ComicViewHolder, position : Int) {
         val comic = comics[position]
         holder.binding.apply {
-            textName.text = comic.title
+            textName.text = comic.title.limitDescription(20)
             if (!comic.description.isNullOrEmpty()) {
-                textDescription.text = comic.description.limitDescription(50)
+                textDescription.text = comic.description.limitDescription(40)
             }
 
             loadImage(

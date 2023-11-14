@@ -4,6 +4,7 @@ package alex.lop.io.alexProject.adapters
 import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.databinding.LayoutCardNameBinding
 import alex.lop.io.alexProject.util.Constants
+import alex.lop.io.alexProject.util.limitDescription
 
 
 import alex.lop.io.alexProject.util.loadImage
@@ -55,7 +56,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
     override fun onBindViewHolder(holder : CharacterViewHolder, position : Int) {
         val character = characters[position]
         holder.binding.apply {
-            textName.text = character.name
+            textName.text = character.name.limitDescription(15)
             loadImage(
                 image,
                 character.thumbnailModel.path,

@@ -67,7 +67,7 @@ class DetailsCharacterFragment :
     }
 
     private fun aboutActive() = binding.run {
-        textAbout.setTextColor(resources.getColor(R.color.red))
+        textAbout.setTextColor(resources.getColor(R.color.black))
         textComic.setTextColor(resources.getColor(R.color.white))
         textEvent.setTextColor(resources.getColor(R.color.white))
         textSeries.setTextColor(resources.getColor(R.color.white))
@@ -75,7 +75,7 @@ class DetailsCharacterFragment :
 
     private fun characterActive() = binding.run {
         textAbout.setTextColor(resources.getColor(R.color.white))
-        textComic.setTextColor(resources.getColor(R.color.red))
+        textComic.setTextColor(resources.getColor(R.color.black))
         textEvent.setTextColor(resources.getColor(R.color.white))
         textSeries.setTextColor(resources.getColor(R.color.white))
     }
@@ -83,7 +83,7 @@ class DetailsCharacterFragment :
     private fun eventActive() = binding.run {
         textAbout.setTextColor(resources.getColor(R.color.white))
         textComic.setTextColor(resources.getColor(R.color.white))
-        textEvent.setTextColor(resources.getColor(R.color.red))
+        textEvent.setTextColor(resources.getColor(R.color.black))
         textSeries.setTextColor(resources.getColor(R.color.white))
     }
 
@@ -91,7 +91,7 @@ class DetailsCharacterFragment :
         textAbout.setTextColor(resources.getColor(R.color.white))
         textComic.setTextColor(resources.getColor(R.color.white))
         textEvent.setTextColor(resources.getColor(R.color.white))
-        textSeries.setTextColor(resources.getColor(R.color.red))
+        textSeries.setTextColor(resources.getColor(R.color.black))
     }
 
     private fun handleClickViewpager() = binding.run {
