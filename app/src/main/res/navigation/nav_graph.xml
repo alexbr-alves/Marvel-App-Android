@@ -54,17 +54,11 @@
             android:id="@+id/action_homeFragment_to_comicsFragment"
             app:destination="@id/comicsFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_creatorFragment"
-            app:destination="@id/creatorFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_eventFragment2"
             app:destination="@id/eventFragment" />
         <action
             android:id="@+id/action_homeFragment_to_seriesFragment"
             app:destination="@id/seriesFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_storiesFragment"
-            app:destination="@id/storiesFragment" />
     </fragment>
     <fragment
         android:id="@+id/comicsFragment"
@@ -75,11 +69,6 @@
             android:id="@+id/action_comicsFragment_to_detailsComicFragment"
             app:destination="@id/detailsComicFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/creatorFragment"
-        tools:layout="@layout/fragment_creator"
-        android:name="alex.lop.io.alexProject.fragment.CreatorFragment"
-        android:label="CreatorFragment" />
     <fragment
         android:id="@+id/eventFragment"
         tools:layout="@layout/fragment_event"
@@ -94,11 +83,6 @@
         tools:layout="@layout/fragment_series"
         android:name="alex.lop.io.alexProject.fragment.SeriesFragment"
         android:label="SeriesFragment" />
-    <fragment
-        android:id="@+id/storiesFragment"
-        tools:layout="@layout/fragment_stories"
-        android:name="alex.lop.io.alexProject.fragment.StoriesFragment"
-        android:label="StoriesFragment" />
     <fragment
         tools:layout="@layout/fragment_details_comic"
         android:id="@+id/detailsComicFragment"

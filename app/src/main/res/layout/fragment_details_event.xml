@@ -112,22 +112,6 @@
                   android:textSize="14sp"
                   app:layout_constraintStart_toEndOf="@+id/text_event"
                   app:layout_constraintTop_toBottomOf="@+id/image_event" />
-
-              <com.google.android.material.textview.MaterialTextView
-                  android:id="@+id/text_stories"
-                  style="@style/TextAppearance.MaterialComponents.Subtitle2"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_marginStart="12dp"
-                  android:layout_marginTop="24dp"
-                  android:paddingVertical="5dp"
-                  android:paddingHorizontal="2dp"
-                  android:text="@string/title_fragment_stories"
-                  android:textAlignment="inherit"
-                  android:textColor="@color/white"
-                  android:textSize="14sp"
-                  app:layout_constraintStart_toEndOf="@+id/text_series"
-                  app:layout_constraintTop_toBottomOf="@+id/image_event" />
           </LinearLayout>
 
             <ImageView

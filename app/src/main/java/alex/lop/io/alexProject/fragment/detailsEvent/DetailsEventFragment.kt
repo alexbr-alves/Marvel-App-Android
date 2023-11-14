@@ -70,7 +70,6 @@ class DetailsEventFragment :
             1 -> characterActive()
             2 -> eventActive()
             3 -> seriesActive()
-            4 -> storiesActive()
         }
     }
 
@@ -79,7 +78,6 @@ class DetailsEventFragment :
         textCharacter.setTextColor(resources.getColor(R.color.white))
         textComic.setTextColor(resources.getColor(R.color.white))
         textSeries.setTextColor(resources.getColor(R.color.white))
-        textStories.setTextColor(resources.getColor(R.color.white))
     }
 
     private fun characterActive() = binding.run {
@@ -87,7 +85,6 @@ class DetailsEventFragment :
         textCharacter.setTextColor(resources.getColor(R.color.red))
         textComic.setTextColor(resources.getColor(R.color.white))
         textSeries.setTextColor(resources.getColor(R.color.white))
-        textStories.setTextColor(resources.getColor(R.color.white))
     }
 
     private fun eventActive() = binding.run {
@@ -95,7 +92,6 @@ class DetailsEventFragment :
         textCharacter.setTextColor(resources.getColor(R.color.white))
         textComic.setTextColor(resources.getColor(R.color.red))
         textSeries.setTextColor(resources.getColor(R.color.white))
-        textStories.setTextColor(resources.getColor(R.color.white))
     }
 
     private fun seriesActive() = binding.run {
@@ -103,15 +99,6 @@ class DetailsEventFragment :
         textCharacter.setTextColor(resources.getColor(R.color.white))
         textComic.setTextColor(resources.getColor(R.color.white))
         textSeries.setTextColor(resources.getColor(R.color.red))
-        textStories.setTextColor(resources.getColor(R.color.white))
-    }
-
-    private fun storiesActive() = binding.run {
-        textAbout.setTextColor(resources.getColor(R.color.white))
-        textStories.setTextColor(resources.getColor(R.color.red))
-        textCharacter.setTextColor(resources.getColor(R.color.white))
-        textComic.setTextColor(resources.getColor(R.color.white))
-        textSeries.setTextColor(resources.getColor(R.color.white))
     }
 
     private fun handleClickViewpager() = binding.run {
@@ -126,9 +113,6 @@ class DetailsEventFragment :
         }
         textSeries.setOnClickListener {
             viewPagerEvent.currentItem = 3
-        }
-        textStories.setOnClickListener {
-            viewPagerEvent.currentItem = 4
         }
         updateButtonColors(viewPagerEvent.currentItem)
     }
