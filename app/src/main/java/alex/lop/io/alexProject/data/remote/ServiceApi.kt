@@ -4,7 +4,6 @@ import alex.lop.io.alexProject.data.model.character.CharacterModelResponse
 import alex.lop.io.alexProject.data.model.comic.ComicModelResponse
 import alex.lop.io.alexProject.data.model.event.EventModelResponse
 import alex.lop.io.alexProject.data.model.serie.SeriesModelResponse
-import alex.lop.io.alexProject.data.model.stories.StoriesModelResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -34,11 +33,6 @@ interface ServiceApi {
         @Query("limit") limit : Int = 100
     ) : Response<SeriesModelResponse>
 
-    @GET("stories")
-    suspend fun stories(
-        @Query("limit") limit : Int = 100
-    ) : Response<StoriesModelResponse>
-
     //Character details
 
     @GET("characters/{characterId}/comics")
@@ -65,14 +59,6 @@ interface ServiceApi {
         ) characterId : Int
     ) : Response<SeriesModelResponse>
 
-    @GET("characters/{characterId}/stories")
-    suspend fun getStoriesCharacter(
-        @Path(
-            value = "characterId",
-            encoded = true
-        ) characterId : Int
-    ) : Response<StoriesModelResponse>
-
     //Comic details
 
     @GET("comics/{comicId}/characters")
@@ -90,14 +76,6 @@ interface ServiceApi {
             encoded = true
         ) comicId : Int
     ) : Response<EventModelResponse>
-
-    @GET("comics/{comicId}/stories")
-    suspend fun getStoriesComics(
-        @Path(
-            value = "comicId",
-            encoded = true
-        ) comicId : Int
-    ) : Response<StoriesModelResponse>
 
     //Event details
 
@@ -124,13 +102,5 @@ interface ServiceApi {
             encoded = true
         ) eventId : Int
     ) : Response<SeriesModelResponse>
-
-    @GET("events/{eventId}/stories")
-    suspend fun getStoriesEvent(
-        @Path(
-            value = "eventId",
-            encoded = true
-        ) eventId : Int
-    ) : Response<StoriesModelResponse>
 
 }

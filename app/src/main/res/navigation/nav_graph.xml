@@ -59,9 +59,6 @@
         <action
             android:id="@+id/action_homeFragment_to_seriesFragment"
             app:destination="@id/seriesFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_storiesFragment"
-            app:destination="@id/storiesFragment" />
     </fragment>
     <fragment
         android:id="@+id/comicsFragment"
@@ -86,11 +83,6 @@
         tools:layout="@layout/fragment_series"
         android:name="alex.lop.io.alexProject.fragment.SeriesFragment"
         android:label="SeriesFragment" />
-    <fragment
-        android:id="@+id/storiesFragment"
-        tools:layout="@layout/fragment_stories"
-        android:name="alex.lop.io.alexProject.fragment.StoriesFragment"
-        android:label="StoriesFragment" />
     <fragment
         tools:layout="@layout/fragment_details_comic"
         android:id="@+id/detailsComicFragment"
