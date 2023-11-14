@@ -1,5 +1,6 @@
 package alex.lop.io.alexProject.data.remote
 
+import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.data.model.character.CharacterModelResponse
 import alex.lop.io.alexProject.data.model.comic.ComicModelResponse
 import alex.lop.io.alexProject.data.model.event.EventModelResponse

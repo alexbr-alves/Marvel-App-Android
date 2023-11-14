@@ -136,7 +136,6 @@ class DetailsCharacterFragment :
         viewModel.searchCharacter.observe(viewLifecycleOwner) {
             val color = if (it) R.drawable.favorite_red else R.drawable.favorite
             binding.imageFavorite.setImageResource(color)
-
             tvNameCharacterDetails.text = characterModel.name
             loadImage(
                 imgCharacterDetails,
