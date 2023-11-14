@@ -44,7 +44,6 @@
     <string name="title_fragment_favorites">Favorites</string>
     <string name="title_fragment_search">Search</string>
     <string name="title_fragment_event">Events</string>
-    <string name="title_fragment_creator">Creators</string>
     <string name="title_fragment_detail">Details</string>
     <string name="title_fragment_characters">Characters</string>
     <string name="title_fragment_series">Series</string>

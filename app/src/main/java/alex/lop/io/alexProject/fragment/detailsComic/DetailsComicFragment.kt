@@ -80,7 +80,6 @@ class DetailsComicFragment :
         textAbout.setTextColor(resources.getColor(R.color.red))
         textCharacter.setTextColor(resources.getColor(R.color.white))
         textEvent.setTextColor(resources.getColor(R.color.white))
-        textSeries.setTextColor(resources.getColor(R.color.white))
         textStories.setTextColor(resources.getColor(R.color.white))
     }
 
@@ -88,7 +87,6 @@ class DetailsComicFragment :
         textAbout.setTextColor(resources.getColor(R.color.white))
         textCharacter.setTextColor(resources.getColor(R.color.red))
         textEvent.setTextColor(resources.getColor(R.color.white))
-        textSeries.setTextColor(resources.getColor(R.color.white))
         textStories.setTextColor(resources.getColor(R.color.white))
     }
 
@@ -96,7 +94,6 @@ class DetailsComicFragment :
         textAbout.setTextColor(resources.getColor(R.color.white))
         textCharacter.setTextColor(resources.getColor(R.color.white))
         textEvent.setTextColor(resources.getColor(R.color.red))
-        textSeries.setTextColor(resources.getColor(R.color.white))
         textStories.setTextColor(resources.getColor(R.color.white))
     }
 
@@ -104,7 +101,6 @@ class DetailsComicFragment :
         textAbout.setTextColor(resources.getColor(R.color.white))
         textCharacter.setTextColor(resources.getColor(R.color.white))
         textEvent.setTextColor(resources.getColor(R.color.white))
-        textSeries.setTextColor(resources.getColor(R.color.red))
         textStories.setTextColor(resources.getColor(R.color.white))
     }
 
@@ -113,7 +109,6 @@ class DetailsComicFragment :
         textStories.setTextColor(resources.getColor(R.color.red))
         textCharacter.setTextColor(resources.getColor(R.color.white))
         textEvent.setTextColor(resources.getColor(R.color.white))
-        textSeries.setTextColor(resources.getColor(R.color.white))
     }
 
     private fun handleClickViewpager() = binding.run {
@@ -126,11 +121,8 @@ class DetailsComicFragment :
         textEvent.setOnClickListener {
             viewPagerComic.currentItem = 2
         }
-        textSeries.setOnClickListener {
-            viewPagerComic.currentItem = 3
-        }
         textStories.setOnClickListener {
-            viewPagerComic.currentItem = 4
+            viewPagerComic.currentItem = 3
         }
         updateButtonColors(viewPagerComic.currentItem)
     }

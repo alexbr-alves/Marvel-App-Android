@@ -67,12 +67,6 @@ class MainActivity : AppCompatActivity() {
                     true,
                     getString(R.string.title_fragment_event)
                 )
-
-                R.id.creatorFragment -> setupTitleToolbar(
-                    true,
-                   getString(R.string.title_fragment_creator)
-                )
-
                 R.id.detailsCharacterFragment -> setupTitleToolbar(
                     true,
                     getString(R.string.title_fragment_detail)

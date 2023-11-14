@@ -2,7 +2,6 @@ package alex.lop.io.alexProject.data.remote
 
 import alex.lop.io.alexProject.data.model.character.CharacterModelResponse
 import alex.lop.io.alexProject.data.model.comic.ComicModelResponse
-import alex.lop.io.alexProject.data.model.creator.CreatorModelResponse
 import alex.lop.io.alexProject.data.model.event.EventModelResponse
 import alex.lop.io.alexProject.data.model.serie.SeriesModelResponse
 import alex.lop.io.alexProject.data.model.stories.StoriesModelResponse
@@ -23,11 +22,6 @@ interface ServiceApi {
     suspend fun comics(
         @Query("limit") limit : Int = 100
     ) : Response<ComicModelResponse>
-
-    @GET("creators")
-    suspend fun creators(
-        @Query("limit") limit : Int = 100
-    ) : Response<CreatorModelResponse>
 
     @GET("events")
     suspend fun events(
@@ -88,14 +82,6 @@ interface ServiceApi {
             encoded = true
         ) comicId : Int
     ) : Response<CharacterModelResponse>
-
-    @GET("comics/{comicId}/creators")
-    suspend fun getCreatorComics(
-        @Path(
-            value = "comicId",
-            encoded = true
-        ) comicId : Int
-    ) : Response<CreatorModelResponse>
 
     @GET("comics/{comicId}/events")
     suspend fun getEventComics(
