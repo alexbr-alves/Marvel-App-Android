@@ -41,7 +41,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
 
     var characters : List<CharacterModel>
         get() = differ.currentList
-        set(value) = differ.submitList(value)
+        set(value) = differ.submitList(value.filter { it.thumbnailModel.path != Constants.IMAGE_NOT_AVAILABLE })
 
     override fun getItemCount() : Int = characters.size
     override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : CharacterViewHolder {
@@ -54,14 +54,14 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
 
     override fun onBindViewHolder(holder : CharacterViewHolder, position : Int) {
         val character = characters[position]
-            holder.binding.apply {
-                textName.text = character.name
-                loadImage(
-                    image,
-                    character.thumbnailModel.path,
-                    character.thumbnailModel.extension
-                )
-            }
+        holder.binding.apply {
+            textName.text = character.name
+            loadImage(
+                image,
+                character.thumbnailModel.path,
+                character.thumbnailModel.extension
+            )
+        }
         holder.itemView.setOnClickListener {
             onItemClickListener?.let {
                 it(character)
