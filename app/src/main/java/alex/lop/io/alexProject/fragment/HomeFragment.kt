@@ -39,11 +39,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             val action = HomeFragmentDirections.actionHomeFragmentToListCharacterFragment()
             findNavController().navigate(action)
         }
-        imageComicMore.setOnClickListener {
+        textComicMore.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToComicsFragment()
             findNavController().navigate(action)
         }
-        imageEventMore.setOnClickListener {
+        textEventMore.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToEventFragment2()
             findNavController().navigate(action)
         }
