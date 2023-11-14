@@ -38,10 +38,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             val action = HomeFragmentDirections.actionHomeFragmentToEventFragment2()
             findNavController().navigate(action)
         }
-        menuSeries.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToSeriesFragment()
-            findNavController().navigate(action)
-        }
-
     }
 }
