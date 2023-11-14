@@ -3,11 +3,13 @@ package alex.lop.io.alexProject.adapters
 
 import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.databinding.LayoutCardNameBinding
+import alex.lop.io.alexProject.databinding.LayoutCardNameDescriptionBinding
 import alex.lop.io.alexProject.util.Constants
 import alex.lop.io.alexProject.util.limitDescription
 
 
 import alex.lop.io.alexProject.util.loadImage
+import alex.lop.io.alexProject.util.setGone
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -16,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
 
-    inner class CharacterViewHolder(val binding : LayoutCardNameBinding) :
+    inner class CharacterViewHolder(val binding : LayoutCardNameDescriptionBinding) :
         RecyclerView.ViewHolder(binding.root)
 
 
@@ -47,7 +49,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
     override fun getItemCount() : Int = characters.size
     override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : CharacterViewHolder {
         return CharacterViewHolder(
-            LayoutCardNameBinding.inflate(
+            LayoutCardNameDescriptionBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
@@ -56,7 +58,12 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
     override fun onBindViewHolder(holder : CharacterViewHolder, position : Int) {
         val character = characters[position]
         holder.binding.apply {
-            textName.text = character.name.limitDescription(15)
+            name.text = character.name.limitDescription(15)
+            if (character.description.isNullOrEmpty()) {
+                description.setGone()
+            } else {
+                description.text = character.description.limitDescription(40)
+            }
             loadImage(
                 image,
                 character.thumbnailModel.path,

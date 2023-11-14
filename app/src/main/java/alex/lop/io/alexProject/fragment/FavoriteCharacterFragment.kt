@@ -31,7 +31,6 @@ class FavoriteCharacterFragment :
 
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupRecycleView()
         clickAdapter()
         observer()
