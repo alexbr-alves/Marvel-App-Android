@@ -10,7 +10,7 @@ class MarvelRepository @Inject constructor(
     private val dao : MarvelDao
 ) {
     suspend fun characters(nameStartsWith : String? = null) = api.characters(nameStartsWith)
-    suspend fun comics() = api.comics()
+    suspend fun comics(titleStartsWith : String? = null) = api.comics(titleStartsWith)
     suspend fun events() = api.events()
     suspend fun series(titleStartsWith : String? = null) = api.series(titleStartsWith)
 
