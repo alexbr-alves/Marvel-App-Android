@@ -11,7 +11,7 @@ class MarvelRepository @Inject constructor(
 ) {
     suspend fun characters(nameStartsWith : String? = null) = api.characters(nameStartsWith)
     suspend fun comics(titleStartsWith : String? = null) = api.comics(titleStartsWith)
-    suspend fun events() = api.events()
+    suspend fun events(nameStartsWith : String? = null) = api.events(nameStartsWith)
     suspend fun series(titleStartsWith : String? = null) = api.series(titleStartsWith)
 
     //Character details

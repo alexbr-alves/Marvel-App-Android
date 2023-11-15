@@ -27,13 +27,13 @@ class EventViewModel @Inject constructor(
         fetch()
     }
 
-    private fun fetch() = viewModelScope.launch {
-        safeFetch()
+    fun fetch(nameStartsWith : String? = null) = viewModelScope.launch {
+        safeFetch(nameStartsWith)
     }
 
-    private suspend fun safeFetch() {
+    private suspend fun safeFetch(nameStartsWith : String? = null) {
         try {
-            val response = repository.events()
+            val response = repository.events(nameStartsWith)
             _eventList.value = handleResponse(response)
         } catch (t : Throwable) {
             when (t) {

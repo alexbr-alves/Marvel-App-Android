@@ -9,6 +9,8 @@ import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
 import alex.lop.io.alexProject.viewModel.EventViewModel
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,6 +39,7 @@ class EventFragment : BaseFragment<FragmentEventBinding,EventViewModel>(){
         collectObserver()
         setupRecycleView()
         clickAdapter()
+        searchInit()
     }
 
     private fun clickAdapter() {
@@ -82,4 +85,35 @@ class EventFragment : BaseFragment<FragmentEventBinding,EventViewModel>(){
         }
     }
 
+    private fun searchInit(query : String? = null) = with(binding) {
+        editTextSearch.setText(query)
+        editTextSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                char : CharSequence?,
+                start : Int,
+                count : Int,
+                after : Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                char : CharSequence?,
+                start : Int,
+                before : Int,
+                count : Int
+            ) {
+                if (char.toString().isEmpty()) {
+                    updateEventList()
+                } else {
+                    updateEventList(char.toString())
+                }
+            }
+
+            override fun afterTextChanged(s : Editable?) {}
+        })
+    }
+
+    private fun updateEventList(query : String? = null) {
+        viewModel.fetch(query)
+    }
 }
