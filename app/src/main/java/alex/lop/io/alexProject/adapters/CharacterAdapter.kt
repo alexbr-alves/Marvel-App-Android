@@ -59,11 +59,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
         val character = characters[position]
         holder.binding.apply {
             name.text = character.name.limitDescription(15)
-            if (character.description.isNullOrEmpty()) {
-                description.setGone()
-            } else {
-                description.text = character.description.limitDescription(40)
-            }
+            description.setGone()
             loadImage(
                 image,
                 character.thumbnailModel.path,
