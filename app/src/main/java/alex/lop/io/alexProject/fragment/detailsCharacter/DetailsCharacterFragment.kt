@@ -9,6 +9,7 @@ import alex.lop.io.alexProject.viewModel.detailCharacter.DetailsCharacterViewMod
 import alex.lop.io.alexProject.util.loadImage
 import alex.lop.io.alexProject.util.toast
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater

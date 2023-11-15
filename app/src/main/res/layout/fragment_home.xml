@@ -44,8 +44,7 @@
                 android:layout_marginEnd="5dp"
                 android:background="@color/white"
                 android:contentDescription="@string/app_name"
-                android:padding="2dp"
-                android:src="@drawable/img_spider_man" />
+                android:padding="2dp" />
 
             <ImageView
                 android:id="@+id/image_character2"
@@ -55,8 +54,7 @@
                 android:layout_toEndOf="@id/image_character1"
                 android:background="@color/white"
                 android:contentDescription="@string/app_name"
-                android:padding="2dp"
-                android:src="@drawable/img_black_widow" />
+                android:padding="2dp" />
 
             <ImageView
                 android:id="@+id/image_character3"
@@ -66,8 +64,7 @@
                 android:layout_toEndOf="@id/image_character2"
                 android:background="@color/white"
                 android:contentDescription="@string/app_name"
-                android:padding="2dp"
-                android:src="@drawable/img_iron_man" />
+                android:padding="2dp" />
 
             <ImageView
                 android:id="@+id/image_character4"
@@ -77,8 +74,7 @@
                 android:layout_toEndOf="@id/image_character3"
                 android:background="@color/white"
                 android:contentDescription="@string/app_name"
-                android:padding="2dp"
-                android:src="@drawable/img_thor" />
+                android:padding="2dp" />
 
             <ImageView
                 android:id="@+id/image_character5"
@@ -88,8 +84,7 @@
                 android:layout_toEndOf="@id/image_character4"
                 android:background="@color/white"
                 android:contentDescription="@string/app_name"
-                android:padding="2dp"
-                android:src="@drawable/img_black_panther" />
+                android:padding="2dp" />
 
             <TextView
                 android:id="@+id/text_character_more"
@@ -146,8 +141,7 @@
                 android:background="@color/white"
                 android:padding="2dp"
                 android:scaleType="centerCrop"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/img_comic1" />
+                android:contentDescription="@string/app_name" />
 
             <ImageView
                 android:id="@+id/image_comic2"
@@ -158,8 +152,7 @@
                 android:scaleType="centerCrop"
                 android:background="@color/white"
                 android:contentDescription="@string/app_name"
-                android:padding="2dp"
-                android:src="@drawable/img_comic2" />
+                android:padding="2dp" />
 
             <ImageView
                 android:id="@+id/image_comic3"
@@ -170,8 +163,7 @@
                 android:scaleType="centerCrop"
                 android:contentDescription="@string/app_name"
                 android:background="@color/white"
-                android:padding="2dp"
-                android:src="@drawable/img_comic3" />
+                android:padding="2dp" />
 
             <ImageView
                 android:id="@+id/image_comic4"
@@ -182,8 +174,7 @@
                 android:scaleType="centerCrop"
                 android:background="@color/white"
                 android:contentDescription="@string/app_name"
-                android:padding="2dp"
-                android:src="@drawable/img_comic4" />
+                android:padding="2dp" />
 
             <ImageView
                 android:id="@+id/image_comic5"
@@ -194,8 +185,7 @@
                 android:scaleType="centerCrop"
                 android:background="@color/white"
                 android:contentDescription="@string/app_name"
-                android:padding="2dp"
-                android:src="@drawable/img_comic5" />
+                android:padding="2dp" />
 
             <TextView
                 android:id="@+id/text_comic_more"
@@ -251,8 +241,7 @@
                 android:layout_marginEnd="5dp"
                 android:background="@color/white"
                 android:padding="2dp"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/img_event" />
+                android:contentDescription="@string/app_name" />
 
             <ImageView
                 android:id="@+id/image_event2"
@@ -262,8 +251,7 @@
                 android:layout_toEndOf="@id/image_event1"
                 android:contentDescription="@string/app_name"
                 android:background="@color/white"
-                android:padding="2dp"
-                android:src="@drawable/img_event2" />
+                android:padding="2dp" />
 
             <ImageView
                 android:id="@+id/image_event3"
@@ -273,8 +261,7 @@
                 android:layout_toEndOf="@id/image_event2"
                 android:contentDescription="@string/app_name"
                 android:background="@color/white"
-                android:padding="2dp"
-                android:src="@drawable/img_event3" />
+                android:padding="2dp" />
 
             <ImageView
                 android:id="@+id/image_event4"
@@ -284,8 +271,7 @@
                 android:layout_toEndOf="@id/image_event3"
                 android:contentDescription="@string/app_name"
                 android:background="@color/white"
-                android:padding="2dp"
-                android:src="@drawable/img_event4" />
+                android:padding="2dp" />
 
             <ImageView
                 android:id="@+id/image_event5"
@@ -295,8 +281,7 @@
                 android:layout_toEndOf="@id/image_event4"
                 android:contentDescription="@string/app_name"
                 android:background="@color/white"
-                android:padding="2dp"
-                android:src="@drawable/img_event5" />
+                android:padding="2dp" />
 
             <TextView
                 android:id="@+id/text_event_more"

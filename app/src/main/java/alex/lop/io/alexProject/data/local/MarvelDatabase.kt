@@ -9,5 +9,4 @@ import androidx.room.TypeConverters
 @TypeConverters(MarvelConverters::class)
 abstract class MarvelDatabase : RoomDatabase() {
     abstract fun MarvelDao(): MarvelDao
-
 }
