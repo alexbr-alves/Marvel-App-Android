@@ -22,8 +22,8 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class ComicsCharacterFragment(private val characterId: Int):
-BaseFragment<FragmentComicsCharapterBinding,ComicsCharacterViewModel>(){
+class ComicsCharacterFragment(private val characterId : Int) :
+    BaseFragment<FragmentComicsCharapterBinding, ComicsCharacterViewModel>() {
 
     override val viewModel : ComicsCharacterViewModel by viewModels()
     private val comicDetailsAdapter by lazy { ComicDetailsAdapter() }
@@ -40,13 +40,13 @@ BaseFragment<FragmentComicsCharapterBinding,ComicsCharacterViewModel>(){
         setupRecycleView()
         collectObserver()
     }
+
     private fun setupRecycleView() = with(binding) {
         rvComics.apply {
             adapter = comicDetailsAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
-
 
 
     private fun collectObserver() = lifecycleScope.launch {

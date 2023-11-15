@@ -14,7 +14,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginHorizontal="20dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:boxStrokeColor="@color/white"
@@ -32,7 +32,7 @@
             android:inputType="textNoSuggestions"
             android:selectAllOnFocus="true"
             android:textColor="@color/white"
-            tools:text="Spyder Man" />
+            tools:text="Spider-man" />
     </com.google.android.material.textfield.TextInputLayout>
 
 

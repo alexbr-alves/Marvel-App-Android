@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
@@ -45,11 +46,13 @@ class DetailsComicFragment :
 
     private fun handleViewPager() {
         viewPager2 = view?.findViewById<ViewPager2>(R.id.viewPagerComic)
-        val comicDescription = if (!comicModel.description.isNullOrEmpty()) comicModel.description else ""
-        val detailsComicAdapter = DetailsComicAdapter(childFragmentManager, lifecycle, comicModel.id, comicDescription)
+        val comicDescription =
+            if (!comicModel.description.isNullOrEmpty()) comicModel.description else ""
+        val detailsComicAdapter =
+            DetailsComicAdapter(childFragmentManager, lifecycle, comicModel.id, comicDescription)
         viewPager2?.adapter = detailsComicAdapter
         viewPager2?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
+            override fun onPageSelected(position : Int) {
                 super.onPageSelected(position)
                 viewPager2?.offscreenPageLimit = 1
                 updateButtonColors(position)
@@ -67,36 +70,14 @@ class DetailsComicFragment :
     }
 
     private fun updateButtonColors(position : Int) = binding.run {
-        when (position) {
-            0 -> aboutActive()
-            1 -> characterActive()
-            2 -> eventActive()
-            3 -> seriesActive()
+        val textViews =
+            arrayOf(binding.textAbout, binding.textCharacter, binding.textEvent)
+        val activeColor = ContextCompat.getColor(requireContext(), R.color.red)
+        val inactiveColor = ContextCompat.getColor(requireContext(), R.color.white)
+
+        textViews.forEachIndexed { index, textView ->
+            textView.setTextColor(if (index == position) activeColor else inactiveColor)
         }
-    }
-
-    private fun aboutActive() = binding.run {
-        textAbout.setTextColor(resources.getColor(R.color.red))
-        textCharacter.setTextColor(resources.getColor(R.color.white))
-        textEvent.setTextColor(resources.getColor(R.color.white))
-    }
-
-    private fun characterActive() = binding.run {
-        textAbout.setTextColor(resources.getColor(R.color.white))
-        textCharacter.setTextColor(resources.getColor(R.color.red))
-        textEvent.setTextColor(resources.getColor(R.color.white))
-    }
-
-    private fun eventActive() = binding.run {
-        textAbout.setTextColor(resources.getColor(R.color.white))
-        textCharacter.setTextColor(resources.getColor(R.color.white))
-        textEvent.setTextColor(resources.getColor(R.color.red))
-    }
-
-    private fun seriesActive() = binding.run {
-        textAbout.setTextColor(resources.getColor(R.color.white))
-        textCharacter.setTextColor(resources.getColor(R.color.white))
-        textEvent.setTextColor(resources.getColor(R.color.white))
     }
 
     private fun handleClickViewpager() = binding.run {

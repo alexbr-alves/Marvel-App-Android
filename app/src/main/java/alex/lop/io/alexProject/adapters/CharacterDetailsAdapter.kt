@@ -2,6 +2,7 @@ package alex.lop.io.alexProject.adapters
 
 import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.databinding.LayoutMiniCardsBinding
+import alex.lop.io.alexProject.util.Constants
 import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
 import alex.lop.io.alexProject.util.setGone
@@ -39,7 +40,9 @@ class CharacterDetailsAdapter : RecyclerView.Adapter<CharacterDetailsAdapter.Cha
 
     var characters: List<CharacterModel>
         get() = differ.currentList
-        set(value) = differ.submitList(value)
+        set(value) = differ.submitList(value.filter {
+            it.thumbnailModel.path != Constants.IMAGE_NOT_AVAILABLE
+        })
 
     override fun getItemCount(): Int {
         return characters.size

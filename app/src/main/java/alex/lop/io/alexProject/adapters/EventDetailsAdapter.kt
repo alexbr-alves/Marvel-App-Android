@@ -2,6 +2,7 @@ package alex.lop.io.alexProject.adapters
 
 import alex.lop.io.alexProject.data.model.event.EventModel
 import alex.lop.io.alexProject.databinding.LayoutMiniCardsBinding
+import alex.lop.io.alexProject.util.Constants
 import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
 import alex.lop.io.alexProject.util.setGone
@@ -39,7 +40,9 @@ class EventDetailsAdapter : RecyclerView.Adapter<EventDetailsAdapter.EventViewHo
 
     var events: List<EventModel>
         get() = differ.currentList
-        set(value) = differ.submitList(value)
+        set(value) = differ.submitList(value.filter {
+            it.thumbnailModel.path != Constants.IMAGE_NOT_AVAILABLE
+        })
 
     override fun getItemCount(): Int {
         return events.size

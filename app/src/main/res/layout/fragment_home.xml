@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/red_marvel"
-    android:paddingHorizontal="20dp"
-    android:paddingTop="20dp">
+    android:paddingTop="10dp">
 
     <TextView
         android:id="@+id/text_character"
@@ -16,185 +15,289 @@
         android:text="@string/title_fragment_characters"
         android:textColor="@color/white"
         android:textSize="20sp"
+        android:layout_marginStart="10dp"
         android:textStyle="bold"
         tools:ignore="MissingConstraints" />
 
-    <ImageView
-        android:id="@+id/image_character1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <HorizontalScrollView
+        android:id="@+id/scrollview_characters"
         android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:contentDescription="@string/app_name"
-        android:padding="2dp"
-        android:src="@drawable/img_spider_man"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_character" />
-
-    <ImageView
-        android:id="@+id/image_character2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:contentDescription="@string/app_name"
-        android:padding="2dp"
-        android:src="@drawable/img_black_widow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:layout_marginStart="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_character" />
+        app:layout_constraintTop_toBottomOf="@id/text_character">
 
-    <ImageView
-        android:id="@+id/image_character3"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:contentDescription="@string/app_name"
-        android:padding="2dp"
-        android:src="@drawable/img_iron_man"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_character" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal">
 
-    <ImageView
-        android:id="@+id/image_character4"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:contentDescription="@string/app_name"
-        android:padding="2dp"
-        android:src="@drawable/img_thor"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_character1" />
+            <ImageView
+                android:id="@+id/image_character1"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/white"
+                android:contentDescription="@string/app_name"
+                android:padding="2dp" />
 
-    <ImageView
-        android:id="@+id/image_character5"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:contentDescription="@string/app_name"
-        android:padding="2dp"
-        android:src="@drawable/img_black_panther"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_character2" />
+            <ImageView
+                android:id="@+id/image_character2"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toEndOf="@id/image_character1"
+                android:background="@color/white"
+                android:contentDescription="@string/app_name"
+                android:padding="2dp" />
 
-    <TextView
-        android:id="@+id/text_character_more"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:fontFamily="@font/marvel"
-        android:background="@drawable/background_gradient"
-        android:text="@string/see_more"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@id/image_character5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/image_character5" />
+            <ImageView
+                android:id="@+id/image_character3"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toEndOf="@id/image_character2"
+                android:background="@color/white"
+                android:contentDescription="@string/app_name"
+                android:padding="2dp" />
+
+            <ImageView
+                android:id="@+id/image_character4"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toEndOf="@id/image_character3"
+                android:background="@color/white"
+                android:contentDescription="@string/app_name"
+                android:padding="2dp" />
+
+            <ImageView
+                android:id="@+id/image_character5"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toEndOf="@id/image_character4"
+                android:background="@color/white"
+                android:contentDescription="@string/app_name"
+                android:padding="2dp" />
+
+            <TextView
+                android:id="@+id/text_character_more"
+                android:layout_width="120dp"
+                android:layout_height="150dp"
+                android:background="@drawable/background_gradient"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/marvel"
+                android:gravity="center"
+                android:text="@string/see_more"
+                android:layout_toEndOf="@+id/image_character5"
+                 />
+        </RelativeLayout>
+    </HorizontalScrollView>
 
     <TextView
         android:id="@+id/text_comic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:fontFamily="@font/marvel"
         android:text="@string/title_fragment_comic"
         android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/scrollview_characters"
         android:textSize="20sp"
+        android:layout_marginStart="10dp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/image_character4"
         tools:ignore="MissingConstraints" />
 
-    <ImageView
-        android:id="@+id/image_comic1"
-        android:layout_width="100dp"
-        android:layout_height="150dp"
+    <HorizontalScrollView
+        android:id="@+id/scrollview_comic"
         android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:contentDescription="@string/app_name"
-        android:padding="2dp"
-        android:src="@drawable/img_comic1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_comic" />
-
-    <ImageView
-        android:id="@+id/image_comic2"
-        android:layout_width="100dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:contentDescription="@string/app_name"
-        android:padding="2dp"
-        android:src="@drawable/img_comic2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:layout_marginStart="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_comic" />
+        app:layout_constraintTop_toBottomOf="@id/text_comic">
 
-    <ImageView
-        android:id="@+id/image_comic_more"
-        android:layout_width="100dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="10dp"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/baseline_add_box_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_comic" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal">
+
+            <ImageView
+                android:id="@+id/image_comic1"
+                android:layout_width="130dp"
+                android:layout_height="220dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="5dp"
+                android:background="@color/white"
+                android:padding="2dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/app_name" />
+
+            <ImageView
+                android:id="@+id/image_comic2"
+                android:layout_width="130dp"
+                android:layout_height="220dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toEndOf="@id/image_comic1"
+                android:scaleType="centerCrop"
+                android:background="@color/white"
+                android:contentDescription="@string/app_name"
+                android:padding="2dp" />
+
+            <ImageView
+                android:id="@+id/image_comic3"
+                android:layout_width="130dp"
+                android:layout_height="220dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toEndOf="@id/image_comic2"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/app_name"
+                android:background="@color/white"
+                android:padding="2dp" />
+
+            <ImageView
+                android:id="@+id/image_comic4"
+                android:layout_width="130dp"
+                android:layout_height="220dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toEndOf="@id/image_comic3"
+                android:scaleType="centerCrop"
+                android:background="@color/white"
+                android:contentDescription="@string/app_name"
+                android:padding="2dp" />
+
+            <ImageView
+                android:id="@+id/image_comic5"
+                android:layout_width="130dp"
+                android:layout_height="220dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toEndOf="@id/image_comic4"
+                android:scaleType="centerCrop"
+                android:background="@color/white"
+                android:contentDescription="@string/app_name"
+                android:padding="2dp" />
+
+            <TextView
+                android:id="@+id/text_comic_more"
+                android:layout_width="120dp"
+                android:layout_height="220dp"
+                android:background="@drawable/background_gradient"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/marvel"
+                android:gravity="center"
+                android:text="@string/see_more"
+                android:layout_toEndOf="@+id/image_comic5"
+                />
+        </RelativeLayout>
+    </HorizontalScrollView>
 
     <TextView
         android:id="@+id/text_event"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:fontFamily="@font/marvel"
         android:text="@string/title_fragment_event"
         android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/scrollview_comic"
         android:textSize="20sp"
+        android:layout_marginStart="10dp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/image_comic1"
         tools:ignore="MissingConstraints" />
 
-
-    <ImageView
-        android:id="@+id/image_event1"
-        android:layout_width="100dp"
-        android:layout_height="150dp"
+    <HorizontalScrollView
+        android:id="@+id/scrollview_event"
         android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:contentDescription="@string/app_name"
-        android:padding="2dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/img_event"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_event" />
-
-    <ImageView
-        android:id="@+id/image_event2"
-        android:layout_width="100dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:contentDescription="@string/app_name"
-        android:padding="2dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/img_event2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:layout_marginStart="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_event" />
+        app:layout_constraintTop_toBottomOf="@id/text_event">
 
-    <ImageView
-        android:id="@+id/image_event_more"
-        android:layout_width="100dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="10dp"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/baseline_add_box_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_event" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal">
 
+            <ImageView
+                android:id="@+id/image_event1"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="5dp"
+                android:background="@color/white"
+                android:padding="2dp"
+                android:contentDescription="@string/app_name" />
+
+            <ImageView
+                android:id="@+id/image_event2"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toEndOf="@id/image_event1"
+                android:contentDescription="@string/app_name"
+                android:background="@color/white"
+                android:padding="2dp" />
+
+            <ImageView
+                android:id="@+id/image_event3"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toEndOf="@id/image_event2"
+                android:contentDescription="@string/app_name"
+                android:background="@color/white"
+                android:padding="2dp" />
+
+            <ImageView
+                android:id="@+id/image_event4"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toEndOf="@id/image_event3"
+                android:contentDescription="@string/app_name"
+                android:background="@color/white"
+                android:padding="2dp" />
+
+            <ImageView
+                android:id="@+id/image_event5"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toEndOf="@id/image_event4"
+                android:contentDescription="@string/app_name"
+                android:background="@color/white"
+                android:padding="2dp" />
+
+            <TextView
+                android:id="@+id/text_event_more"
+                android:layout_width="120dp"
+                android:layout_height="150dp"
+                android:background="@drawable/background_gradient"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/marvel"
+                android:gravity="center"
+                android:text="@string/see_more"
+                android:layout_toEndOf="@+id/image_event5"
+                />
+        </RelativeLayout>
+    </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

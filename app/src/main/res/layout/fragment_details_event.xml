@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/red_marvel">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_details"
@@ -34,13 +34,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
                 android:layout_marginBottom="10dp"
-                android:background="@color/black"
                 android:text="@string/tx_item_name"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintTop_toBottomOf="@id/image_event"
                 app:layout_constraintStart_toStartOf="@id/image_event" />
-
 
           <LinearLayout
               android:id="@+id/layout_buttons"

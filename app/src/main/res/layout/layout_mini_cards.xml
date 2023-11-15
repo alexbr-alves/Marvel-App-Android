@@ -8,8 +8,8 @@
     android:layout_marginVertical="5dp"
     android:layout_marginHorizontal="12dp"
     app:cardMaxElevation="2dp"
-    android:backgroundTint="@color/black"
-    app:strokeColor="@color/white"
+    android:backgroundTint="@color/white"
+    app:strokeColor="@color/black"
     app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:contentDescription="@string/app_name"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,13 +33,13 @@
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginHorizontal="10dp"
-            android:paddingBottom="10dp"
+            android:paddingBottom="5dp"
             android:text="@string/tx_item_name"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="@id/main_constraint"
             app:layout_constraintTop_toTopOf="parent"
@@ -53,8 +53,9 @@
             android:layout_marginStart="10dp"
             android:paddingBottom="10dp"
             android:text="@string/tx_item_name"
-            android:textColor="@color/white"
-            android:textSize="12sp"
+            android:textColor="@color/gray"
+            android:textStyle="italic"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="@id/main_constraint"
             app:layout_constraintTop_toBottomOf="@+id/text_name"
             app:layout_constraintStart_toEndOf="@+id/image" />

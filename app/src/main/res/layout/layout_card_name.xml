@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="170dp"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="5dp"
+    app:cardCornerRadius="10dp"
     android:layout_marginVertical="5dp"
     android:layout_marginHorizontal="10dp"
     app:cardMaxElevation="2dp"
-    android:backgroundTint="@color/black"
+    android:backgroundTint="@color/white"
     app:strokeColor="@color/white"
     app:strokeWidth="1dp">
 
@@ -32,16 +32,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
             android:paddingBottom="10dp"
             android:text="@string/tx_item_name"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
+            android:fontFamily="@font/marvel"
             android:textSize="15sp"
-            android:gravity="center_horizontal"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/image"
-            app:layout_constraintTop_toBottomOf="@+id/image"
             app:layout_constraintEnd_toEndOf="@+id/image"
-             />
+            app:layout_constraintStart_toStartOf="@+id/image"
+            app:layout_constraintTop_toBottomOf="@+id/image" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -59,6 +59,15 @@
         <action
             android:id="@+id/action_homeFragment_to_seriesFragment"
             app:destination="@id/seriesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailsCharacterFragment"
+            app:destination="@id/detailsCharacterFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailsComicFragment"
+            app:destination="@id/detailsComicFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailsEventFragment"
+            app:destination="@id/detailsEventFragment" />
     </fragment>
     <fragment
         android:id="@+id/comicsFragment"

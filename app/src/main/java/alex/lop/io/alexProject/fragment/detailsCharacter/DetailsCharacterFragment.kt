@@ -9,12 +9,14 @@ import alex.lop.io.alexProject.viewModel.detailCharacter.DetailsCharacterViewMod
 import alex.lop.io.alexProject.util.loadImage
 import alex.lop.io.alexProject.util.toast
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
@@ -28,6 +30,7 @@ class DetailsCharacterFragment :
     private val args : DetailsCharacterFragmentArgs by navArgs()
     private lateinit var characterModel : CharacterModel
     private var viewPager2 : ViewPager2? = null
+
 
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,8 +48,14 @@ class DetailsCharacterFragment :
 
     private fun handleViewPager() {
         viewPager2 = view?.findViewById<ViewPager2>(R.id.viewPager2)
-        val characterDescription = if (!characterModel.description.isNullOrEmpty()) characterModel.description else ""
-        val detailsCharacterAdapter = DetailsCharacterAdapter(childFragmentManager, lifecycle, characterModel.id, characterDescription)
+        val characterDescription =
+            if (!characterModel.description.isNullOrEmpty()) characterModel.description else ""
+        val detailsCharacterAdapter = DetailsCharacterAdapter(
+            childFragmentManager,
+            lifecycle,
+            characterModel.id,
+            characterDescription
+        )
         viewPager2?.adapter = detailsCharacterAdapter
         viewPager2?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position : Int) {
@@ -57,41 +66,16 @@ class DetailsCharacterFragment :
         })
     }
 
-    private fun updateButtonColors(position : Int) = binding.run {
-        when (position) {
-            0 -> aboutActive()
-            1 -> characterActive()
-            2 -> eventActive()
-            3 -> seriesActive()
+
+    private fun updateButtonColors(position : Int) {
+        val textViews =
+            arrayOf(binding.textAbout, binding.textComic, binding.textEvent, binding.textSeries)
+
+        val activeColor = ContextCompat.getColor(requireContext(), R.color.red)
+        val inactiveColor = ContextCompat.getColor(requireContext(), R.color.white)
+        textViews.forEachIndexed { index, textView ->
+            textView.setTextColor(if (index == position) activeColor else inactiveColor)
         }
-    }
-
-    private fun aboutActive() = binding.run {
-        textAbout.setTextColor(resources.getColor(R.color.red))
-        textComic.setTextColor(resources.getColor(R.color.white))
-        textEvent.setTextColor(resources.getColor(R.color.white))
-        textSeries.setTextColor(resources.getColor(R.color.white))
-    }
-
-    private fun characterActive() = binding.run {
-        textAbout.setTextColor(resources.getColor(R.color.white))
-        textComic.setTextColor(resources.getColor(R.color.red))
-        textEvent.setTextColor(resources.getColor(R.color.white))
-        textSeries.setTextColor(resources.getColor(R.color.white))
-    }
-
-    private fun eventActive() = binding.run {
-        textAbout.setTextColor(resources.getColor(R.color.white))
-        textComic.setTextColor(resources.getColor(R.color.white))
-        textEvent.setTextColor(resources.getColor(R.color.red))
-        textSeries.setTextColor(resources.getColor(R.color.white))
-    }
-
-    private fun seriesActive() = binding.run {
-        textAbout.setTextColor(resources.getColor(R.color.white))
-        textComic.setTextColor(resources.getColor(R.color.white))
-        textEvent.setTextColor(resources.getColor(R.color.white))
-        textSeries.setTextColor(resources.getColor(R.color.red))
     }
 
     private fun handleClickViewpager() = binding.run {
