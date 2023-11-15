@@ -8,12 +8,14 @@ import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
 import alex.lop.io.alexProject.viewModel.ComicViewModel
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -28,6 +30,7 @@ import timber.log.Timber
 class ComicsFragment : BaseFragment<FragmentComicBinding, ComicViewModel>() {
     override val viewModel : ComicViewModel by viewModels()
     private val comicsAdapter by lazy { ComicsAdapter() }
+    private var isSearchExpanded = false
 
     override fun getViewBinding(
         inflater : LayoutInflater,
@@ -41,6 +44,49 @@ class ComicsFragment : BaseFragment<FragmentComicBinding, ComicViewModel>() {
         collectObserver()
         clickAdapter()
         searchInit()
+        handleSearchAnimation()
+    }
+
+    private fun handleSearchAnimation() = binding.run {
+        searchIcon.setOnClickListener {
+            if (isSearchExpanded) {
+                collapseSearchBar()
+            } else {
+                expandSearchBar()
+            }
+        }
+    }
+
+    private fun expandSearchBar() = binding.run {
+        val animator = ValueAnimator.ofFloat(0f, 1f)
+        animator.addUpdateListener { valueAnimator ->
+            val fraction = valueAnimator.animatedValue as Float
+            val params = searchEditText.layoutParams as ConstraintLayout.LayoutParams
+            params.matchConstraintPercentWidth = fraction
+            searchEditText.layoutParams = params
+        }
+        animator.duration = 300
+        animator.start()
+
+        searchEditText.visibility = View.VISIBLE
+        searchEditText.requestFocus()
+
+        isSearchExpanded = true
+    }
+
+    private fun collapseSearchBar() = binding.run {
+        val animator = ValueAnimator.ofFloat(1f, 0f)
+        animator.addUpdateListener { valueAnimator ->
+            val fraction = valueAnimator.animatedValue as Float
+            val params = searchEditText.layoutParams as ConstraintLayout.LayoutParams
+            params.matchConstraintPercentWidth = fraction
+            searchEditText.layoutParams = params
+        }
+        animator.duration = 300
+        animator.start()
+
+        searchEditText.visibility = View.GONE
+        isSearchExpanded = false
     }
 
     private fun collectObserver() = lifecycleScope.launch {
@@ -91,8 +137,8 @@ class ComicsFragment : BaseFragment<FragmentComicBinding, ComicViewModel>() {
     }
 
     private fun searchInit(query : String? = null) = with(binding) {
-        editTextSearch.setText(query)
-        editTextSearch.addTextChangedListener(object : TextWatcher {
+        searchEditText.setText(query)
+        searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 char : CharSequence?,
                 start : Int,
