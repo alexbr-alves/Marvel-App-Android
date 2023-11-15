@@ -27,15 +27,15 @@ class ComicViewModel @Inject constructor(
         fetch()
     }
 
-    fun fetch() = viewModelScope.launch {
-        safeFetch()
+    fun fetch(titleStartsWith : String? = null) = viewModelScope.launch {
+        safeFetch(titleStartsWith)
     }
 
 
 
-    private suspend fun safeFetch() {
+    private suspend fun safeFetch(titleStartsWith : String? = null) {
         try {
-            val response = repository.comics()
+            val response = repository.comics(titleStartsWith)
             _comicList.value = handleResponse(response)
         } catch (t: Throwable) {
             when (t) {

@@ -83,6 +83,10 @@ class MainActivity : AppCompatActivity() {
                     true,
                     getString(R.string.title_fragment_detail)
                 )
+                R.id.detailsEventFragment -> setupTitleToolbar(
+                    true,
+                    getString(R.string.title_fragment_event)
+                )
             }
         }
     }

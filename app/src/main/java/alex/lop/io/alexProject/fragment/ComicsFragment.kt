@@ -40,6 +40,7 @@ class ComicsFragment : BaseFragment<FragmentComicBinding, ComicViewModel>() {
         setupRecycleView()
         collectObserver()
         clickAdapter()
+        searchInit()
     }
 
     private fun collectObserver() = lifecycleScope.launch {
@@ -89,4 +90,35 @@ class ComicsFragment : BaseFragment<FragmentComicBinding, ComicViewModel>() {
         }
     }
 
+    private fun searchInit(query : String? = null) = with(binding) {
+        editTextSearch.setText(query)
+        editTextSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                char : CharSequence?,
+                start : Int,
+                count : Int,
+                after : Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                char : CharSequence?,
+                start : Int,
+                before : Int,
+                count : Int
+            ) {
+                if (char.toString().isEmpty()) {
+                    updateComicList()
+                } else {
+                    updateComicList(char.toString())
+                }
+            }
+
+            override fun afterTextChanged(s : Editable?) {}
+        })
+    }
+
+    private fun updateComicList(query : String? = null) {
+        viewModel.fetch(query)
+    }
 }

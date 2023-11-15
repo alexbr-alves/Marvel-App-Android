@@ -20,17 +20,19 @@ interface ServiceApi {
 
     @GET("comics")
     suspend fun comics(
+        @Query("titleStartsWith") titleStartsWith : String? = null,
         @Query("limit") limit : Int = 100
     ) : Response<ComicModelResponse>
 
     @GET("events")
     suspend fun events(
+        @Query("nameStartsWith") nameStartsWith : String? = null,
         @Query("limit") limit : Int = 100
     ) : Response<EventModelResponse>
 
     @GET("series")
     suspend fun series(
-        @Query("titleStartsWith") titleStartsWith : String? = null,
+        @Query("nameStartsWith") nameStartsWith : String? = null,
         @Query("limit") limit : Int = 100
     ) : Response<SeriesModelResponse>
 

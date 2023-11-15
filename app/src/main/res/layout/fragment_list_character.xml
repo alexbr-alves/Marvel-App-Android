@@ -27,7 +27,7 @@
             android:id="@+id/edit_text_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/search_hint"
+            android:hint="@string/search_character"
             android:imeOptions="actionSearch"
             android:inputType="textNoSuggestions"
             android:selectAllOnFocus="true"

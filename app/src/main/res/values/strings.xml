@@ -15,7 +15,8 @@
     <string name="close_dialog">Fechar</string>
 
     <!--    Search Character Fragment -->
-    <string name="search_hint">Pesquise um personagem</string>
+    <string name="search_character">Pesquise um personagem</string>
+    <string name="search_comic">Pesquise um HQ</string>
 
     <!--    Dialog delete -->
     <string name="dialog_title_text">DELETAR</string>
