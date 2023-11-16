@@ -96,6 +96,7 @@ class DetailsCharacterFragment :
 
     private fun descriptionCharacter() = binding.run {
         imageFavorite.setOnClickListener {
+            viewModel.searchFavorite(characterModel.id)
             viewModel.searchCharacter.observe(viewLifecycleOwner) {
                 if (it) {
                     viewModel.delete(characterModel)
