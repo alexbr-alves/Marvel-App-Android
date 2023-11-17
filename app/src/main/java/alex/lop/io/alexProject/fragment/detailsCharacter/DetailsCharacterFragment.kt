@@ -4,7 +4,10 @@ import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.databinding.FragmentDetailsCharacterBinding
 import alex.lop.io.alexProject.adapters.DetailsCharacterAdapter
+import alex.lop.io.alexProject.data.model.FavoriteModel
+import alex.lop.io.alexProject.data.model.ThumbnailModel
 import alex.lop.io.alexProject.fragment.BaseFragment
+import alex.lop.io.alexProject.util.Constants
 import alex.lop.io.alexProject.viewModel.detailCharacter.DetailsCharacterViewModel
 import alex.lop.io.alexProject.util.loadImage
 import alex.lop.io.alexProject.util.toast
@@ -30,14 +33,29 @@ class DetailsCharacterFragment :
     private val args : DetailsCharacterFragmentArgs by navArgs()
     private lateinit var characterModel : CharacterModel
     private var viewPager2 : ViewPager2? = null
+    private lateinit var favoriteModel : FavoriteModel
 
+    override fun getViewBinding(
+        inflater : LayoutInflater, container : ViewGroup?
+    ) : FragmentDetailsCharacterBinding =
+        FragmentDetailsCharacterBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         characterModel = args.character
+        favoriteModel = FavoriteModel(
+            characterModel.id,
+            characterModel.name,
+            characterModel.description,
+            Constants.CHARACTER,
+            thumbnailModel = ThumbnailModel(
+                path = characterModel.thumbnailModel.path,
+                extension = characterModel.thumbnailModel.extension
+            )
+        )
         descriptionCharacter()
         onLoadCharacter(characterModel)
-        viewModel.searchFavorite(characterModel.id)
+        viewModel.searchFavorite(favoriteModel.id)
         setupViewPager()
     }
 
@@ -65,7 +83,6 @@ class DetailsCharacterFragment :
             }
         })
     }
-
 
     private fun updateButtonColors(position : Int) {
         val textViews =
@@ -96,24 +113,17 @@ class DetailsCharacterFragment :
 
     private fun descriptionCharacter() = binding.run {
         imageFavorite.setOnClickListener {
+            viewModel.searchFavorite(favoriteModel.id)
             viewModel.searchCharacter.observe(viewLifecycleOwner) {
                 if (it) {
-                    viewModel.delete(characterModel)
+                    viewModel.delete(favoriteModel)
                     binding.imageFavorite.setImageResource(R.drawable.favorite)
                 } else {
-                    viewModel.insert(characterModel)
+                    viewModel.insert(favoriteModel)
                     binding.imageFavorite.setImageResource(R.drawable.favorite_red)
                 }
             }
         }
-    }
-
-    private fun onShowDialog(characterModel : CharacterModel) {
-        MaterialAlertDialogBuilder(requireContext()).setTitle(characterModel.name)
-            .setMessage(characterModel.description)
-            .setNegativeButton(getString(R.string.close_dialog)) { dialog, _ ->
-                dialog.dismiss()
-            }.show()
     }
 
     private fun onLoadCharacter(characterModel : CharacterModel) = with(binding) {
@@ -130,24 +140,5 @@ class DetailsCharacterFragment :
     }
 
 
-    override fun getViewBinding(
-        inflater : LayoutInflater, container : ViewGroup?
-    ) : FragmentDetailsCharacterBinding =
-        FragmentDetailsCharacterBinding.inflate(inflater, container, false)
-
-    override fun onCreateOptionsMenu(menu : Menu, inflater : MenuInflater) {
-        inflater.inflate(R.menu.menu_details, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item : MenuItem) : Boolean {
-        when (item.itemId) {
-            R.id.favorite -> {
-                viewModel.insert(characterModel)
-                toast(getString(R.string.saved_successfully))
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
 }

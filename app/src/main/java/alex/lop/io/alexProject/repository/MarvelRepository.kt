@@ -1,6 +1,7 @@
 package alex.lop.io.alexProject.repository
 
 import alex.lop.io.alexProject.data.local.MarvelDao
+import alex.lop.io.alexProject.data.model.FavoriteModel
 import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.data.remote.ServiceApi
 import javax.inject.Inject
@@ -32,8 +33,8 @@ class MarvelRepository @Inject constructor(
     suspend fun getSeriesEvent(eventId: Int) = api.getSeriesEvent(eventId)
 
 
-    suspend fun insert(characterModel : CharacterModel) = dao.insert(characterModel)
+    suspend fun insert(characterModel : FavoriteModel) = dao.insert(characterModel)
     fun getAll() = dao.getAll()
-    suspend fun delete(characterModel : CharacterModel) = dao.delete(characterModel)
+    suspend fun delete(characterModel : FavoriteModel) = dao.delete(characterModel)
     suspend fun searchFavorite(id : Int) = dao.searchFavorite(id)
 }

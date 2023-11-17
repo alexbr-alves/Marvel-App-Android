@@ -2,9 +2,12 @@ package alex.lop.io.alexProject.fragment.detailsComic
 
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.adapters.DetailsComicAdapter
+import alex.lop.io.alexProject.data.model.FavoriteModel
+import alex.lop.io.alexProject.data.model.ThumbnailModel
 import alex.lop.io.alexProject.data.model.comic.ComicModel
 import alex.lop.io.alexProject.databinding.FragmentDetailsComicBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
+import alex.lop.io.alexProject.util.Constants
 import alex.lop.io.alexProject.util.loadImage
 import alex.lop.io.alexProject.viewModel.detailsComics.DetailsComicsViewModel
 import android.os.Bundle
@@ -24,6 +27,7 @@ class DetailsComicFragment :
     private val args : DetailsComicFragmentArgs by navArgs()
     private lateinit var comicModel : ComicModel
     private var viewPager2 : ViewPager2? = null
+    private lateinit var favoriteModel : FavoriteModel
 
 
     override fun getViewBinding(
@@ -35,8 +39,20 @@ class DetailsComicFragment :
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         comicModel = args.Comic
+        favoriteModel = FavoriteModel(
+            comicModel.id,
+            comicModel.title,
+            comicModel.description,
+            Constants.COMIC,
+            thumbnailModel = ThumbnailModel(
+                path = comicModel.thumbnailModel.path,
+                extension = comicModel.thumbnailModel.extension
+            )
+        )
+        viewModel.searchFavorite(favoriteModel.id)
         onLoadComic(comicModel)
         setupViewPager()
+        descriptionComic()
     }
 
     private fun setupViewPager() {
@@ -61,12 +77,16 @@ class DetailsComicFragment :
     }
 
     private fun onLoadComic(comic : ComicModel) = with(binding) {
-        textName.text = comic.title
-        loadImage(
-            imageComic,
-            comic.thumbnailModel.path,
-            comic.thumbnailModel.extension
-        )
+        viewModel.searchCharacter.observe(viewLifecycleOwner) {
+            val color = if (it) R.drawable.favorite_red else R.drawable.favorite
+            binding.imageFavorite.setImageResource(color)
+            textName.text = comic.title
+            loadImage(
+                imageComic,
+                comic.thumbnailModel.path,
+                comic.thumbnailModel.extension
+            )
+        }
     }
 
     private fun updateButtonColors(position : Int) = binding.run {
@@ -92,5 +112,21 @@ class DetailsComicFragment :
         }
         updateButtonColors(viewPagerComic.currentItem)
     }
+
+    private fun descriptionComic() = binding.run {
+        imageFavorite.setOnClickListener {
+            viewModel.searchFavorite(favoriteModel.id)
+            viewModel.searchCharacter.observe(viewLifecycleOwner) {
+                if (it) {
+                    viewModel.delete(favoriteModel)
+                    binding.imageFavorite.setImageResource(R.drawable.favorite)
+                } else {
+                    viewModel.insert(favoriteModel)
+                    binding.imageFavorite.setImageResource(R.drawable.favorite_red)
+                }
+            }
+        }
+    }
+
 
 }

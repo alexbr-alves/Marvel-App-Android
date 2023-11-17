@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/red_marvel">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_details"
@@ -34,7 +34,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
                 android:layout_marginBottom="10dp"
-                android:background="@color/black"
                 android:text="@string/tx_item_name"
                 android:textColor="@color/white"
                 android:textSize="18sp"
@@ -102,10 +101,10 @@
                 android:id="@+id/image_favorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="30dp"
                 android:src="@drawable/favorite"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/image_comic"
+                app:layout_constraintBottom_toTopOf="@id/viewPagerComic"
                 android:contentDescription="@string/app_name" />
 
             <androidx.viewpager2.widget.ViewPager2

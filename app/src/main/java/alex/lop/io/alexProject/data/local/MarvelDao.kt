@@ -1,5 +1,6 @@
 package alex.lop.io.alexProject.data.local
 
+import alex.lop.io.alexProject.data.model.FavoriteModel
 import alex.lop.io.alexProject.data.model.character.CharacterModel
 import androidx.room.Dao
 import androidx.room.Delete
@@ -13,14 +14,14 @@ import kotlinx.coroutines.flow.Flow
 interface MarvelDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(characterModel : CharacterModel) : Long
+    suspend fun insert(characterModel : FavoriteModel) : Long
 
-    @Query("SELECT * FROM characterModel ORDER BY id")
-    fun getAll(): Flow<List<CharacterModel>>
+    @Query("SELECT * FROM favoriteModel ORDER BY id")
+    fun getAll(): Flow<List<FavoriteModel>>
 
     @Delete
-    suspend fun delete(characterModel : CharacterModel)
+    suspend fun delete(characterModel : FavoriteModel)
 
-    @Query("Select COUNT(*) from characterModel WHERE id = :characterId")
+    @Query("Select COUNT(*) from favoriteModel WHERE id = :characterId")
     suspend fun searchFavorite(characterId: Int) : Boolean
 }
