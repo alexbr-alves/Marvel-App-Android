@@ -2,9 +2,12 @@ package alex.lop.io.alexProject.fragment.detailsEvent
 
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.adapters.DetailsEventAdapter
+import alex.lop.io.alexProject.data.model.FavoriteModel
+import alex.lop.io.alexProject.data.model.ThumbnailModel
 import alex.lop.io.alexProject.data.model.event.EventModel
 import alex.lop.io.alexProject.databinding.FragmentDetailsEventBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
+import alex.lop.io.alexProject.util.Constants
 import alex.lop.io.alexProject.util.loadImage
 import alex.lop.io.alexProject.viewModel.detailEvent.DetailsEventViewModel
 import android.os.Bundle
@@ -23,6 +26,7 @@ class DetailsEventFragment : BaseFragment<FragmentDetailsEventBinding, DetailsEv
     private val args : DetailsEventFragmentArgs by navArgs()
     private lateinit var eventModel : EventModel
     private var viewPagerEvent : ViewPager2? = null
+    private lateinit var favoriteModel : FavoriteModel
 
     override fun getViewBinding(
         inflater : LayoutInflater, container : ViewGroup?
@@ -32,8 +36,20 @@ class DetailsEventFragment : BaseFragment<FragmentDetailsEventBinding, DetailsEv
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         eventModel = args.eventModel
+        favoriteModel = FavoriteModel(
+            eventModel.id,
+            eventModel.title,
+            eventModel.description,
+            Constants.EVENT,
+            thumbnailModel = ThumbnailModel(
+                path = eventModel.thumbnailModel.path,
+                extension = eventModel.thumbnailModel.extension
+            )
+        )
+        viewModel.searchFavorite(favoriteModel.id)
         setupViewPager()
         onLoadEvent(eventModel)
+        descriptionEvent()
     }
 
     private fun setupViewPager() {
@@ -42,10 +58,29 @@ class DetailsEventFragment : BaseFragment<FragmentDetailsEventBinding, DetailsEv
     }
 
     private fun onLoadEvent(comic : EventModel) = with(binding) {
-        textName.text = comic.title
-        loadImage(
-            imageEvent, comic.thumbnailModel.path, comic.thumbnailModel.extension
-        )
+        viewModel.searchCharacter.observe(viewLifecycleOwner) {
+            val color = if (it) R.drawable.favorite_red else R.drawable.favorite
+            binding.imageFavorite.setImageResource(color)
+            textName.text = comic.title
+            loadImage(
+                imageEvent, comic.thumbnailModel.path, comic.thumbnailModel.extension
+            )
+        }
+    }
+
+    private fun descriptionEvent() = binding.run {
+        imageFavorite.setOnClickListener {
+            viewModel.searchFavorite(favoriteModel.id)
+            viewModel.searchCharacter.observe(viewLifecycleOwner) {
+                if (it) {
+                    viewModel.delete(favoriteModel)
+                    binding.imageFavorite.setImageResource(R.drawable.favorite)
+                } else {
+                    viewModel.insert(favoriteModel)
+                    binding.imageFavorite.setImageResource(R.drawable.favorite_red)
+                }
+            }
+        }
     }
 
     private fun handleViewPager() {

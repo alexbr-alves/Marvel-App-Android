@@ -17,11 +17,17 @@
     <fragment
         android:id="@+id/favoriteCharacterFragment"
         tools:layout="@layout/fragment_favorite_character"
-        android:name="alex.lop.io.alexProject.fragment.FavoriteCharacterFragment"
+        android:name="alex.lop.io.alexProject.fragment.FavoriteFragment"
         android:label="FavoriteCharacterFragment" >
         <action
             android:id="@+id/action_favoriteCharacterFragment_to_detailsCharacterFragment"
             app:destination="@id/detailsCharacterFragment" />
+        <action
+            android:id="@+id/action_favoriteCharacterFragment_to_detailsEventFragment"
+            app:destination="@id/detailsEventFragment" />
+        <action
+            android:id="@+id/action_favoriteCharacterFragment_to_detailsComicFragment"
+            app:destination="@id/detailsComicFragment" />
     </fragment>
     <fragment
         android:id="@+id/ListCharacterFragment"

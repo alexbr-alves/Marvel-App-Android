@@ -1,5 +1,6 @@
 package alex.lop.io.alexProject.viewModel.detailCharacter
 
+import alex.lop.io.alexProject.data.model.FavoriteModel
 import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.repository.MarvelRepository
 import androidx.lifecycle.LiveData
@@ -20,11 +21,11 @@ class DetailsCharacterViewModel @Inject constructor(
         MutableLiveData<Boolean>()
     val searchCharacter : LiveData<Boolean> = _searchCharacter
 
-    fun insert(characterModel : CharacterModel) = viewModelScope.launch {
+    fun insert(characterModel : FavoriteModel) = viewModelScope.launch {
         repository.insert(characterModel)
     }
 
-    fun delete(characterModel : CharacterModel) = viewModelScope.launch {
+    fun delete(characterModel : FavoriteModel) = viewModelScope.launch {
         repository.delete(characterModel)
     }
 

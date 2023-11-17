@@ -1,5 +1,6 @@
 package alex.lop.io.alexProject.viewModel.detailsComics
 
+import alex.lop.io.alexProject.data.model.FavoriteModel
 import alex.lop.io.alexProject.data.model.comic.ComicModel
 import alex.lop.io.alexProject.repository.MarvelRepository
 import androidx.lifecycle.LiveData
@@ -15,22 +16,21 @@ class DetailsComicsViewModel @Inject constructor(
     private val repository : MarvelRepository
 ) : ViewModel() {
 
-    private val _searchComic =
+    private val _searchCharacter =
         MutableLiveData<Boolean>()
-    val searchComic : LiveData<Boolean> = _searchComic
+    val searchCharacter : LiveData<Boolean> = _searchCharacter
 
-    fun insert(comicModel : ComicModel) = viewModelScope.launch {
-        //repository.insert(ComicModel)
+    fun insert(characterModel : FavoriteModel) = viewModelScope.launch {
+        repository.insert(characterModel)
     }
 
-    fun delete(comicModel : ComicModel) = viewModelScope.launch {
-        //repository.delete(comicModel)
+    fun delete(characterModel : FavoriteModel) = viewModelScope.launch {
+        repository.delete(characterModel)
     }
 
     fun searchFavorite(id : Int) = viewModelScope.launch {
         val response = repository.searchFavorite(id)
-        _searchComic.value = response
+        _searchCharacter.value = response
     }
-
 
 }

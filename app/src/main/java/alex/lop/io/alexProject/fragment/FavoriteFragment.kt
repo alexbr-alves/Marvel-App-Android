@@ -2,9 +2,14 @@ package alex.lop.io.alexProject.fragment
 
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.databinding.FragmentFavoriteCharacterBinding
-import alex.lop.io.alexProject.adapters.CharacterAdapter
+import alex.lop.io.alexProject.adapters.FavoriteAdapter
+import alex.lop.io.alexProject.data.model.ThumbnailModel
+import alex.lop.io.alexProject.data.model.character.CharacterModel
+import alex.lop.io.alexProject.data.model.comic.ComicModel
+import alex.lop.io.alexProject.data.model.event.EventModel
 import alex.lop.io.alexProject.viewModel.FavoriteCharacterViewModel
 import alex.lop.io.alexProject.state.ResourceState
+import alex.lop.io.alexProject.util.Constants
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
@@ -23,11 +28,11 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class FavoriteCharacterFragment :
+class FavoriteFragment :
     BaseFragment<FragmentFavoriteCharacterBinding, FavoriteCharacterViewModel>() {
     override val viewModel : FavoriteCharacterViewModel by viewModels()
 
-    private val characterAdapter by lazy { CharacterAdapter() }
+    private val favoriteAdapter by lazy { FavoriteAdapter() }
 
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,7 +47,7 @@ class FavoriteCharacterFragment :
                 is ResourceState.Success -> {
                     resource.data?.let {
                         binding.tvEmptyList.setInvisible()
-                        characterAdapter.characters = it.toList()
+                        favoriteAdapter.favorites = it.toList()
                     }
                 }
 
@@ -56,16 +61,58 @@ class FavoriteCharacterFragment :
     }
 
     private fun clickAdapter() {
-        characterAdapter.setOnClickListener { characterModel ->
-            val action = FavoriteCharacterFragmentDirections
-                .actionFavoriteCharacterFragmentToDetailsCharacterFragment(characterModel)
-            findNavController().navigate(action)
+        favoriteAdapter.setOnClickListener { favoriteModel ->
+            if (favoriteModel.type == Constants.CHARACTER) {
+                val action = FavoriteFragmentDirections
+                    .actionFavoriteCharacterFragmentToDetailsCharacterFragment(
+                        CharacterModel(
+                            favoriteModel.id,
+                            favoriteModel.title,
+                            favoriteModel.description,
+                            ThumbnailModel(
+                                favoriteModel.thumbnailModel.path,
+                                favoriteModel.thumbnailModel.extension
+                            )
+                        )
+                    )
+                findNavController().navigate(action)
+            }
+            else if (favoriteModel.type == Constants.COMIC) {
+                val action = FavoriteFragmentDirections
+                    .actionFavoriteCharacterFragmentToDetailsComicFragment(
+                        ComicModel(
+                            favoriteModel.id,
+                            favoriteModel.title,
+                            favoriteModel.description,
+                            ThumbnailModel(
+                                favoriteModel.thumbnailModel.path,
+                                favoriteModel.thumbnailModel.extension
+                            )
+                        )
+                    )
+                findNavController().navigate(action)
+            } else if (favoriteModel.type == Constants.EVENT) {
+                val action = FavoriteFragmentDirections
+                    .actionFavoriteCharacterFragmentToDetailsEventFragment(
+                        EventModel(
+                            favoriteModel.id,
+                            favoriteModel.title,
+                            favoriteModel.description,
+                            ThumbnailModel(
+                                favoriteModel.thumbnailModel.path,
+                                favoriteModel.thumbnailModel.extension
+                            )
+                        )
+                    )
+                findNavController().navigate(action)
+            }
         }
+
     }
 
     private fun setupRecycleView() = with(binding) {
         rvFavoriteCharacter.apply {
-            adapter = characterAdapter
+            adapter = favoriteAdapter
             layoutManager = LinearLayoutManager(context)
         }
         ItemTouchHelper(itemTouchHelperCallBack()).attachToRecyclerView(rvFavoriteCharacter)
@@ -83,7 +130,7 @@ class FavoriteCharacterFragment :
             }
 
             override fun onSwiped(viewHolder : RecyclerView.ViewHolder, direction : Int) {
-                val character = characterAdapter.getCharacterPosition(viewHolder.adapterPosition)
+                val character = favoriteAdapter.getCharacterPosition(viewHolder.adapterPosition)
                 viewModel.delete(character).also {
                     toast(getString(R.string.message_delete_character))
                 }
