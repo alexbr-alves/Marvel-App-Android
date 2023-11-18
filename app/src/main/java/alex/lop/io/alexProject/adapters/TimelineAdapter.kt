@@ -1,8 +1,7 @@
 package alex.lop.io.alexProject.adapters
 
-import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.data.model.timeline.TimelineModel
-import alex.lop.io.alexProject.databinding.LayoutCardNameBinding
+import alex.lop.io.alexProject.data.model.timeline.TimelineType
 import alex.lop.io.alexProject.databinding.LayoutTimelineBinding
 import alex.lop.io.alexProject.util.Constants
 import alex.lop.io.alexProject.util.limitDescription
@@ -21,9 +20,10 @@ class TimelineAdapter : RecyclerView.Adapter<TimelineAdapter.TimelineViewHolder>
 
     inner class TimelineViewHolder(val binding : LayoutTimelineBinding) :
         RecyclerView.ViewHolder(binding.root)
+
     private val originalFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault())
-    private val data: Date? = originalFormat.parse("2023-11-16T16:07:08-0500")
-    private val desireDataFormat = SimpleDateFormat("dd/MM", Locale.getDefault())
+    private val data : Date? = originalFormat.parse("2023-11-16T16:07:08-0500")
+    private val desireDataFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
     private val desiredTimeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
 
     private val differCallback = object : DiffUtil.ItemCallback<TimelineModel>() {
@@ -47,7 +47,7 @@ class TimelineAdapter : RecyclerView.Adapter<TimelineAdapter.TimelineViewHolder>
 
     private val differ = AsyncListDiffer(this, differCallback)
 
-    var timelineList: List<TimelineModel>
+    var timelineList : List<TimelineModel>
         get() = differ.currentList
         set(value) = differ.submitList(value.filter {
             it.thumbnailModel.path != Constants.IMAGE_NOT_AVAILABLE
@@ -86,7 +86,8 @@ class TimelineAdapter : RecyclerView.Adapter<TimelineAdapter.TimelineViewHolder>
                 onItemClickListener?.let {
                     it(timeline)
                 }
-            } }
+            }
+        }
     }
 
     private var onItemClickListener : ((TimelineModel) -> Unit)? = null

@@ -42,13 +42,13 @@ class TimelineFragment :
     }
 
     private fun collectObserve() = lifecycleScope.launch {
-        viewModel.listComic.collect { result ->
+        viewModel.listItems.collect { result ->
             when (result) {
                 is ResourceState.Success -> {
                     binding.progressbarSearch.setInvisible()
-                    result.data?.let {
-                        if (it.data.result.isNotEmpty()) {
-                            timelineAdapter.timelineList = it.data.result.toList()
+                    result.data?.let { item ->
+                        if (item.isNotEmpty()) {
+                            timelineAdapter.timelineList = item.toList()
                         }
                     }
                 }

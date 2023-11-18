@@ -1,7 +1,9 @@
 package alex.lop.io.alexProject.viewModel
 
 import alex.lop.io.alexProject.R
+import alex.lop.io.alexProject.data.model.timeline.TimelineModel
 import alex.lop.io.alexProject.data.model.timeline.TimelineModelResponse
+import alex.lop.io.alexProject.data.model.timeline.TimelineType
 import alex.lop.io.alexProject.repository.MarvelRepository
 import alex.lop.io.alexProject.state.ResourceState
 import androidx.lifecycle.ViewModel
@@ -19,13 +21,10 @@ class TimelineViewModel @Inject constructor(
     private val repository : MarvelRepository
 ) : ViewModel() {
 
-    private val _listComic =
-        MutableStateFlow<ResourceState<TimelineModelResponse>>(ResourceState.Loading())
-    val listComic : StateFlow<ResourceState<TimelineModelResponse>> = _listComic
+    private val _listItems =
+        MutableStateFlow<ResourceState<Collection<TimelineModel>>>(ResourceState.Loading())
+    val listItems : StateFlow<ResourceState<Collection<TimelineModel>>> = _listItems
 
-    private val _listEvent =
-        MutableStateFlow<ResourceState<TimelineModelResponse>>(ResourceState.Loading())
-    val listEvent : StateFlow<ResourceState<TimelineModelResponse>> = _listEvent
 
     init {
         fetch()
@@ -38,13 +37,51 @@ class TimelineViewModel @Inject constructor(
     private suspend fun safeFetch() {
         try {
             val comicList = handleResponse(repository.getComicTimeline())
-            _listComic.value = comicList
+            val eventList = handleResponse(repository.getEventTimeline())
+            val characterList = handleResponse(repository.getCharacterTimeline())
+
+
+            val combinedList = mutableListOf<TimelineModel>()
+
+            comicList.data?.let {
+                it.data.result.map { it.type = TimelineType.COMIC }
+            }
+            comicList.data?.let { data ->
+                combinedList.addAll(
+                    (data.data.result ?: emptyList()) as Collection<TimelineModel>)
+
+                eventList.data?.let {
+                    it.data.result.map { it.type = TimelineType.EVENT }
+                }
+
+
+                eventList.data?.let { data ->
+                    combinedList.addAll(
+                        (data.data.result ?: emptyList()) as Collection<TimelineModel>
+                    )
+                }
+
+                characterList.data?.let {
+                    it.data.result.map { it.type = TimelineType.CHARACTER }
+                }
+
+
+                characterList.data?.let { data ->
+                    combinedList.addAll(
+                        (data.data.result ?: emptyList()) as Collection<TimelineModel>
+                    )
+                }
+            }
+
+            combinedList.sortByDescending { it.modified }
+
+            _listItems.value = ResourceState.Success(combinedList)
         } catch (t : Throwable) {
             when (t) {
-                is IOException -> _listComic.value =
+                is IOException -> _listItems.value =
                     ResourceState.Error(R.string.error_internet_connection.toString())
 
-                else -> _listComic.value =
+                else -> _listItems.value =
                     ResourceState.Error(R.string.error_data_conversion_failure.toString())
             }
         }
