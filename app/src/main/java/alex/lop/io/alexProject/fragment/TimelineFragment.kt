@@ -2,7 +2,7 @@ package alex.lop.io.alexProject.fragment
 
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.databinding.FragmentSearchCharacterBinding
-import alex.lop.io.alexProject.adapters.CharacterAdapter
+import alex.lop.io.alexProject.adapters.TimelineAdapter
 import alex.lop.io.alexProject.viewModel.SearchCharacterViewModel
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.Constants.DEFAULT_QUERY
@@ -10,6 +10,7 @@ import alex.lop.io.alexProject.util.Constants.LAST_SEARCH_QUERY
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
+import alex.lop.io.alexProject.viewModel.TimelineViewModel
 import android.os.Bundle
 import android.view.KeyEvent.ACTION_DOWN
 import android.view.KeyEvent.KEYCODE_ENTER
@@ -21,100 +22,59 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class SearchCharacterFragment :
-    BaseFragment<FragmentSearchCharacterBinding, SearchCharacterViewModel>() {
-    override val viewModel : SearchCharacterViewModel by viewModels()
-    private val characterAdapter by lazy { CharacterAdapter() }
+class TimelineFragment :
+    BaseFragment<FragmentSearchCharacterBinding, TimelineViewModel>() {
+    override val viewModel : TimelineViewModel by viewModels()
+    private val timelineAdapter by lazy { TimelineAdapter() }
 
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecycleView()
-        clickAdapter()
-
-        val query = savedInstanceState?.getString(LAST_SEARCH_QUERY) ?: DEFAULT_QUERY
-        searchInit(query)
         collectObserve()
     }
 
     private fun collectObserve() = lifecycleScope.launch {
-        viewModel.searchCharacter.collect { result ->
+        viewModel.listComic.collect { result ->
             when (result) {
                 is ResourceState.Success -> {
                     binding.progressbarSearch.setInvisible()
                     result.data?.let {
-                        characterAdapter.characters = it.data.results.toList()
+                        if (it.data.result.isNotEmpty()) {
+                            timelineAdapter.timelineList = it.data.result.toList()
+                        }
                     }
                 }
+
                 is ResourceState.Error -> {
                     binding.progressbarSearch.setInvisible()
                     result.message?.let { message ->
                         toast(getString(R.string.an_error_occurred))
-                        Timber.tag("SearchCharacterFragment").e("Error -> $message")
+                        Timber.tag("TimelineFragment").e("Error -> $message")
                     }
                 }
+
                 is ResourceState.Loading -> {
                     binding.progressbarSearch.setVisible()
                 }
+
                 else -> {}
             }
         }
-    }
 
-    private fun searchInit(query : String) = with(binding) {
-        edSearchCharacter.setText(query)
-        edSearchCharacter.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_GO) {
-                updateCharacterList()
-                true
-            } else {
-                false
-            }
-        }
-        edSearchCharacter.setOnKeyListener { _, keyCode, keyEvent ->
-            if (keyEvent.action == ACTION_DOWN && keyCode == KEYCODE_ENTER) {
-                updateCharacterList()
-                true
-            } else {
-                false
-            }
-        }
-    }
-
-    private fun updateCharacterList() = with(binding) {
-        edSearchCharacter.editableText.trim().let {
-            if (it.isNotEmpty()) {
-                searchQuery(it.toString())
-            }
-        }
-    }
-
-    private fun searchQuery(query : String) {
-        viewModel.fetch(query)
-    }
-
-    override fun onSaveInstanceState(outState : Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putString(LAST_SEARCH_QUERY,
-            binding.edSearchCharacter.editableText.trim().toString())
-    }
-
-    private fun clickAdapter() {
-        characterAdapter.setOnClickListener { characterModel ->
-            val action = SearchCharacterFragmentDirections.actionSearchCharacterFragmentToDetailsCharacterFragment(characterModel)
-            findNavController().navigate(action)
-        }
     }
 
     private fun setupRecycleView() = with(binding) {
-        rvSearchCharacter.apply {
-            adapter = characterAdapter
-            layoutManager = GridLayoutManager(requireContext(), 2)
+        recycleView.apply {
+            adapter = timelineAdapter
+            layoutManager = LinearLayoutManager(context)
         }
     }
 

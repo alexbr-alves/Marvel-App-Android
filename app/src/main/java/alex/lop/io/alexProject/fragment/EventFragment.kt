@@ -66,10 +66,8 @@ class EventFragment : BaseFragment<FragmentEventBinding,EventViewModel>(){
         }
         animator.duration = 300
         animator.start()
-
         searchEditText.visibility = View.VISIBLE
         searchEditText.requestFocus()
-
         isSearchExpanded = true
     }
 
