@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
 
-    inner class CharacterViewHolder(val binding : LayoutCardNameDescriptionBinding) :
+    inner class CharacterViewHolder(val binding : LayoutCardNameBinding) :
         RecyclerView.ViewHolder(binding.root)
 
 
@@ -49,7 +49,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
     override fun getItemCount() : Int = characters.size
     override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : CharacterViewHolder {
         return CharacterViewHolder(
-            LayoutCardNameDescriptionBinding.inflate(
+            LayoutCardNameBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
@@ -58,8 +58,7 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
     override fun onBindViewHolder(holder : CharacterViewHolder, position : Int) {
         val character = characters[position]
         holder.binding.apply {
-            name.text = character.name.limitDescription(15)
-            description.setGone()
+            textName.text = character.name.limitDescription(15)
             loadImage(
                 image,
                 character.thumbnailModel.path,
