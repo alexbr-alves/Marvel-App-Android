@@ -10,6 +10,8 @@ data class TimelineModel(
     val id : Int,
     @SerializedName("title")
     val title : String,
+    @SerializedName("name")
+    val name : String,
     @SerializedName("description")
     val description : String,
     @SerializedName("modified")

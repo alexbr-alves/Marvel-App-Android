@@ -54,6 +54,9 @@
 
     <string name="common_no_information">No information</string>
     <string name="see_more">See more...</string>
+    <string name="favorites">Favorites</string>
+    <string name="feed">Feed</string>
+    <string name="home">Home</string>
 
 
 </resources>

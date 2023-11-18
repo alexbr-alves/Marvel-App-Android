@@ -38,6 +38,7 @@ class TimelineAdapter : RecyclerView.Adapter<TimelineAdapter.TimelineViewHolder>
             return oldItem.id == newItem.id &&
                     oldItem.description == newItem.description &&
                     oldItem.title == newItem.title &&
+                    oldItem.name == newItem.name &&
                     oldItem.modified == newItem.modified &&
                     oldItem.thumbnailModel.path == newItem.thumbnailModel.path &&
                     oldItem.thumbnailModel.extension == newItem.thumbnailModel.extension
@@ -68,9 +69,14 @@ class TimelineAdapter : RecyclerView.Adapter<TimelineAdapter.TimelineViewHolder>
     override fun onBindViewHolder(holder : TimelineViewHolder, position : Int) {
         val timeline = timelineList[position]
         holder.binding.apply {
-            name.text = timeline.title.limitDescription(30)
+            if (timeline.title.isNullOrEmpty()) {
+                name.text = timeline.name.limitDescription(30) ?: ""
+            } else {
+                name.text = timeline.title.limitDescription(30)
+            }
             textData.text =
-                "${desiredTimeFormat.format(timeline.modified)} - ${desireDataFormat.format(timeline.modified)}"
+                "${desiredTimeFormat.format(timeline.modified)} " +
+                        "- ${desireDataFormat.format(timeline.modified)}"
             if (timeline.description.isNullOrEmpty()) {
                 description.setGone()
             } else {
