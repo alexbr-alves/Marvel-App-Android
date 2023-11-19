@@ -3,27 +3,18 @@ package alex.lop.io.alexProject.fragment
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.databinding.FragmentSearchCharacterBinding
 import alex.lop.io.alexProject.adapters.TimelineAdapter
-import alex.lop.io.alexProject.viewModel.SearchCharacterViewModel
 import alex.lop.io.alexProject.state.ResourceState
-import alex.lop.io.alexProject.util.Constants.DEFAULT_QUERY
-import alex.lop.io.alexProject.util.Constants.LAST_SEARCH_QUERY
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
 import alex.lop.io.alexProject.viewModel.TimelineViewModel
 import android.os.Bundle
-import android.view.KeyEvent.ACTION_DOWN
-import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -33,7 +24,7 @@ import timber.log.Timber
 class TimelineFragment :
     BaseFragment<FragmentSearchCharacterBinding, TimelineViewModel>() {
     override val viewModel : TimelineViewModel by viewModels()
-    private val timelineAdapter by lazy { TimelineAdapter() }
+    private val timelineAdapter by lazy { context?.let { TimelineAdapter(it) } }
 
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,7 +39,7 @@ class TimelineFragment :
                     binding.progressbarSearch.setInvisible()
                     result.data?.let { item ->
                         if (item.isNotEmpty()) {
-                            timelineAdapter.timelineList = item.toList()
+                            timelineAdapter?.timelineList = item.toList()
                         }
                     }
                 }

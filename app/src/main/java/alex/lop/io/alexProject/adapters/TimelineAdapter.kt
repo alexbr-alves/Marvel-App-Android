@@ -1,5 +1,6 @@
 package alex.lop.io.alexProject.adapters
 
+import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.data.model.timeline.TimelineModel
 import alex.lop.io.alexProject.data.model.timeline.TimelineType
 import alex.lop.io.alexProject.databinding.LayoutTimelineBinding
@@ -7,23 +8,22 @@ import alex.lop.io.alexProject.util.Constants
 import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
 import alex.lop.io.alexProject.util.setGone
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 
-class TimelineAdapter : RecyclerView.Adapter<TimelineAdapter.TimelineViewHolder>() {
+class TimelineAdapter(val context : Context) :
+    RecyclerView.Adapter<TimelineAdapter.TimelineViewHolder>() {
 
     inner class TimelineViewHolder(val binding : LayoutTimelineBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val originalFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault())
-    private val data : Date? = originalFormat.parse("2023-11-16T16:07:08-0500")
-    private val desireDataFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    private val desireDataFormat = SimpleDateFormat("dd/MM", Locale.getDefault())
     private val desiredTimeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
 
     private val differCallback = object : DiffUtil.ItemCallback<TimelineModel>() {
@@ -74,9 +74,21 @@ class TimelineAdapter : RecyclerView.Adapter<TimelineAdapter.TimelineViewHolder>
             } else {
                 name.text = timeline.title.limitDescription(30)
             }
-            textData.text =
-                "${desiredTimeFormat.format(timeline.modified)} " +
-                        "- ${desireDataFormat.format(timeline.modified)}"
+
+            when (timeline.type) {
+                TimelineType.CHARACTER -> type.text =
+                    context.getString(R.string.title_fragment_characters)
+                TimelineType.COMIC -> type.text =
+                    context.getString(R.string.comics)
+                TimelineType.EVENT -> type.text =
+                    context.getString(R.string.title_fragment_event)
+            }
+            textData.text = context.getString(
+                R.string.data_and_time,
+                desiredTimeFormat.format(timeline.modified),
+                desireDataFormat.format(timeline.modified)
+            )
+
             if (timeline.description.isNullOrEmpty()) {
                 description.setGone()
             } else {
