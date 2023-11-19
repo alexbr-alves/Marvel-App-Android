@@ -5,6 +5,7 @@ import alex.lop.io.alexProject.data.model.character.CharacterModelResponse
 import alex.lop.io.alexProject.data.model.comic.ComicModelResponse
 import alex.lop.io.alexProject.data.model.event.EventModelResponse
 import alex.lop.io.alexProject.data.model.serie.SeriesModelResponse
+import alex.lop.io.alexProject.data.model.timeline.TimelineModelResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -105,5 +106,24 @@ interface ServiceApi {
             encoded = true
         ) eventId : Int
     ) : Response<SeriesModelResponse>
+
+    // Timeline
+    @GET("characters")
+    suspend fun getCharacterTimeline(
+        @Query("orderBy") orderBy : String = "-modified",
+        @Query("limit") limit : Int = 50
+    ) : Response<TimelineModelResponse>
+
+    @GET("comics")
+    suspend fun getComicTimeline(
+        @Query("orderBy") orderBy : String = "-modified",
+        @Query("limit") limit : Int = 50
+    ) : Response<TimelineModelResponse>
+
+    @GET("events")
+    suspend fun getEventTimeline(
+        @Query("orderBy") orderBy : String = "-modified",
+        @Query("limit") limit : Int = 50
+    ) : Response<TimelineModelResponse>
 
 }

@@ -10,6 +10,7 @@ import alex.lop.io.alexProject.data.model.event.EventModel
 import alex.lop.io.alexProject.viewModel.FavoriteCharacterViewModel
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.Constants
+import alex.lop.io.alexProject.util.Converts
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
@@ -31,8 +32,8 @@ import kotlinx.coroutines.launch
 class FavoriteFragment :
     BaseFragment<FragmentFavoriteCharacterBinding, FavoriteCharacterViewModel>() {
     override val viewModel : FavoriteCharacterViewModel by viewModels()
-
     private val favoriteAdapter by lazy { FavoriteAdapter() }
+    private var converts = Converts()
 
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,49 +63,28 @@ class FavoriteFragment :
 
     private fun clickAdapter() {
         favoriteAdapter.setOnClickListener { favoriteModel ->
-            if (favoriteModel.type == Constants.CHARACTER) {
-                val action = FavoriteFragmentDirections
-                    .actionFavoriteCharacterFragmentToDetailsCharacterFragment(
-                        CharacterModel(
-                            favoriteModel.id,
-                            favoriteModel.title,
-                            favoriteModel.description,
-                            ThumbnailModel(
-                                favoriteModel.thumbnailModel.path,
-                                favoriteModel.thumbnailModel.extension
-                            )
+            when (favoriteModel.type) {
+                Constants.CHARACTER -> {
+                    val action = FavoriteFragmentDirections
+                        .actionFavoriteCharacterFragmentToDetailsCharacterFragment(
+                            converts.favoriteToCharacter(favoriteModel)
                         )
-                    )
-                findNavController().navigate(action)
-            }
-            else if (favoriteModel.type == Constants.COMIC) {
-                val action = FavoriteFragmentDirections
-                    .actionFavoriteCharacterFragmentToDetailsComicFragment(
-                        ComicModel(
-                            favoriteModel.id,
-                            favoriteModel.title,
-                            favoriteModel.description,
-                            ThumbnailModel(
-                                favoriteModel.thumbnailModel.path,
-                                favoriteModel.thumbnailModel.extension
-                            )
+                    findNavController().navigate(action)
+                }
+                Constants.COMIC -> {
+                    val action = FavoriteFragmentDirections
+                        .actionFavoriteCharacterFragmentToDetailsComicFragment(
+                            converts.favoriteToComic(favoriteModel)
                         )
-                    )
-                findNavController().navigate(action)
-            } else if (favoriteModel.type == Constants.EVENT) {
-                val action = FavoriteFragmentDirections
-                    .actionFavoriteCharacterFragmentToDetailsEventFragment(
-                        EventModel(
-                            favoriteModel.id,
-                            favoriteModel.title,
-                            favoriteModel.description,
-                            ThumbnailModel(
-                                favoriteModel.thumbnailModel.path,
-                                favoriteModel.thumbnailModel.extension
-                            )
+                    findNavController().navigate(action)
+                }
+                Constants.EVENT -> {
+                    val action = FavoriteFragmentDirections
+                        .actionFavoriteCharacterFragmentToDetailsEventFragment(
+                            converts.favoriteToEvent(favoriteModel)
                         )
-                    )
-                findNavController().navigate(action)
+                    findNavController().navigate(action)
+                }
             }
         }
 

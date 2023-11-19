@@ -4,16 +4,16 @@
     <item
         android:id="@+id/homerFragment"
         android:icon="@drawable/ic_home"
-        android:title="Home" />
+        android:title="@string/home" />
 
     <item
         android:id="@+id/searchCharacterFragment"
-        android:icon="@drawable/ic_search"
-        android:title="Pesquisar" />
+        android:icon="@drawable/baseline_rss_feed_24"
+        android:title="@string/feed" />
 
     <item
         android:id="@+id/favoriteCharacterFragment"
         android:icon="@drawable/ic_favorite_border"
-        android:title="Favoritos" />
+        android:title="@string/favorites" />
 
 </menu>

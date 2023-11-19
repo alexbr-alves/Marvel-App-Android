@@ -42,7 +42,7 @@
     <fragment
         android:id="@+id/searchCharacterFragment"
         tools:layout="@layout/fragment_search_character"
-        android:name="alex.lop.io.alexProject.fragment.SearchCharacterFragment"
+        android:name="alex.lop.io.alexProject.fragment.TimelineFragment"
         android:label="SearchCharacterFragment" >
         <action
             android:id="@+id/action_searchCharacterFragment_to_detailsCharacterFragment"

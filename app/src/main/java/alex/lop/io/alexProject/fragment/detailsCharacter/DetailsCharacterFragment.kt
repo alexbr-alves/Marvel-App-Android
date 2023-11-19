@@ -8,6 +8,7 @@ import alex.lop.io.alexProject.data.model.FavoriteModel
 import alex.lop.io.alexProject.data.model.ThumbnailModel
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.util.Constants
+import alex.lop.io.alexProject.util.Converts
 import alex.lop.io.alexProject.viewModel.detailCharacter.DetailsCharacterViewModel
 import alex.lop.io.alexProject.util.loadImage
 import alex.lop.io.alexProject.util.toast
@@ -34,6 +35,7 @@ class DetailsCharacterFragment :
     private lateinit var characterModel : CharacterModel
     private var viewPager2 : ViewPager2? = null
     private lateinit var favoriteModel : FavoriteModel
+    private var converts = Converts()
 
     override fun getViewBinding(
         inflater : LayoutInflater, container : ViewGroup?
@@ -43,16 +45,7 @@ class DetailsCharacterFragment :
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         characterModel = args.character
-        favoriteModel = FavoriteModel(
-            characterModel.id,
-            characterModel.name,
-            characterModel.description,
-            Constants.CHARACTER,
-            thumbnailModel = ThumbnailModel(
-                path = characterModel.thumbnailModel.path,
-                extension = characterModel.thumbnailModel.extension
-            )
-        )
+        favoriteModel = converts.characterToFavorite(characterModel)
         descriptionCharacter()
         onLoadCharacter(characterModel)
         viewModel.searchFavorite(favoriteModel.id)
