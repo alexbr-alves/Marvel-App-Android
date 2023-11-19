@@ -1,14 +1,13 @@
 package alex.lop.io.alexProject.fragment
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.databinding.FragmentListCharacterBinding
 import alex.lop.io.alexProject.adapters.CharacterAdapter
+import alex.lop.io.alexProject.databinding.FragmentCharacterBinding
 import alex.lop.io.alexProject.viewModel.ListCharacterViewModel
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
-import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.os.Bundle
 import android.text.Editable
@@ -28,7 +27,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class CharacterFragment : BaseFragment<FragmentListCharacterBinding, ListCharacterViewModel>() {
+class CharacterFragment : BaseFragment<FragmentCharacterBinding, ListCharacterViewModel>() {
     override val viewModel : ListCharacterViewModel by viewModels()
     private val characterAdapter by lazy { CharacterAdapter() }
     private var isSearchExpanded = false
@@ -36,8 +35,8 @@ class CharacterFragment : BaseFragment<FragmentListCharacterBinding, ListCharact
     override fun getViewBinding(
         inflater : LayoutInflater,
         container : ViewGroup?
-    ) : FragmentListCharacterBinding =
-        FragmentListCharacterBinding.inflate(inflater, container, false)
+    ) : FragmentCharacterBinding =
+        FragmentCharacterBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)

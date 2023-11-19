@@ -30,8 +30,8 @@
             app:destination="@id/detailsComicFragment" />
     </fragment>
     <fragment
-        android:id="@+id/ListCharacterFragment"
-        tools:layout="@layout/fragment_list_character"
+        android:id="@+id/CharacterFragment"
+        tools:layout="@layout/fragment_character"
         android:name="alex.lop.io.alexProject.fragment.CharacterFragment"
         android:label="ListCharacterFragment" >
         <action
@@ -55,7 +55,7 @@
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_ListCharacterFragment"
-            app:destination="@id/ListCharacterFragment" />
+            app:destination="@id/CharacterFragment" />
         <action
             android:id="@+id/action_homeFragment_to_comicsFragment"
             app:destination="@id/comicsFragment" />
