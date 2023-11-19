@@ -4,8 +4,9 @@ import alex.lop.io.alexProject.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import alex.lop.io.alexProject.databinding.ActivityMainBinding
-import alex.lop.io.alexProject.util.setInvisible
+import alex.lop.io.alexProject.util.setGone
 import alex.lop.io.alexProject.util.setVisible
+import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,64 +27,70 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.back.setOnClickListener { onBackPressed() }
     }
 
-    private fun setupTitleToolbar(textVisible : Boolean, title : String = "") =
-        with(binding.toolbar) {
-            back.setOnClickListener {
+    private fun setupToolbar(textVisible : Boolean, title : String = "") =
+        with(binding) {
+            toolbar.back.setOnClickListener {
                 onBackPressed()
             }
+            val toolbarInclude : View = findViewById(R.id.toolbar)
             if (textVisible) {
-                text.setVisible()
-                image.setInvisible()
-                text.text = title
-                back.setVisible()
+                toolbarInclude.setVisible()
+                toolbar.text.setVisible()
+                toolbar.text.text = title
+                toolbar.back.setVisible()
             } else {
-                text.setInvisible()
-                image.setVisible()
-                back.setInvisible()
+                toolbarInclude.setGone()
             }
         }
 
     private fun setupToolbar() {
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.homeFragment -> setupTitleToolbar(
-                    false)
-                R.id.comicsFragment -> setupTitleToolbar(
+                R.id.homeFragment -> setupToolbar(
+                    false
+                )
+
+                R.id.comicsFragment -> setupToolbar(
                     true,
                     getString(R.string.title_fragment_comic)
                 )
 
-                R.id.favoriteCharacterFragment -> setupTitleToolbar(
+                R.id.favoriteCharacterFragment -> setupToolbar(
                     true,
                     getString(R.string.title_fragment_favorites)
                 )
 
-                R.id.searchCharacterFragment -> setupTitleToolbar(
+                R.id.searchCharacterFragment -> setupToolbar(
                     true,
-                    getString(R.string.title_fragment_search)
+                    getString(R.string.feed)
                 )
 
-                R.id.eventFragment -> setupTitleToolbar(
+                R.id.eventFragment -> setupToolbar(
                     true,
                     getString(R.string.title_fragment_event)
                 )
-                R.id.detailsCharacterFragment -> setupTitleToolbar(
+
+                R.id.detailsCharacterFragment -> setupToolbar(
                     true,
                     getString(R.string.title_fragment_detail)
                 )
-                R.id.ListCharacterFragment -> setupTitleToolbar(
+
+                R.id.ListCharacterFragment -> setupToolbar(
                     true,
                     getString(R.string.title_fragment_characters)
                 )
-                R.id.seriesFragment -> setupTitleToolbar(
+
+                R.id.seriesFragment -> setupToolbar(
                     true,
                     getString(R.string.title_fragment_series)
                 )
-                R.id.detailsComicFragment -> setupTitleToolbar(
+
+                R.id.detailsComicFragment -> setupToolbar(
                     true,
                     getString(R.string.title_fragment_detail)
                 )
-                R.id.detailsEventFragment -> setupTitleToolbar(
+
+                R.id.detailsEventFragment -> setupToolbar(
                     true,
                     getString(R.string.title_fragment_event)
                 )

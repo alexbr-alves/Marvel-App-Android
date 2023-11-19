@@ -30,6 +30,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         clickEvents()
         setupUI()
+
     }
     override fun getViewBinding(
         inflater : LayoutInflater,
@@ -128,15 +129,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
     private fun clickEvents() = with(binding) {
-        textCharacterMore.setOnClickListener {
+        layoutCharacter.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToListCharacterFragment()
             findNavController().navigate(action)
         }
-        textComicMore.setOnClickListener {
+        layoutComic.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToComicsFragment()
             findNavController().navigate(action)
         }
-        textEventMore.setOnClickListener {
+        layoutEvent.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToEventFragment2()
             findNavController().navigate(action)
         }
