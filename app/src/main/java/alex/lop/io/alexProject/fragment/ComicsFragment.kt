@@ -4,6 +4,7 @@ import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.adapters.ComicsAdapter
 import alex.lop.io.alexProject.databinding.FragmentComicBinding
 import alex.lop.io.alexProject.state.ResourceState
+import alex.lop.io.alexProject.util.setGone
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
@@ -21,6 +22,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
