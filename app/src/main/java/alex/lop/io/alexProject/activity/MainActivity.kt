@@ -4,9 +4,12 @@ import alex.lop.io.alexProject.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import alex.lop.io.alexProject.databinding.ActivityMainBinding
+import alex.lop.io.alexProject.fragment.CharacterFragment
+import alex.lop.io.alexProject.fragment.HomeFragment
 import alex.lop.io.alexProject.util.setGone
 import alex.lop.io.alexProject.util.setVisible
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
     private lateinit var navHostFragment : NavHostFragment
+    private val characterFragment = CharacterFragment()
 
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +30,8 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         binding.toolbar.back.setOnClickListener { onBackPressed() }
     }
+
+
 
     private fun setupToolbar(textVisible : Boolean, title : String = "") =
         with(binding) {
@@ -75,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                     getString(R.string.title_fragment_detail)
                 )
 
-                R.id.ListCharacterFragment -> setupToolbar(
+                R.id.CharacterFragment -> setupToolbar(
                     true,
                     getString(R.string.title_fragment_characters)
                 )

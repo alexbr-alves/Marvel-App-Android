@@ -58,6 +58,7 @@
     <string name="home">Home</string>
 
     <string name="data_and_time">%s - %s</string>
+    <string name="search_event">Pesquise um evento</string>
 
 
 </resources>
