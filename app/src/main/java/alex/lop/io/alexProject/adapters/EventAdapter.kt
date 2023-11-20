@@ -17,7 +17,7 @@ class EventAdapter : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
     private val differCallback = object : DiffUtil.ItemCallback<EventModel>() {
         override fun areItemsTheSame(oldItem : EventModel, newItem : EventModel) : Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
+            return true
         }
 
         override fun areContentsTheSame(

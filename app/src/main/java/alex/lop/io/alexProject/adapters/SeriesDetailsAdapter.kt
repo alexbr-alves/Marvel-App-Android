@@ -20,7 +20,7 @@ class SeriesDetailsAdapter : RecyclerView.Adapter<SeriesDetailsAdapter.SeriesVie
     private val differCallback = object : DiffUtil.ItemCallback<SeriesModel>() {
 
         override fun areItemsTheSame(oldItem : SeriesModel, newItem : SeriesModel) : Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
+            return true
         }
 
         override fun areContentsTheSame(

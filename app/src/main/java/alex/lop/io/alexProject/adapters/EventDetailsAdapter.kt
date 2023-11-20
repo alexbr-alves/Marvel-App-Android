@@ -20,7 +20,7 @@ class EventDetailsAdapter : RecyclerView.Adapter<EventDetailsAdapter.EventViewHo
     private val differCallback = object : DiffUtil.ItemCallback<EventModel>() {
 
         override fun areItemsTheSame(oldItem : EventModel, newItem : EventModel) : Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
+            return true
         }
 
         override fun areContentsTheSame(
@@ -72,5 +72,16 @@ class EventDetailsAdapter : RecyclerView.Adapter<EventDetailsAdapter.EventViewHo
                 event.thumbnailModel.extension
             )
         }
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.let {
+                it(event)
+            }
+        }
+    }
+
+    private var onItemClickListener : ((EventModel) -> Unit)? = null
+
+    fun setOnClickListener(listener : (EventModel) -> Unit) {
+        onItemClickListener = listener
     }
 }

@@ -21,7 +21,7 @@ class CharacterDetailsAdapter :
     private val differCallback = object : DiffUtil.ItemCallback<CharacterModel>() {
 
         override fun areItemsTheSame(oldItem : CharacterModel, newItem : CharacterModel) : Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
+            return true
         }
 
         override fun areContentsTheSame(
