@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -39,6 +40,14 @@ class CharacterComicsFragment(private val characterId : Int) :
         viewModel.fetchComic(characterId)
         setupRecycleView()
         collectObserver()
+        clickAdapter()
+    }
+
+    private fun clickAdapter() {
+        comicDetailsAdapter.setOnClickListener { comicModel ->
+            val action = CharacterDetailsFragmentDirections.actionDetailsCharacterFragmentToDetailsComicFragment(comicModel)
+            findNavController().navigate(action)
+        }
     }
 
     private fun setupRecycleView() = with(binding) {
