@@ -10,4 +10,7 @@
     <color name="red">#E91E63</color>
     <color name="red_marvel">#801416</color>
     <color name="gray">#808080</color>
+    <color name="gray_700">#1E1E1E</color>
+    <color name="gray_500">#232228</color>
+    <color name="gray_300">#616161</color>
 </resources>

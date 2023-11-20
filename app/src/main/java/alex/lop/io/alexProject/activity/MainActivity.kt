@@ -48,9 +48,13 @@ class MainActivity : AppCompatActivity() {
     private fun setupToolbar() {
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.homeFragment -> setupToolbar(
-                    false
-                )
+                R.id.homeFragment -> {
+                    setupToolbar(
+                        true,
+                        getString(R.string.marvel)
+                    )
+                    binding.toolbar.back.setGone()
+                }
 
                 R.id.comicsFragment -> setupToolbar(
                     true,

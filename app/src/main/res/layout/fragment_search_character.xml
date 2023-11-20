@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="20dp"
-    android:background="@color/red_marvel">
+    android:background="@color/gray_500"
+    android:paddingTop="20dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleView"

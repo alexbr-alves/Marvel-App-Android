@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/red_marvel"
+    android:backgroundTint="@color/gray_500"
     tools:context=".fragment.detailsComic.ComicDescriptionFragment">
 
-        <TextView
-            android:id="@+id/text_description"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="12dp"
-            android:textSize="15sp"
-            android:textColor="@color/white"
-            android:layout_width="match_parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:text="@string/text_description_empty" />
+    <TextView
+        android:id="@+id/text_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/gray_500"
+        android:paddingBottom="20dp"
+        android:text="@string/text_description_empty"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
