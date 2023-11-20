@@ -31,13 +31,11 @@ class ComicViewModel @Inject constructor(
         safeFetch(titleStartsWith)
     }
 
-
-
     private suspend fun safeFetch(titleStartsWith : String? = null) {
         try {
             val response = repository.comics(titleStartsWith)
             _comicList.value = handleResponse(response)
-        } catch (t: Throwable) {
+        } catch (t : Throwable) {
             when (t) {
                 is IOException -> _comicList.value =
                     ResourceState.Error(R.string.error_internet_connection.toString())
@@ -54,7 +52,7 @@ class ComicViewModel @Inject constructor(
                 return ResourceState.Success(values)
             }
         }
-        return  ResourceState.Error(response.message())
+        return ResourceState.Error(response.message())
     }
 
 }

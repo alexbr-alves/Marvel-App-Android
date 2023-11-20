@@ -7,7 +7,7 @@ import alex.lop.io.alexProject.adapters.DetailsCharacterAdapter
 import alex.lop.io.alexProject.data.model.FavoriteModel
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.util.Converts
-import alex.lop.io.alexProject.viewModel.detailCharacter.DetailsCharacterViewModel
+import alex.lop.io.alexProject.viewModel.detailCharacter.CharacterDetailsViewModel
 import alex.lop.io.alexProject.util.loadImage
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,8 +21,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CharacterDetailsFragment :
-    BaseFragment<FragmentDetailsCharacterBinding, DetailsCharacterViewModel>() {
-    override val viewModel : DetailsCharacterViewModel by viewModels()
+    BaseFragment<FragmentDetailsCharacterBinding, CharacterDetailsViewModel>() {
+    override val viewModel : CharacterDetailsViewModel by viewModels()
     private val args : CharacterDetailsFragmentArgs by navArgs()
     private lateinit var characterModel : CharacterModel
     private var viewPager2 : ViewPager2? = null

@@ -1,7 +1,7 @@
-package alex.lop.io.alexProject.viewModel.detailCharacter
+package alex.lop.io.alexProject.viewModel.detailEvent
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.data.model.event.EventModelResponse
+import alex.lop.io.alexProject.data.model.comic.ComicModelResponse
 import alex.lop.io.alexProject.repository.MarvelRepository
 import alex.lop.io.alexProject.state.ResourceState
 import androidx.lifecycle.ViewModel
@@ -15,35 +15,34 @@ import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
-class EventsCharacterViewModel @Inject constructor(
-    val repository : MarvelRepository
+class EventComicsViewModel @Inject constructor(
+    private val repository : MarvelRepository
 ) : ViewModel() {
+    private val _list =
+        MutableStateFlow<ResourceState<ComicModelResponse>>(ResourceState.Loading())
+    val list : StateFlow<ResourceState<ComicModelResponse>> = _list
 
-    private val _eventList =
-        MutableStateFlow<ResourceState<EventModelResponse>>(ResourceState.Loading())
-    val eventList : StateFlow<ResourceState<EventModelResponse>> = _eventList
-
-    fun fetchEvent(characterId : Int) = viewModelScope.launch {
-        safeFetchEvent(characterId)
+    fun fetch(eventId : Int) = viewModelScope.launch {
+        safeFetchComic(eventId)
     }
 
-    private suspend fun safeFetchEvent(characterId : Int) {
-        _eventList.value = ResourceState.Loading()
+    private suspend fun safeFetchComic(eventId : Int) {
+        _list.value = ResourceState.Loading()
         try {
-            val response = repository.getEventsCharacter(characterId)
-            _eventList.value = handleEventResponse(response)
+            val response = repository.getComicEvent(eventId)
+            _list.value = handleComicResponse(response)
         } catch (t : Throwable) {
             when (t) {
-                is IOException -> _eventList.value =
+                is IOException -> _list.value =
                     ResourceState.Error(R.string.error_internet_connection.toString())
 
-                else -> _eventList.value =
+                else -> _list.value =
                     ResourceState.Error(R.string.error_data_conversion_failure.toString())
             }
         }
     }
 
-    private fun handleEventResponse(response : Response<EventModelResponse>) : ResourceState<EventModelResponse> {
+    private fun handleComicResponse(response : Response<ComicModelResponse>) : ResourceState<ComicModelResponse> {
         if (response.isSuccessful) {
             response.body()?.let { values ->
                 return ResourceState.Success(values)
@@ -51,6 +50,4 @@ class EventsCharacterViewModel @Inject constructor(
         }
         return ResourceState.Error(response.message())
     }
-
-
 }

@@ -3,7 +3,7 @@ package alex.lop.io.alexProject.fragment
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.databinding.FragmentFavoriteCharacterBinding
 import alex.lop.io.alexProject.adapters.FavoriteAdapter
-import alex.lop.io.alexProject.viewModel.FavoriteCharacterViewModel
+import alex.lop.io.alexProject.viewModel.FavoriteViewModel
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.Constants
 import alex.lop.io.alexProject.util.Converts
@@ -26,8 +26,8 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FavoriteFragment :
-    BaseFragment<FragmentFavoriteCharacterBinding, FavoriteCharacterViewModel>() {
-    override val viewModel : FavoriteCharacterViewModel by viewModels()
+    BaseFragment<FragmentFavoriteCharacterBinding, FavoriteViewModel>() {
+    override val viewModel : FavoriteViewModel by viewModels()
     private val favoriteAdapter by lazy { FavoriteAdapter() }
     private var converts = Converts()
 

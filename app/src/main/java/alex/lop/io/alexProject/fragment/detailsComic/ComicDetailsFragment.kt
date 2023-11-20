@@ -8,7 +8,7 @@ import alex.lop.io.alexProject.databinding.FragmentDetailsComicBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.util.Converts
 import alex.lop.io.alexProject.util.loadImage
-import alex.lop.io.alexProject.viewModel.detailsComics.DetailsComicsViewModel
+import alex.lop.io.alexProject.viewModel.detailsComics.ComicDetailsViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,8 +20,8 @@ import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ComicDetailsFragment : BaseFragment<FragmentDetailsComicBinding, DetailsComicsViewModel>() {
-    override val viewModel : DetailsComicsViewModel by viewModels()
+class ComicDetailsFragment : BaseFragment<FragmentDetailsComicBinding, ComicDetailsViewModel>() {
+    override val viewModel : ComicDetailsViewModel by viewModels()
     private val args : ComicDetailsFragmentArgs by navArgs()
     private lateinit var comicModel : ComicModel
     private var viewPager2 : ViewPager2? = null

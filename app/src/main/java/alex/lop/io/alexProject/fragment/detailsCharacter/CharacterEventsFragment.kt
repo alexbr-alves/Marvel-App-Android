@@ -8,7 +8,7 @@ import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
-import alex.lop.io.alexProject.viewModel.detailCharacter.EventsCharacterViewModel
+import alex.lop.io.alexProject.viewModel.detailCharacter.CharacterEventsViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,10 +23,10 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class CharacterEventsFragment(private val characterId: Int) :
-    BaseFragment<FragmentEventsCharapterBinding, EventsCharacterViewModel>() {
+    BaseFragment<FragmentEventsCharapterBinding, CharacterEventsViewModel>() {
 
     private val eventDetailsAdapter by lazy { EventDetailsAdapter() }
-    override val viewModel : EventsCharacterViewModel by viewModels()
+    override val viewModel : CharacterEventsViewModel by viewModels()
 
     override fun getViewBinding(
         inflater : LayoutInflater,

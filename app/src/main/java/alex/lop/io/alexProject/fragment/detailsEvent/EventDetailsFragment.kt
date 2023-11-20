@@ -8,7 +8,7 @@ import alex.lop.io.alexProject.databinding.FragmentDetailsEventBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.util.Converts
 import alex.lop.io.alexProject.util.loadImage
-import alex.lop.io.alexProject.viewModel.detailEvent.DetailsEventViewModel
+import alex.lop.io.alexProject.viewModel.detailEvent.EventDetailsViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,8 +20,8 @@ import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class EventDetailsFragment : BaseFragment<FragmentDetailsEventBinding, DetailsEventViewModel>() {
-    override val viewModel : DetailsEventViewModel by viewModels()
+class EventDetailsFragment : BaseFragment<FragmentDetailsEventBinding, EventDetailsViewModel>() {
+    override val viewModel : EventDetailsViewModel by viewModels()
     private val args : EventDetailsFragmentArgs by navArgs()
     private lateinit var eventModel : EventModel
     private var viewPagerEvent : ViewPager2? = null

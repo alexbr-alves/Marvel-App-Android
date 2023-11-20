@@ -18,6 +18,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val repository : MarvelRepository
+
 ) : ViewModel() {
 }

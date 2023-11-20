@@ -8,7 +8,7 @@ import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
-import alex.lop.io.alexProject.viewModel.detailCharacter.SeriesCharacterViewModel
+import alex.lop.io.alexProject.viewModel.detailCharacter.CharacterSeriesViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,10 +23,10 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class CharacterSeriesFragment(private val characterId: Int) :
-    BaseFragment<FragmentSeriesCharacterBinding, SeriesCharacterViewModel>() {
+    BaseFragment<FragmentSeriesCharacterBinding, CharacterSeriesViewModel>() {
 
     private val seriesDetailsAdapter by lazy { SeriesDetailsAdapter() }
-    override val viewModel: SeriesCharacterViewModel by viewModels()
+    override val viewModel: CharacterSeriesViewModel by viewModels()
 
     override fun getViewBinding(
         inflater: LayoutInflater,

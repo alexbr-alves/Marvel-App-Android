@@ -8,7 +8,7 @@ import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
-import alex.lop.io.alexProject.viewModel.detailsComics.EventComicViewModel
+import alex.lop.io.alexProject.viewModel.detailsComics.ComicEventsViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,8 +23,8 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class ComicEventFragment(private val comicId : Int) :
-    BaseFragment<FragmentEventComicBinding, EventComicViewModel>() {
-    override val viewModel : EventComicViewModel by viewModels()
+    BaseFragment<FragmentEventComicBinding, ComicEventsViewModel>() {
+    override val viewModel : ComicEventsViewModel by viewModels()
     private val eventDetailsAdapter by lazy { EventDetailsAdapter() }
 
     override fun getViewBinding(

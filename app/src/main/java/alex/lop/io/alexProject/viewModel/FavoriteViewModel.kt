@@ -1,7 +1,6 @@
 package alex.lop.io.alexProject.viewModel
 
 import alex.lop.io.alexProject.data.model.FavoriteModel
-import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.repository.MarvelRepository
 import alex.lop.io.alexProject.state.ResourceState
 import androidx.lifecycle.ViewModel
@@ -14,12 +13,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoriteCharacterViewModel@Inject constructor(
+class FavoriteViewModel @Inject constructor(
     private val repository : MarvelRepository
-): ViewModel() {
+) : ViewModel() {
 
-    private val _favorites = MutableStateFlow<ResourceState<List<FavoriteModel>>>(ResourceState.Empty())
-    val favorites: StateFlow<ResourceState<List<FavoriteModel>>> = _favorites
+    private val _favorites =
+        MutableStateFlow<ResourceState<List<FavoriteModel>>>(ResourceState.Empty())
+    val favorites : StateFlow<ResourceState<List<FavoriteModel>>> = _favorites
 
     init {
         fetch()
@@ -38,5 +38,5 @@ class FavoriteCharacterViewModel@Inject constructor(
     fun delete(characterModel : FavoriteModel) = viewModelScope.launch {
         repository.delete(characterModel)
     }
-    
+
 }

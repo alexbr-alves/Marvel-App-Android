@@ -1,7 +1,6 @@
-package alex.lop.io.alexProject.viewModel.detailsComics
+package alex.lop.io.alexProject.viewModel.detailCharacter
 
 import alex.lop.io.alexProject.data.model.FavoriteModel
-import alex.lop.io.alexProject.data.model.comic.ComicModel
 import alex.lop.io.alexProject.repository.MarvelRepository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailsComicsViewModel @Inject constructor(
+class CharacterDetailsViewModel @Inject constructor(
     private val repository : MarvelRepository
 ) : ViewModel() {
 

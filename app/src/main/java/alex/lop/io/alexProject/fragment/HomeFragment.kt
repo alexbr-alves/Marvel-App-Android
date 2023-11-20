@@ -21,7 +21,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         clickEvents()
         setupUI()
-
     }
 
     override fun getViewBinding(
