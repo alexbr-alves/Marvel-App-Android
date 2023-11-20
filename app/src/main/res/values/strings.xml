@@ -2,7 +2,7 @@
     <string name="app_name">Marvel App</string>
 
     <!--    Splash Activity -->
-    <string name="marvel">MARVEL WIKI</string>
+    <string name="marvel">MARVEL</string>
 
     <!--    Item character and Item comic -->
     <string name="tx_item_name">Nome</string>
@@ -35,7 +35,6 @@
     <!--    Error -->
     <string name="error_internet_connection">Erro de conexão com a internet!</string>
     <string name="error_data_conversion_failure">Falha na conversão dos dados!</string>
-    <string name="error_empty_list">Lista Vazia</string>
 
     <!--    title fragments -->
     <string name="title_fragment_comic">Comics</string>
