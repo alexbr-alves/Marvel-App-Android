@@ -8,7 +8,7 @@ import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
-import alex.lop.io.alexProject.viewModel.detailCharacter.ComicsCharacterViewModel
+import alex.lop.io.alexProject.viewModel.detailCharacter.CharacterComicsViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,10 +22,10 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class ComicsCharacterFragment(private val characterId : Int) :
-    BaseFragment<FragmentComicsCharapterBinding, ComicsCharacterViewModel>() {
+class CharacterComicsFragment(private val characterId : Int) :
+    BaseFragment<FragmentComicsCharapterBinding, CharacterComicsViewModel>() {
 
-    override val viewModel : ComicsCharacterViewModel by viewModels()
+    override val viewModel : CharacterComicsViewModel by viewModels()
     private val comicDetailsAdapter by lazy { ComicDetailsAdapter() }
 
     override fun getViewBinding(
@@ -47,7 +47,6 @@ class ComicsCharacterFragment(private val characterId : Int) :
             layoutManager = LinearLayoutManager(context)
         }
     }
-
 
     private fun collectObserver() = lifecycleScope.launch {
         viewModel.comicList.collect { resource ->
@@ -79,5 +78,4 @@ class ComicsCharacterFragment(private val characterId : Int) :
             }
         }
     }
-
 }

@@ -5,5 +5,5 @@ import java.io.Serializable
 
 data class EventModelData(
     @SerializedName("results")
-    val result: List<EventModel>
+    val result : List<EventModel>
 ) : Serializable

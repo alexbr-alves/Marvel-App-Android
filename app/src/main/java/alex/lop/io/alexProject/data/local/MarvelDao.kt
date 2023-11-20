@@ -1,7 +1,6 @@
 package alex.lop.io.alexProject.data.local
 
 import alex.lop.io.alexProject.data.model.FavoriteModel
-import alex.lop.io.alexProject.data.model.character.CharacterModel
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -17,11 +16,11 @@ interface MarvelDao {
     suspend fun insert(characterModel : FavoriteModel) : Long
 
     @Query("SELECT * FROM favoriteModel ORDER BY id")
-    fun getAll(): Flow<List<FavoriteModel>>
+    fun getAll() : Flow<List<FavoriteModel>>
 
     @Delete
     suspend fun delete(characterModel : FavoriteModel)
 
     @Query("Select COUNT(*) from favoriteModel WHERE id = :characterId")
-    suspend fun searchFavorite(characterId: Int) : Boolean
+    suspend fun searchFavorite(characterId : Int) : Boolean
 }

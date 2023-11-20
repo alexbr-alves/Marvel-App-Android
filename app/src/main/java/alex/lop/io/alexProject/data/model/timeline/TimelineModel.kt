@@ -15,10 +15,10 @@ data class TimelineModel(
     @SerializedName("description")
     val description : String,
     @SerializedName("modified")
-    val modified: Date,
-    var type: TimelineType,
+    val modified : Date,
+    var type : TimelineType,
     @SerializedName("thumbnail")
-    val thumbnailModel: ThumbnailModel
+    val thumbnailModel : ThumbnailModel
 ) : Serializable
 
 enum class TimelineType {

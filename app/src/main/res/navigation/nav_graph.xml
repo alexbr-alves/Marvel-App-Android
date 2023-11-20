@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/detailsCharacterFragment"
         tools:layout="@layout/fragment_details_character"
-        android:name="alex.lop.io.alexProject.fragment.detailsCharacter.DetailsCharacterFragment"
+        android:name="alex.lop.io.alexProject.fragment.detailsCharacter.CharacterDetailsFragment"
         android:label="DetailsCharacterFragment" >
         <argument
             android:name="character"
@@ -40,13 +40,19 @@
 
     </fragment>
     <fragment
-        android:id="@+id/searchCharacterFragment"
+        android:id="@+id/timelineFragment"
         tools:layout="@layout/fragment_search_character"
         android:name="alex.lop.io.alexProject.fragment.TimelineFragment"
         android:label="SearchCharacterFragment" >
         <action
             android:id="@+id/action_searchCharacterFragment_to_detailsCharacterFragment"
             app:destination="@id/detailsCharacterFragment" />
+        <action
+            android:id="@+id/action_timelineFragment_to_detailsComicFragment"
+            app:destination="@id/detailsComicFragment" />
+        <action
+            android:id="@+id/action_timelineFragment_to_detailsEventFragment"
+            app:destination="@id/detailsEventFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -62,9 +68,6 @@
         <action
             android:id="@+id/action_homeFragment_to_eventFragment2"
             app:destination="@id/eventFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_seriesFragment"
-            app:destination="@id/seriesFragment" />
         <action
             android:id="@+id/action_homeFragment_to_detailsCharacterFragment"
             app:destination="@id/detailsCharacterFragment" />
@@ -94,14 +97,9 @@
             app:destination="@id/detailsEventFragment" />
     </fragment>
     <fragment
-        android:id="@+id/seriesFragment"
-        tools:layout="@layout/fragment_series"
-        android:name="alex.lop.io.alexProject.fragment.SeriesFragment"
-        android:label="SeriesFragment" />
-    <fragment
         tools:layout="@layout/fragment_details_comic"
         android:id="@+id/detailsComicFragment"
-        android:name="alex.lop.io.alexProject.fragment.detailsComic.DetailsComicFragment"
+        android:name="alex.lop.io.alexProject.fragment.detailsComic.ComicDetailsFragment"
         android:label="DetailsComicFragment" >
         <argument
             android:name="Comic"
@@ -110,7 +108,7 @@
     <fragment
         android:id="@+id/detailsEventFragment"
         tools:layout="@layout/fragment_details_event"
-        android:name="alex.lop.io.alexProject.fragment.detailsEvent.DetailsEventFragment"
+        android:name="alex.lop.io.alexProject.fragment.detailsEvent.EventDetailsFragment"
         android:label="DetailsEventFragment" >
         <argument
             android:name="eventModel"

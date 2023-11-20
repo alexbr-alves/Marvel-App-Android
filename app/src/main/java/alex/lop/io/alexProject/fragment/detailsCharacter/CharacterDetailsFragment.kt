@@ -5,33 +5,25 @@ import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.databinding.FragmentDetailsCharacterBinding
 import alex.lop.io.alexProject.adapters.DetailsCharacterAdapter
 import alex.lop.io.alexProject.data.model.FavoriteModel
-import alex.lop.io.alexProject.data.model.ThumbnailModel
 import alex.lop.io.alexProject.fragment.BaseFragment
-import alex.lop.io.alexProject.util.Constants
 import alex.lop.io.alexProject.util.Converts
-import alex.lop.io.alexProject.viewModel.detailCharacter.DetailsCharacterViewModel
+import alex.lop.io.alexProject.viewModel.detailCharacter.CharacterDetailsViewModel
 import alex.lop.io.alexProject.util.loadImage
-import alex.lop.io.alexProject.util.toast
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailsCharacterFragment :
-    BaseFragment<FragmentDetailsCharacterBinding, DetailsCharacterViewModel>() {
-    override val viewModel : DetailsCharacterViewModel by viewModels()
-    private val args : DetailsCharacterFragmentArgs by navArgs()
+class CharacterDetailsFragment :
+    BaseFragment<FragmentDetailsCharacterBinding, CharacterDetailsViewModel>() {
+    override val viewModel : CharacterDetailsViewModel by viewModels()
+    private val args : CharacterDetailsFragmentArgs by navArgs()
     private lateinit var characterModel : CharacterModel
     private var viewPager2 : ViewPager2? = null
     private lateinit var favoriteModel : FavoriteModel
@@ -131,7 +123,5 @@ class DetailsCharacterFragment :
             )
         }
     }
-
-
 
 }

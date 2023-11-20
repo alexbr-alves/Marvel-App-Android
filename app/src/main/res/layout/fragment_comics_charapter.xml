@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="10dp"
+    android:background="@color/gray_500">
 
     <TextView
         android:id="@+id/text_empty"
@@ -25,12 +26,12 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp"
+        android:nestedScrollingEnabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        android:nestedScrollingEnabled="false"
-        tools:listitem="@layout/layout_mini_cards" >
+        tools:listitem="@layout/layout_mini_cards">
 
     </androidx.recyclerview.widget.RecyclerView>
 

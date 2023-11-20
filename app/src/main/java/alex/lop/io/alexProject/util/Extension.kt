@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 
-fun Fragment.toast(message: String, duration: Int = Toast.LENGTH_LONG){
+fun Fragment.toast(message : String, duration : Int = Toast.LENGTH_LONG) {
     Toast.makeText(
         requireContext(),
         message,
@@ -28,15 +28,15 @@ fun View.setGone() {
 
 fun loadImage(
     imageView : ImageView,
-    path: String,
-    extension: String
+    path : String,
+    extension : String
 ) {
     Glide.with(imageView)
         .load("$path.$extension")
         .into(imageView)
 }
 
-fun String.limitDescription(characters: Int): String {
+fun String.limitDescription(characters : Int) : String {
     if (this.length > characters) {
         val firstCharacter = 0
         return "${this.substring(firstCharacter, characters)}..."

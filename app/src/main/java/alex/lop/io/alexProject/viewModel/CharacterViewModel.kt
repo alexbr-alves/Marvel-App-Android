@@ -1,7 +1,7 @@
 package alex.lop.io.alexProject.viewModel
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.data.model.serie.SeriesModelResponse
+import alex.lop.io.alexProject.data.model.character.CharacterModelResponse
 import alex.lop.io.alexProject.repository.MarvelRepository
 import alex.lop.io.alexProject.state.ResourceState
 import androidx.lifecycle.ViewModel
@@ -15,40 +15,38 @@ import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
-class SeriesViewModel @Inject constructor(
+class CharacterViewModel @Inject constructor(
     private val repository : MarvelRepository
 ) : ViewModel() {
 
-    private val _seriesList =
-        MutableStateFlow<ResourceState<SeriesModelResponse>>(ResourceState.Loading())
-    val seriesList : StateFlow<ResourceState<SeriesModelResponse>> = _seriesList
+    private val _list =
+        MutableStateFlow<ResourceState<CharacterModelResponse>>(ResourceState.Loading())
+    val list : StateFlow<ResourceState<CharacterModelResponse>> = _list
 
     init {
         fetch()
     }
 
-    fun fetch(titleStartsWith : String? = null) = viewModelScope.launch {
-        safeFetch(titleStartsWith)
+    fun fetch(nameStartsWith : String? = null) = viewModelScope.launch {
+        safeFetch(nameStartsWith)
     }
 
-
-
-    private suspend fun safeFetch(titleStartsWith : String? = null) {
+    private suspend fun safeFetch(nameStartsWith : String? = null) {
         try {
-            val response = repository.series(titleStartsWith)
-            _seriesList.value = handleResponse(response)
-        } catch (t: Throwable) {
+            val response = repository.characters(nameStartsWith)
+            _list.value = handleResponse(response)
+        } catch (t : Throwable) {
             when (t) {
-                is IOException -> _seriesList.value =
+                is IOException -> _list.value =
                     ResourceState.Error(R.string.error_internet_connection.toString())
 
-                else -> _seriesList.value =
+                else -> _list.value =
                     ResourceState.Error(R.string.error_data_conversion_failure.toString())
             }
         }
     }
 
-    private fun handleResponse(response : Response<SeriesModelResponse>) : ResourceState<SeriesModelResponse> {
+    private fun handleResponse(response : Response<CharacterModelResponse>) : ResourceState<CharacterModelResponse> {
         if (response.isSuccessful) {
             response.body()?.let { values ->
                 return ResourceState.Success(values)

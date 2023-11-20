@@ -5,5 +5,5 @@ import java.io.Serializable
 
 data class TimelineModelResponse(
     @SerializedName("data")
-    val data: TimelineModelData
+    val data : TimelineModelData
 ) : Serializable

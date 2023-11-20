@@ -15,7 +15,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
-class SeriesCharacterViewModel @Inject constructor(
+class CharacterSeriesViewModel @Inject constructor(
     val repository: MarvelRepository
 ) : ViewModel() {
 

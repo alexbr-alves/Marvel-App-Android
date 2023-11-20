@@ -2,7 +2,6 @@ package alex.lop.io.alexProject.repository
 
 import alex.lop.io.alexProject.data.local.MarvelDao
 import alex.lop.io.alexProject.data.model.FavoriteModel
-import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.data.remote.ServiceApi
 import javax.inject.Inject
 
@@ -25,9 +24,9 @@ class MarvelRepository @Inject constructor(
     suspend fun getEventComics(comicId : Int) = api.getEventComics(comicId)
 
     //Events details
-    suspend fun getCharacterEvent(eventId: Int) = api.getCharacterEvent(eventId)
-    suspend fun getComicEvent(eventId: Int) = api.getComicEvent(eventId)
-    suspend fun getSeriesEvent(eventId: Int) = api.getSeriesEvent(eventId)
+    suspend fun getCharacterEvent(eventId : Int) = api.getCharacterEvent(eventId)
+    suspend fun getComicEvent(eventId : Int) = api.getComicEvent(eventId)
+    suspend fun getSeriesEvent(eventId : Int) = api.getSeriesEvent(eventId)
 
     //Timeline
     suspend fun getCharacterTimeline() = api.getCharacterTimeline()

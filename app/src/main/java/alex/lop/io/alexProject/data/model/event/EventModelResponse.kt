@@ -6,5 +6,5 @@ import java.io.Serializable
 
 data class EventModelResponse(
     @SerializedName("data")
-    val data: EventModelData
+    val data : EventModelData
 ) : Serializable

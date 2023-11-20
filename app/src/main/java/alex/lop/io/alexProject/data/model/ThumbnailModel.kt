@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class ThumbnailModel(
     @SerializedName("path")
-    val path: String,
+    val path : String,
 
     @SerializedName("extension")
-    val extension: String
+    val extension : String
 )

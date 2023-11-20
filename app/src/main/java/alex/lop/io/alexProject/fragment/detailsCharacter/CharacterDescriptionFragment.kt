@@ -1,26 +1,23 @@
-package alex.lop.io.alexProject.fragment.detailsEvent
+package alex.lop.io.alexProject.fragment.detailsCharacter
+
 
 import alex.lop.io.alexProject.R
+import alex.lop.io.alexProject.databinding.FragmentDescriptionCharacterBinding
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import alex.lop.io.alexProject.databinding.FragmentDescriptionComicBinding
-import alex.lop.io.alexProject.databinding.FragmentDescriptionEventBinding
-import alex.lop.io.alexProject.databinding.FragmentDetailsEventBinding
-import alex.lop.io.alexProject.util.setGone
+import androidx.fragment.app.Fragment
 
-
-class DescriptionEventFragment(private val description: String) : Fragment() {
-    private var _binding: FragmentDescriptionEventBinding? = null
+class CharacterDescriptionFragment(private val description : String) : Fragment() {
+    private var _binding : FragmentDescriptionCharacterBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater : LayoutInflater, container : ViewGroup?,
         savedInstanceState : Bundle?
     ) : View {
-        _binding = FragmentDescriptionEventBinding.inflate(inflater, container, false)
+        _binding = FragmentDescriptionCharacterBinding.inflate(inflater, container, false)
         setupUI()
         return binding.root
     }
@@ -32,5 +29,4 @@ class DescriptionEventFragment(private val description: String) : Fragment() {
             textDescription.text = description
         }
     }
-
 }

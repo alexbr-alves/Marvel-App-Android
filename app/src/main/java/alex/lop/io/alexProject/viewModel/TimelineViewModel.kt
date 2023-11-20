@@ -48,7 +48,8 @@ class TimelineViewModel @Inject constructor(
             }
             comicList.data?.let { data ->
                 combinedList.addAll(
-                    (data.data.result ?: emptyList()) as Collection<TimelineModel>)
+                    (data.data.result ?: emptyList()) as Collection<TimelineModel>
+                )
 
                 eventList.data?.let {
                     it.data.result.map { it.type = TimelineType.EVENT }

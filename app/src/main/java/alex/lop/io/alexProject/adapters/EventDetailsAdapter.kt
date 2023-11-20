@@ -14,19 +14,19 @@ import androidx.recyclerview.widget.RecyclerView
 
 class EventDetailsAdapter : RecyclerView.Adapter<EventDetailsAdapter.EventViewHolder>() {
 
-    inner class EventViewHolder(val binding: LayoutMiniCardsBinding) :
+    inner class EventViewHolder(val binding : LayoutMiniCardsBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object : DiffUtil.ItemCallback<EventModel>() {
 
-        override fun areItemsTheSame(oldItem: EventModel, newItem: EventModel): Boolean {
+        override fun areItemsTheSame(oldItem : EventModel, newItem : EventModel) : Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
 
         override fun areContentsTheSame(
-            oldItem: EventModel,
-            newItem: EventModel
-        ): Boolean {
+            oldItem : EventModel,
+            newItem : EventModel
+        ) : Boolean {
             return oldItem.id == newItem.id &&
                     oldItem.title == newItem.title &&
                     oldItem.description == newItem.description &&
@@ -38,17 +38,17 @@ class EventDetailsAdapter : RecyclerView.Adapter<EventDetailsAdapter.EventViewHo
 
     private val differ = AsyncListDiffer(this, differCallback)
 
-    var events: List<EventModel>
+    var events : List<EventModel>
         get() = differ.currentList
         set(value) = differ.submitList(value.filter {
             it.thumbnailModel.path != Constants.IMAGE_NOT_AVAILABLE
         })
 
-    override fun getItemCount(): Int {
+    override fun getItemCount() : Int {
         return events.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
+    override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : EventViewHolder {
         return EventViewHolder(
             LayoutMiniCardsBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
@@ -56,7 +56,7 @@ class EventDetailsAdapter : RecyclerView.Adapter<EventDetailsAdapter.EventViewHo
         )
     }
 
-    override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
+    override fun onBindViewHolder(holder : EventViewHolder, position : Int) {
         val event = events[position]
         holder.binding.apply {
             textName.text = event.title

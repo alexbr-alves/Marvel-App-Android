@@ -3,13 +3,9 @@ package alex.lop.io.alexProject.adapters
 
 import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.databinding.LayoutCardNameBinding
-import alex.lop.io.alexProject.databinding.LayoutCardNameDescriptionBinding
 import alex.lop.io.alexProject.util.Constants
 import alex.lop.io.alexProject.util.limitDescription
-
-
 import alex.lop.io.alexProject.util.loadImage
-import alex.lop.io.alexProject.util.setGone
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -76,9 +72,5 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterViewHold
 
     fun setOnClickListener(listener : (CharacterModel) -> Unit) {
         onItemClickListener = listener
-    }
-
-    fun getCharacterPosition(position : Int) : CharacterModel {
-        return characters[position]
     }
 }

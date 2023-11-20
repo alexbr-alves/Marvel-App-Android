@@ -1,12 +1,7 @@
 package alex.lop.io.alexProject.fragment
 
-import alex.lop.io.alexProject.adapters.CharacterDetailsAdapter
 import alex.lop.io.alexProject.data.local.DataHome
-import alex.lop.io.alexProject.data.model.ThumbnailModel
-import alex.lop.io.alexProject.data.model.character.CharacterModel
-import alex.lop.io.alexProject.data.model.serie.SeriesModel
 import alex.lop.io.alexProject.databinding.FragmentHomeBinding
-import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.loadImage
 import alex.lop.io.alexProject.viewModel.HomeViewModel
 import android.os.Bundle
@@ -14,12 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import retrofit2.Response
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
@@ -30,8 +21,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         clickEvents()
         setupUI()
-
     }
+
     override fun getViewBinding(
         inflater : LayoutInflater,
         container : ViewGroup?
@@ -44,7 +35,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         loadEvents()
     }
 
-    private fun loadCharacters()  = binding.run {
+    private fun loadCharacters() = binding.run {
         loadImage(
             imageCharacter1,
             DataHome.CHARACTER1.thumbnailModel.path,
@@ -142,71 +133,86 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             findNavController().navigate(action)
         }
         imageCharacter1.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailsCharacterFragment(DataHome.CHARACTER1)
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDetailsCharacterFragment(DataHome.CHARACTER1)
             findNavController().navigate(action)
         }
 
         imageCharacter2.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailsCharacterFragment(DataHome.CHARACTER2)
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDetailsCharacterFragment(DataHome.CHARACTER2)
             findNavController().navigate(action)
         }
 
         imageCharacter3.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailsCharacterFragment(DataHome.CHARACTER3)
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDetailsCharacterFragment(DataHome.CHARACTER3)
             findNavController().navigate(action)
         }
 
         imageCharacter4.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailsCharacterFragment(DataHome.CHARACTER4)
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDetailsCharacterFragment(DataHome.CHARACTER4)
             findNavController().navigate(action)
         }
 
         imageCharacter5.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailsCharacterFragment(DataHome.CHARACTER5)
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDetailsCharacterFragment(DataHome.CHARACTER5)
             findNavController().navigate(action)
         }
 
 
         imageComic1.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailsComicFragment(DataHome.COMIC1)
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDetailsComicFragment(DataHome.COMIC1)
             findNavController().navigate(action)
         }
         imageComic2.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailsComicFragment(DataHome.COMIC2)
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDetailsComicFragment(DataHome.COMIC2)
             findNavController().navigate(action)
         }
         imageComic3.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailsComicFragment(DataHome.COMIC3)
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDetailsComicFragment(DataHome.COMIC3)
             findNavController().navigate(action)
         }
         imageComic4.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailsComicFragment(DataHome.COMIC4)
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDetailsComicFragment(DataHome.COMIC4)
             findNavController().navigate(action)
         }
         imageComic5.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailsComicFragment(DataHome.COMIC5)
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDetailsComicFragment(DataHome.COMIC5)
             findNavController().navigate(action)
         }
 
 
         imageEvent1.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailsEventFragment(DataHome.EVENT1)
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDetailsEventFragment(DataHome.EVENT1)
             findNavController().navigate(action)
         }
         imageEvent2.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailsEventFragment(DataHome.EVENT2)
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDetailsEventFragment(DataHome.EVENT2)
             findNavController().navigate(action)
         }
         imageEvent3.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailsEventFragment(DataHome.EVENT3)
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDetailsEventFragment(DataHome.EVENT3)
             findNavController().navigate(action)
         }
         imageEvent4.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailsEventFragment(DataHome.EVENT4)
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDetailsEventFragment(DataHome.EVENT4)
             findNavController().navigate(action)
         }
         imageEvent5.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailsEventFragment(DataHome.EVENT5)
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDetailsEventFragment(DataHome.EVENT5)
             findNavController().navigate(action)
         }
 

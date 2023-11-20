@@ -1,10 +1,10 @@
 package alex.lop.io.alexProject.adapters
 
 
-import alex.lop.io.alexProject.fragment.detailsCharacter.ComicsCharacterFragment
-import alex.lop.io.alexProject.fragment.detailsCharacter.DescriptionCharacterFragment
-import alex.lop.io.alexProject.fragment.detailsCharacter.EventsCharacterFragment
-import alex.lop.io.alexProject.fragment.detailsCharacter.SeriesCharacterFragment
+import alex.lop.io.alexProject.fragment.detailsCharacter.CharacterComicsFragment
+import alex.lop.io.alexProject.fragment.detailsCharacter.CharacterDescriptionFragment
+import alex.lop.io.alexProject.fragment.detailsCharacter.CharacterEventsFragment
+import alex.lop.io.alexProject.fragment.detailsCharacter.CharacterSeriesFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -17,11 +17,11 @@ class DetailsCharacterAdapter(fragmentManager: FragmentManager, lifecycle: Lifec
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> DescriptionCharacterFragment(description)
-            1 -> ComicsCharacterFragment(id)
-            2 -> EventsCharacterFragment(id)
-            3 -> SeriesCharacterFragment(id)
-            else -> ComicsCharacterFragment(id)
+            0 -> CharacterDescriptionFragment(description)
+            1 -> CharacterComicsFragment(id)
+            2 -> CharacterEventsFragment(id)
+            3 -> CharacterSeriesFragment(id)
+            else -> CharacterComicsFragment(id)
         }
     }
 }

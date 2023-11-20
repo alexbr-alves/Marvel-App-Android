@@ -3,7 +3,7 @@ package alex.lop.io.alexProject.fragment
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.adapters.CharacterAdapter
 import alex.lop.io.alexProject.databinding.FragmentCharacterBinding
-import alex.lop.io.alexProject.viewModel.ListCharacterViewModel
+import alex.lop.io.alexProject.viewModel.CharacterViewModel
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
@@ -27,8 +27,8 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class CharacterFragment : BaseFragment<FragmentCharacterBinding, ListCharacterViewModel>() {
-    override val viewModel : ListCharacterViewModel by viewModels()
+class CharacterFragment : BaseFragment<FragmentCharacterBinding, CharacterViewModel>() {
+    override val viewModel : CharacterViewModel by viewModels()
     private val characterAdapter by lazy { CharacterAdapter() }
     private var isSearchExpanded = false
 

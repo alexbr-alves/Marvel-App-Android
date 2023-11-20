@@ -1,20 +1,14 @@
-package alex.lop.io.alexProject.fragment.detailsEvent
-
+package alex.lop.io.alexProject.fragment.detailsCharacter
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.adapters.CharacterDetailsAdapter
-import alex.lop.io.alexProject.adapters.ComicDetailsAdapter
-import alex.lop.io.alexProject.databinding.FragmentCharacterComicBinding
-import alex.lop.io.alexProject.databinding.FragmentCharacterEventBinding
-import alex.lop.io.alexProject.databinding.FragmentComicEventBinding
+import alex.lop.io.alexProject.adapters.SeriesDetailsAdapter
+import alex.lop.io.alexProject.databinding.FragmentSeriesCharacterBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
-import alex.lop.io.alexProject.viewModel.detailEvent.CharacterEventViewModel
-import alex.lop.io.alexProject.viewModel.detailEvent.ComicEventViewModel
-import alex.lop.io.alexProject.viewModel.detailsComics.CharactersComicViewModel
+import alex.lop.io.alexProject.viewModel.detailCharacter.CharacterSeriesViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,43 +22,37 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class ComicEventFragment(private val comicId: Int) :
-    BaseFragment<FragmentComicEventBinding, ComicEventViewModel>() {
+class CharacterSeriesFragment(private val characterId: Int) :
+    BaseFragment<FragmentSeriesCharacterBinding, CharacterSeriesViewModel>() {
 
-    override val viewModel : ComicEventViewModel by viewModels()
-    private val comicDetailsAdapter by lazy { ComicDetailsAdapter() }
+    private val seriesDetailsAdapter by lazy { SeriesDetailsAdapter() }
+    override val viewModel: CharacterSeriesViewModel by viewModels()
 
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): FragmentComicEventBinding =
-        FragmentComicEventBinding.inflate(inflater, container, false)
+    ): FragmentSeriesCharacterBinding =
+        FragmentSeriesCharacterBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.fetch(comicId)
+        viewModel.fetchSeries(characterId)
         setupRecyclerView()
         collectObserver()
     }
 
-    private fun setupRecyclerView() = with(binding) {
-        rvComics.apply {
-            adapter = comicDetailsAdapter
-            layoutManager = LinearLayoutManager(context)
-        }
-    }
-
     private fun collectObserver() = lifecycleScope.launch {
-        viewModel.list.collect { resource ->
+        viewModel.seriesList.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
                     binding.progressBarDetail.setInvisible()
                     resource.data?.let { values ->
-                        if (values.data.result.isEmpty()) {
-                            binding.textEmpty.setVisible()
+                        if (values.data.result.isNotEmpty()) {
+                            seriesDetailsAdapter.series = values.data.result.toList()
                         } else {
-                            comicDetailsAdapter.comics = values.data.result.toList()
+                            binding.textEmpty.setVisible()
                         }
+
                     }
                 }
 
@@ -72,7 +60,7 @@ class ComicEventFragment(private val comicId: Int) :
                     binding.progressBarDetail.setInvisible()
                     resource.message?.let { message ->
                         toast(getString(R.string.an_error_occurred))
-                        Timber.tag("CharactersComicFragment").e("Error -> $message")
+                        Timber.tag("ListCharacterFragment").e("Error -> $message")
                     }
                 }
 
@@ -83,6 +71,13 @@ class ComicEventFragment(private val comicId: Int) :
                 else -> {
                 }
             }
+        }
+    }
+
+    private fun setupRecyclerView() = with(binding) {
+        rvSeries.apply {
+            adapter = seriesDetailsAdapter
+            layoutManager = LinearLayoutManager(context)
         }
     }
 }

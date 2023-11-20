@@ -3,13 +3,12 @@ package alex.lop.io.alexProject.fragment.detailsEvent
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.adapters.DetailsEventAdapter
 import alex.lop.io.alexProject.data.model.FavoriteModel
-import alex.lop.io.alexProject.data.model.ThumbnailModel
 import alex.lop.io.alexProject.data.model.event.EventModel
 import alex.lop.io.alexProject.databinding.FragmentDetailsEventBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
-import alex.lop.io.alexProject.util.Constants
+import alex.lop.io.alexProject.util.Converts
 import alex.lop.io.alexProject.util.loadImage
-import alex.lop.io.alexProject.viewModel.detailEvent.DetailsEventViewModel
+import alex.lop.io.alexProject.viewModel.detailEvent.EventDetailsViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,12 +20,13 @@ import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailsEventFragment : BaseFragment<FragmentDetailsEventBinding, DetailsEventViewModel>() {
-    override val viewModel : DetailsEventViewModel by viewModels()
-    private val args : DetailsEventFragmentArgs by navArgs()
+class EventDetailsFragment : BaseFragment<FragmentDetailsEventBinding, EventDetailsViewModel>() {
+    override val viewModel : EventDetailsViewModel by viewModels()
+    private val args : EventDetailsFragmentArgs by navArgs()
     private lateinit var eventModel : EventModel
     private var viewPagerEvent : ViewPager2? = null
     private lateinit var favoriteModel : FavoriteModel
+    private val converts = Converts()
 
     override fun getViewBinding(
         inflater : LayoutInflater, container : ViewGroup?
@@ -36,16 +36,7 @@ class DetailsEventFragment : BaseFragment<FragmentDetailsEventBinding, DetailsEv
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         eventModel = args.eventModel
-        favoriteModel = FavoriteModel(
-            eventModel.id,
-            eventModel.title,
-            eventModel.description,
-            Constants.EVENT,
-            thumbnailModel = ThumbnailModel(
-                path = eventModel.thumbnailModel.path,
-                extension = eventModel.thumbnailModel.extension
-            )
-        )
+        favoriteModel = converts.eventToFavorite(eventModel)
         viewModel.searchFavorite(favoriteModel.id)
         setupViewPager()
         onLoadEvent(eventModel)

@@ -1,7 +1,6 @@
-package alex.lop.io.alexProject.viewModel.detailCharacter
+package alex.lop.io.alexProject.viewModel.detailEvent
 
 import alex.lop.io.alexProject.data.model.FavoriteModel
-import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.repository.MarvelRepository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,11 +8,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailsCharacterViewModel @Inject constructor(
+class EventDetailsViewModel @Inject constructor(
     private val repository : MarvelRepository
 ) : ViewModel() {
 
@@ -30,9 +28,8 @@ class DetailsCharacterViewModel @Inject constructor(
     }
 
     fun searchFavorite(id : Int) = viewModelScope.launch {
-            val response = repository.searchFavorite(id)
-            _searchCharacter.value = response
+        val response = repository.searchFavorite(id)
+        _searchCharacter.value = response
     }
-
 
 }

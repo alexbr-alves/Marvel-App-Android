@@ -1,7 +1,7 @@
-package alex.lop.io.alexProject.viewModel.detailEvent
+package alex.lop.io.alexProject.viewModel.detailsComics
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.data.model.comic.ComicModelResponse
+import alex.lop.io.alexProject.data.model.character.CharacterModelResponse
 import alex.lop.io.alexProject.repository.MarvelRepository
 import alex.lop.io.alexProject.state.ResourceState
 import androidx.lifecycle.ViewModel
@@ -15,34 +15,35 @@ import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
-class ComicEventViewModel @Inject constructor(
+class ComicCharactersViewModel @Inject constructor(
     private val repository : MarvelRepository
 ) : ViewModel() {
-    private val _list =
-        MutableStateFlow<ResourceState<ComicModelResponse>>(ResourceState.Loading())
-    val list : StateFlow<ResourceState<ComicModelResponse>> = _list
 
-    fun fetch(eventId : Int) = viewModelScope.launch {
-        safeFetchComic(eventId)
+    private val _comicCharacterList =
+        MutableStateFlow<ResourceState<CharacterModelResponse>>(ResourceState.Loading())
+    val comicCharacterList : StateFlow<ResourceState<CharacterModelResponse>> = _comicCharacterList
+
+    fun fetchCharacterComic(comicId : Int) = viewModelScope.launch {
+        safeFetchCharacterComic(comicId)
     }
 
-    private suspend fun safeFetchComic(eventId : Int) {
-        _list.value = ResourceState.Loading()
+    private suspend fun safeFetchCharacterComic(characterId : Int) {
+        _comicCharacterList.value = ResourceState.Loading()
         try {
-            val response = repository.getComicEvent(eventId)
-            _list.value = handleComicResponse(response)
+            val response = repository.getCharacterComics(characterId)
+            _comicCharacterList.value = handleResponse(response)
         } catch (t : Throwable) {
             when (t) {
-                is IOException -> _list.value =
+                is IOException -> _comicCharacterList.value =
                     ResourceState.Error(R.string.error_internet_connection.toString())
 
-                else -> _list.value =
+                else -> _comicCharacterList.value =
                     ResourceState.Error(R.string.error_data_conversion_failure.toString())
             }
         }
     }
 
-    private fun handleComicResponse(response : Response<ComicModelResponse>) : ResourceState<ComicModelResponse> {
+    private fun handleResponse(response : Response<CharacterModelResponse>) : ResourceState<CharacterModelResponse> {
         if (response.isSuccessful) {
             response.body()?.let { values ->
                 return ResourceState.Success(values)

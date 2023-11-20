@@ -2,19 +2,14 @@ package alex.lop.io.alexProject.fragment.detailsEvent
 
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.adapters.CharacterDetailsAdapter
 import alex.lop.io.alexProject.adapters.SeriesDetailsAdapter
-import alex.lop.io.alexProject.databinding.FragmentCharacterComicBinding
-import alex.lop.io.alexProject.databinding.FragmentCharacterEventBinding
 import alex.lop.io.alexProject.databinding.FragmentSeriesEventBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
-import alex.lop.io.alexProject.viewModel.detailEvent.CharacterEventViewModel
-import alex.lop.io.alexProject.viewModel.detailEvent.SeriesEventViewModel
-import alex.lop.io.alexProject.viewModel.detailsComics.CharactersComicViewModel
+import alex.lop.io.alexProject.viewModel.detailEvent.EventSeriesViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,19 +23,19 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class SeriesEventFragment(private val comicId: Int) :
-    BaseFragment<FragmentSeriesEventBinding, SeriesEventViewModel>() {
+class EventSeriesFragment(private val comicId : Int) :
+    BaseFragment<FragmentSeriesEventBinding, EventSeriesViewModel>() {
 
-    override val viewModel : SeriesEventViewModel by viewModels()
+    override val viewModel : EventSeriesViewModel by viewModels()
     private val seriesDetailsAdapter by lazy { SeriesDetailsAdapter() }
 
     override fun getViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): FragmentSeriesEventBinding =
+        inflater : LayoutInflater,
+        container : ViewGroup?
+    ) : FragmentSeriesEventBinding =
         FragmentSeriesEventBinding.inflate(inflater, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.fetch(comicId)
         setupRecyclerView()

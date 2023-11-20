@@ -28,7 +28,7 @@ class TimelineAdapter(val context : Context) :
 
     private val differCallback = object : DiffUtil.ItemCallback<TimelineModel>() {
         override fun areItemsTheSame(oldItem : TimelineModel, newItem : TimelineModel) : Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
+            return true
         }
 
         override fun areContentsTheSame(
@@ -78,8 +78,10 @@ class TimelineAdapter(val context : Context) :
             when (timeline.type) {
                 TimelineType.CHARACTER -> type.text =
                     context.getString(R.string.title_fragment_characters)
+
                 TimelineType.COMIC -> type.text =
                     context.getString(R.string.comics)
+
                 TimelineType.EVENT -> type.text =
                     context.getString(R.string.title_fragment_event)
             }

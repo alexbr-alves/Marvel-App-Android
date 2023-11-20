@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/red_marvel"
-    android:paddingTop="10dp">
+    android:background="@color/gray_500">
 
     <LinearLayout
         android:id="@+id/layout_character"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
+        android:background="@color/gray_700"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:paddingVertical="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,8 +20,9 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
             android:fontFamily="@font/marvel"
             android:text="@string/title_fragment_characters"
             android:textColor="@color/white"
@@ -31,9 +31,10 @@
             tools:ignore="MissingConstraints" />
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/double_arrow_right_24" />
     </LinearLayout>
@@ -58,8 +59,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView1"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="0dp"
                 android:layout_marginEnd="5dp"
@@ -76,8 +77,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView2"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_marginEnd="5dp"
                 android:layout_toEndOf="@id/cardView1"
                 app:cardCornerRadius="75dp">
@@ -93,8 +94,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView3"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_marginEnd="5dp"
                 android:layout_toEndOf="@id/cardView2"
                 app:cardCornerRadius="75dp">
@@ -110,8 +111,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView4"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_marginEnd="5dp"
                 android:layout_toEndOf="@id/cardView3"
                 app:cardCornerRadius="75dp">
@@ -127,8 +128,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView5"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_marginEnd="5dp"
                 android:layout_toEndOf="@id/cardView4"
                 app:cardCornerRadius="75dp">
@@ -149,29 +150,32 @@
         android:id="@+id/layout_comic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:orientation="horizontal"
         android:layout_marginTop="20dp"
+        android:background="@color/gray_700"
+        android:orientation="horizontal"
+        android:paddingVertical="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scrollview_characters"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollview_characters"
         tools:ignore="UseCompoundDrawables">
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:fontFamily="@font/marvel"
             android:text="@string/title_fragment_comic"
             android:textColor="@color/white"
+            android:layout_marginStart="10dp"
             android:textSize="20sp"
             android:textStyle="bold"
             tools:ignore="MissingConstraints" />
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/double_arrow_right_24" />
     </LinearLayout>
@@ -255,18 +259,20 @@
         android:id="@+id/layout_event"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:orientation="horizontal"
         android:layout_marginTop="20dp"
+        android:background="@color/gray_700"
+        android:orientation="horizontal"
+        android:paddingVertical="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scrollview_comic"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollview_comic"
         tools:ignore="UseCompoundDrawables">
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
             android:fontFamily="@font/marvel"
             android:text="@string/title_fragment_event"
             android:textColor="@color/white"
@@ -275,9 +281,10 @@
             tools:ignore="MissingConstraints" />
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/double_arrow_right_24" />
     </LinearLayout>
