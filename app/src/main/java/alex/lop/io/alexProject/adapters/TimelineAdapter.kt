@@ -78,8 +78,10 @@ class TimelineAdapter(val context : Context) :
             when (timeline.type) {
                 TimelineType.CHARACTER -> type.text =
                     context.getString(R.string.title_fragment_characters)
+
                 TimelineType.COMIC -> type.text =
                     context.getString(R.string.comics)
+
                 TimelineType.EVENT -> type.text =
                     context.getString(R.string.title_fragment_event)
             }

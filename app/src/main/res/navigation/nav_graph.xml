@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/detailsCharacterFragment"
         tools:layout="@layout/fragment_details_character"
-        android:name="alex.lop.io.alexProject.fragment.detailsCharacter.DetailsCharacterFragment"
+        android:name="alex.lop.io.alexProject.fragment.detailsCharacter.CharacterDetailsFragment"
         android:label="DetailsCharacterFragment" >
         <argument
             android:name="character"

@@ -1,6 +1,5 @@
 package alex.lop.io.alexProject.adapters
 
-import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.data.model.event.EventModel
 import alex.lop.io.alexProject.databinding.LayoutCardNameBinding
 import alex.lop.io.alexProject.util.Constants
@@ -36,7 +35,7 @@ class EventAdapter : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
     private val differ = AsyncListDiffer(this, differCallback)
 
-    var eventList: List<EventModel>
+    var eventList : List<EventModel>
         get() = differ.currentList
         set(value) = differ.submitList(value.filter {
             it.thumbnailModel.path != Constants.IMAGE_NOT_AVAILABLE
@@ -68,7 +67,8 @@ class EventAdapter : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
                 onItemClickListener?.let {
                     it(event)
                 }
-            } }
+            }
+        }
     }
 
     private var onItemClickListener : ((EventModel) -> Unit)? = null

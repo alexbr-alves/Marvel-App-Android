@@ -5,8 +5,6 @@ import alex.lop.io.alexProject.data.model.FavoriteModel
 import alex.lop.io.alexProject.databinding.LayoutCardNameDescriptionBinding
 import alex.lop.io.alexProject.util.Constants
 import alex.lop.io.alexProject.util.limitDescription
-
-
 import alex.lop.io.alexProject.util.loadImage
 import alex.lop.io.alexProject.util.setGone
 import android.view.LayoutInflater

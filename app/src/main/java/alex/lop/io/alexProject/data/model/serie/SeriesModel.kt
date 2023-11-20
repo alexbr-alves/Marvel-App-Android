@@ -12,5 +12,5 @@ data class SeriesModel(
     @SerializedName("description")
     val description : String,
     @SerializedName("thumbnail")
-    val thumbnailModel: ThumbnailModel
+    val thumbnailModel : ThumbnailModel
 ) : Serializable

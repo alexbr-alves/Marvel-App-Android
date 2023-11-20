@@ -34,7 +34,7 @@ class SeriesAdapter : RecyclerView.Adapter<SeriesAdapter.SeriesViewHolder>() {
 
     private val differ = AsyncListDiffer(this, differCallBack)
 
-    var seriesList: List<SeriesModel>
+    var seriesList : List<SeriesModel>
         get() = differ.currentList
         set(value) = differ.submitList(value.filter {
             it.thumbnailModel.path != Constants.IMAGE_NOT_AVAILABLE

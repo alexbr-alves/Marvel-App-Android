@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
+
 @Entity(tableName = "favoriteModel")
 data class FavoriteModel(
     @PrimaryKey(autoGenerate = true)
@@ -14,7 +15,7 @@ data class FavoriteModel(
     @SerializedName("description")
     val description : String,
     @SerializedName("type")
-    val type: String,
+    val type : String,
     @SerializedName("thumbnail")
-    val thumbnailModel: ThumbnailModel
+    val thumbnailModel : ThumbnailModel
 ) : Serializable

@@ -11,13 +11,13 @@ import java.io.Serializable
 data class CharacterModel(
     @PrimaryKey(autoGenerate = true)
     @SerializedName("id")
-    val id: Int,
+    val id : Int,
     @SerializedName("name")
-    val name: String,
+    val name : String,
     @SerializedName("description")
-    val description: String,
+    val description : String,
     @SerializedName("thumbnail")
-    val thumbnailModel: ThumbnailModel
+    val thumbnailModel : ThumbnailModel
 
 
-): Serializable
+) : Serializable

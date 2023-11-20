@@ -43,7 +43,7 @@ class ComicDetailsAdapter : RecyclerView.Adapter<ComicDetailsAdapter.ComicViewHo
             it.thumbnailModel.path != Constants.IMAGE_NOT_AVAILABLE
         })
 
-    override fun getItemCount(): Int {
+    override fun getItemCount() : Int {
         return comics.size
     }
 
