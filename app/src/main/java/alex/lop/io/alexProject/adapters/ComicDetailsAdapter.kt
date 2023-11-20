@@ -5,6 +5,7 @@ import alex.lop.io.alexProject.databinding.LayoutMiniCardsBinding
 import alex.lop.io.alexProject.util.Constants
 import alex.lop.io.alexProject.util.limitDescription
 import alex.lop.io.alexProject.util.loadImage
+import alex.lop.io.alexProject.util.setGone
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -61,6 +62,8 @@ class ComicDetailsAdapter : RecyclerView.Adapter<ComicDetailsAdapter.ComicViewHo
             textName.text = comic.title.limitDescription(20)
             if (!comic.description.isNullOrEmpty()) {
                 textDescription.text = comic.description.limitDescription(40)
+            } else {
+                textDescription.setGone()
             }
 
             loadImage(

@@ -14,7 +14,7 @@ class Converts {
         return FavoriteModel(
             characterModel.id,
             characterModel.name,
-            characterModel.description,
+            characterModel.description ?: "",
             Constants.CHARACTER,
             thumbnailModel = ThumbnailModel(
                 path = characterModel.thumbnailModel.path,
@@ -27,7 +27,7 @@ class Converts {
         return CharacterModel(
             favoriteModel.id,
             favoriteModel.title,
-            favoriteModel.description,
+            favoriteModel.description ?: "",
             ThumbnailModel(
                 favoriteModel.thumbnailModel.path,
                 favoriteModel.thumbnailModel.extension
@@ -51,7 +51,7 @@ class Converts {
         return EventModel(
             favoriteModel.id,
             favoriteModel.title,
-            favoriteModel.description,
+            favoriteModel.description ?: "",
             ThumbnailModel(
                 favoriteModel.thumbnailModel.path,
                 favoriteModel.thumbnailModel.extension
@@ -63,7 +63,7 @@ class Converts {
         return FavoriteModel(
             comicModel.id,
             comicModel.title,
-            comicModel.description,
+            comicModel.description ?: "",
             Constants.COMIC,
             ThumbnailModel(
                 comicModel.thumbnailModel.path,
@@ -76,7 +76,7 @@ class Converts {
         return FavoriteModel(
             eventModel.id,
             eventModel.title,
-            eventModel.description,
+            eventModel.description ?: "",
             Constants.EVENT,
             ThumbnailModel(
                 eventModel.thumbnailModel.path,
@@ -101,7 +101,7 @@ class Converts {
         return ComicModel(
             timelineModel.id,
             timelineModel.title,
-            timelineModel.description,
+            timelineModel.description ?: "",
             ThumbnailModel(
                 timelineModel.thumbnailModel.path,
                 timelineModel.thumbnailModel.extension
@@ -113,7 +113,7 @@ class Converts {
         return EventModel(
             timelineModel.id,
             timelineModel.title,
-            timelineModel.description,
+            timelineModel.description ?: "",
             ThumbnailModel(
                 timelineModel.thumbnailModel.path,
                 timelineModel.thumbnailModel.extension
