@@ -82,7 +82,6 @@ class TimelineFragment :
                 is ResourceState.Error -> {
                     binding.progressbarSearch.setInvisible()
                     result.message?.let { message ->
-                        toast(getString(R.string.an_error_occurred))
                         Timber.tag("TimelineFragment").e("Error -> $message")
                     }
                 }

@@ -102,7 +102,6 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding, CharacterViewMo
                 is ResourceState.Error -> {
                     binding.progressCircular.setInvisible()
                     resource.message?.let { message ->
-                        toast(getString(R.string.an_error_occurred))
                         Timber.tag("ListCharacterFragment").e("Error -> $message")
                     }
                 }

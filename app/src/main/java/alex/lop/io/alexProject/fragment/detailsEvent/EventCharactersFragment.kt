@@ -76,7 +76,6 @@ class EventCharactersFragment(private val comicId : Int) :
                 is ResourceState.Error -> {
                     binding.progressBarDetail.setInvisible()
                     resource.message?.let { message ->
-                        toast(getString(R.string.an_error_occurred))
                         Timber.tag("CharactersComicFragment").e("Error -> $message")
                     }
                 }
