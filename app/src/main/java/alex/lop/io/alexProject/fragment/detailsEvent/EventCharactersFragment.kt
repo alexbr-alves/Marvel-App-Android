@@ -5,6 +5,7 @@ import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.adapters.CharacterDetailsAdapter
 import alex.lop.io.alexProject.databinding.FragmentCharacterEventBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
+import alex.lop.io.alexProject.fragment.detailsCharacter.CharacterDetailsFragmentDirections
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
@@ -16,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -40,6 +42,14 @@ class EventCharactersFragment(private val comicId : Int) :
         viewModel.fetch(comicId)
         setupRecyclerView()
         collectObserver()
+        clickAdapter()
+    }
+
+    private fun clickAdapter() {
+        characterDetailsAdapter.setOnClickListener { characterModel ->
+            val action = EventDetailsFragmentDirections.actionDetailsEventFragmentToDetailsCharacterFragment(characterModel)
+            findNavController().navigate(action)
+        }
     }
 
     private fun setupRecyclerView() = with(binding) {
