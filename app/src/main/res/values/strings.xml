@@ -2,7 +2,7 @@
     <string name="app_name">Marvel App</string>
 
     <!--    Splash Activity -->
-    <string name="marvel">MARVEL</string>
+    <string name="marvel">MARVEL WIKI</string>
 
     <!--    Item character and Item comic -->
     <string name="tx_item_name">Nome</string>
@@ -30,7 +30,6 @@
 
 
     <!--    Toast messages -->
-    <string name="an_error_occurred">Um erro ocorreu!</string>
     <string name="saved_successfully">Salvo com sucesso!</string>
 
     <!--    Error -->

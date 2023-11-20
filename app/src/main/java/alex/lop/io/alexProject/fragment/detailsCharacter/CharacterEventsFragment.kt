@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -22,7 +23,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class CharacterEventsFragment(private val characterId: Int) :
+class CharacterEventsFragment(private val characterId : Int) :
     BaseFragment<FragmentEventsCharapterBinding, CharacterEventsViewModel>() {
 
     private val eventDetailsAdapter by lazy { EventDetailsAdapter() }
@@ -39,9 +40,20 @@ class CharacterEventsFragment(private val characterId: Int) :
         viewModel.fetchEvent(characterId)
         setupRecycleView()
         collectObserver()
+        clickAdapter()
     }
 
-    private fun collectObserver() = lifecycleScope.launch{
+    private fun clickAdapter() {
+        eventDetailsAdapter.setOnClickListener { eventModel ->
+            val action =
+                CharacterDetailsFragmentDirections.actionDetailsCharacterFragmentToDetailsEventFragment(
+                    eventModel
+                )
+            findNavController().navigate(action)
+        }
+    }
+
+    private fun collectObserver() = lifecycleScope.launch {
         viewModel.eventList.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
@@ -58,7 +70,6 @@ class CharacterEventsFragment(private val characterId: Int) :
                 is ResourceState.Error -> {
                     binding.progressBarDetail.setInvisible()
                     resource.message?.let { message ->
-                        toast(getString(R.string.an_error_occurred))
                         Timber.tag("ListCharacterFragment").e("Error -> $message")
                     }
                 }

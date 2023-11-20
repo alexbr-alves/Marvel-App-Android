@@ -20,7 +20,7 @@ class ComicDetailsAdapter : RecyclerView.Adapter<ComicDetailsAdapter.ComicViewHo
     private val differCallback = object : DiffUtil.ItemCallback<ComicModel>() {
 
         override fun areItemsTheSame(oldItem : ComicModel, newItem : ComicModel) : Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
+            return true
         }
 
         override fun areContentsTheSame(
@@ -56,6 +56,13 @@ class ComicDetailsAdapter : RecyclerView.Adapter<ComicDetailsAdapter.ComicViewHo
         )
     }
 
+    private var onItemClickListener : ((ComicModel) -> Unit)? = null
+
+    fun setOnClickListener(listener : (ComicModel) -> Unit) {
+        onItemClickListener = listener
+    }
+
+
     override fun onBindViewHolder(holder : ComicViewHolder, position : Int) {
         val comic = comics[position]
         holder.binding.apply {
@@ -71,6 +78,11 @@ class ComicDetailsAdapter : RecyclerView.Adapter<ComicDetailsAdapter.ComicViewHo
                 comic.thumbnailModel.path,
                 comic.thumbnailModel.extension
             )
+        }
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.let {
+                it(comic)
+            }
         }
 
     }

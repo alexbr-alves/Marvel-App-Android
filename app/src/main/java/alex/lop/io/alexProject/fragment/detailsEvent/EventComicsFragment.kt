@@ -16,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -40,6 +41,14 @@ class EventComicsFragment(private val comicId : Int) :
         viewModel.fetch(comicId)
         setupRecyclerView()
         collectObserver()
+        clickAdapter()
+    }
+
+    private fun clickAdapter() {
+        comicDetailsAdapter.setOnClickListener { comicModel ->
+            val action = EventDetailsFragmentDirections.actionDetailsEventFragmentToDetailsComicFragment(comicModel)
+            findNavController().navigate(action)
+        }
     }
 
     private fun setupRecyclerView() = with(binding) {
@@ -66,7 +75,6 @@ class EventComicsFragment(private val comicId : Int) :
                 is ResourceState.Error -> {
                     binding.progressBarDetail.setInvisible()
                     resource.message?.let { message ->
-                        toast(getString(R.string.an_error_occurred))
                         Timber.tag("CharactersComicFragment").e("Error -> $message")
                     }
                 }

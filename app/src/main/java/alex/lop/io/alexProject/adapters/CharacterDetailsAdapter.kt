@@ -21,7 +21,7 @@ class CharacterDetailsAdapter :
     private val differCallback = object : DiffUtil.ItemCallback<CharacterModel>() {
 
         override fun areItemsTheSame(oldItem : CharacterModel, newItem : CharacterModel) : Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
+            return true
         }
 
         override fun areContentsTheSame(
@@ -73,5 +73,16 @@ class CharacterDetailsAdapter :
                 character.thumbnailModel.extension
             )
         }
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.let {
+                it(character)
+            }
+        }
+    }
+
+    private var onItemClickListener : ((CharacterModel) -> Unit)? = null
+
+    fun setOnClickListener(listener : (CharacterModel) -> Unit) {
+        onItemClickListener = listener
     }
 }

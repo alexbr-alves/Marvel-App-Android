@@ -8,6 +8,7 @@ import alex.lop.io.alexProject.util.setGone
 import alex.lop.io.alexProject.util.setVisible
 import android.view.View
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -106,7 +107,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation.apply {
             setupWithNavController(navController)
-
         }
     }
 

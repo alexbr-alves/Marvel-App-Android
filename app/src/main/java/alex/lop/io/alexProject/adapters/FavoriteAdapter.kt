@@ -21,7 +21,7 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.CharacterViewHolder
 
     private val differCallback = object : DiffUtil.ItemCallback<FavoriteModel>() {
         override fun areItemsTheSame(oldItem : FavoriteModel, newItem : FavoriteModel) : Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
+            return true
         }
 
         override fun areContentsTheSame(

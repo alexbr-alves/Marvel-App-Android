@@ -111,7 +111,6 @@ class EventFragment : BaseFragment<FragmentEventBinding, EventViewModel>() {
                 is ResourceState.Error -> {
                     binding.progressBar.setInvisible()
                     resource.message?.let { message ->
-                        toast(getString(R.string.an_error_occurred))
                         Timber.tag("EventFragment").e("Error -> $message")
                     }
                 }

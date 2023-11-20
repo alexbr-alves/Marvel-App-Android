@@ -13,6 +13,12 @@
         <argument
             android:name="character"
             app:argType="alex.lop.io.alexProject.data.model.character.CharacterModel" />
+        <action
+            android:id="@+id/action_detailsCharacterFragment_to_detailsComicFragment"
+            app:destination="@id/detailsComicFragment" />
+        <action
+            android:id="@+id/action_detailsCharacterFragment_to_detailsEventFragment"
+            app:destination="@id/detailsEventFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoriteCharacterFragment"
@@ -104,6 +110,12 @@
         <argument
             android:name="Comic"
             app:argType="alex.lop.io.alexProject.data.model.comic.ComicModel" />
+        <action
+            android:id="@+id/action_detailsComicFragment_to_detailsCharacterFragment"
+            app:destination="@id/detailsCharacterFragment" />
+        <action
+            android:id="@+id/action_detailsComicFragment_to_detailsEventFragment"
+            app:destination="@id/detailsEventFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsEventFragment"
@@ -113,5 +125,11 @@
         <argument
             android:name="eventModel"
             app:argType="alex.lop.io.alexProject.data.model.event.EventModel" />
+        <action
+            android:id="@+id/action_detailsEventFragment_to_detailsCharacterFragment"
+            app:destination="@id/detailsCharacterFragment" />
+        <action
+            android:id="@+id/action_detailsEventFragment_to_detailsComicFragment"
+            app:destination="@id/detailsComicFragment" />
     </fragment>
 </navigation>
