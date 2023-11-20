@@ -102,8 +102,6 @@ class EventFragment : BaseFragment<FragmentEventBinding, EventViewModel>() {
                     resource.data?.let { values ->
                         if (values.data.result.isNotEmpty()) {
                             eventAdapter.eventList = values.data.result.toList()
-                        } else {
-                            toast(getString(R.string.error_empty_list))
                         }
                     }
                 }

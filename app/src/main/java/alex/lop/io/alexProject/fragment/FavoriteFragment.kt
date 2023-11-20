@@ -109,9 +109,7 @@ class FavoriteFragment :
 
             override fun onSwiped(viewHolder : RecyclerView.ViewHolder, direction : Int) {
                 val character = favoriteAdapter.getCharacterPosition(viewHolder.adapterPosition)
-                viewModel.delete(character).also {
-                    toast(getString(R.string.message_delete_character))
-                }
+                viewModel.delete(character).also {}
             }
 
         }
