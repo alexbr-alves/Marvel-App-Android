@@ -73,5 +73,16 @@ class CharacterDetailsAdapter :
                 character.thumbnailModel.extension
             )
         }
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.let {
+                it(character)
+            }
+        }
+    }
+
+    private var onItemClickListener : ((CharacterModel) -> Unit)? = null
+
+    fun setOnClickListener(listener : (CharacterModel) -> Unit) {
+        onItemClickListener = listener
     }
 }
