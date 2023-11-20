@@ -1,14 +1,15 @@
-package alex.lop.io.alexProject.fragment.detailsCharacter
+package alex.lop.io.alexProject.fragment.detailsEvent
+
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.adapters.SeriesDetailsAdapter
-import alex.lop.io.alexProject.databinding.FragmentSeriesCharacterBinding
+import alex.lop.io.alexProject.adapters.ComicDetailsAdapter
+import alex.lop.io.alexProject.databinding.FragmentComicEventBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
-import alex.lop.io.alexProject.viewModel.detailCharacter.SeriesCharacterViewModel
+import alex.lop.io.alexProject.viewModel.detailEvent.ComicEventViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,37 +23,43 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class SeriesCharacterFragment(private val characterId: Int) :
-    BaseFragment<FragmentSeriesCharacterBinding, SeriesCharacterViewModel>() {
+class EventComicsFragment(private val comicId : Int) :
+    BaseFragment<FragmentComicEventBinding, ComicEventViewModel>() {
 
-    private val seriesDetailsAdapter by lazy { SeriesDetailsAdapter() }
-    override val viewModel: SeriesCharacterViewModel by viewModels()
+    override val viewModel : ComicEventViewModel by viewModels()
+    private val comicDetailsAdapter by lazy { ComicDetailsAdapter() }
 
     override fun getViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): FragmentSeriesCharacterBinding =
-        FragmentSeriesCharacterBinding.inflate(inflater, container, false)
+        inflater : LayoutInflater,
+        container : ViewGroup?
+    ) : FragmentComicEventBinding =
+        FragmentComicEventBinding.inflate(inflater, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.fetchSeries(characterId)
+        viewModel.fetch(comicId)
         setupRecyclerView()
         collectObserver()
     }
 
+    private fun setupRecyclerView() = with(binding) {
+        rvComics.apply {
+            adapter = comicDetailsAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
+    }
+
     private fun collectObserver() = lifecycleScope.launch {
-        viewModel.seriesList.collect { resource ->
+        viewModel.list.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
                     binding.progressBarDetail.setInvisible()
                     resource.data?.let { values ->
-                        if (values.data.result.isNotEmpty()) {
-                            seriesDetailsAdapter.series = values.data.result.toList()
-                        } else {
+                        if (values.data.result.isEmpty()) {
                             binding.textEmpty.setVisible()
+                        } else {
+                            comicDetailsAdapter.comics = values.data.result.toList()
                         }
-
                     }
                 }
 
@@ -60,7 +67,7 @@ class SeriesCharacterFragment(private val characterId: Int) :
                     binding.progressBarDetail.setInvisible()
                     resource.message?.let { message ->
                         toast(getString(R.string.an_error_occurred))
-                        Timber.tag("ListCharacterFragment").e("Error -> $message")
+                        Timber.tag("CharactersComicFragment").e("Error -> $message")
                     }
                 }
 
@@ -71,13 +78,6 @@ class SeriesCharacterFragment(private val characterId: Int) :
                 else -> {
                 }
             }
-        }
-    }
-
-    private fun setupRecyclerView() = with(binding) {
-        rvSeries.apply {
-            adapter = seriesDetailsAdapter
-            layoutManager = LinearLayoutManager(context)
         }
     }
 }

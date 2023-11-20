@@ -3,11 +3,10 @@ package alex.lop.io.alexProject.fragment.detailsComic
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.adapters.DetailsComicAdapter
 import alex.lop.io.alexProject.data.model.FavoriteModel
-import alex.lop.io.alexProject.data.model.ThumbnailModel
 import alex.lop.io.alexProject.data.model.comic.ComicModel
 import alex.lop.io.alexProject.databinding.FragmentDetailsComicBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
-import alex.lop.io.alexProject.util.Constants
+import alex.lop.io.alexProject.util.Converts
 import alex.lop.io.alexProject.util.loadImage
 import alex.lop.io.alexProject.viewModel.detailsComics.DetailsComicsViewModel
 import android.os.Bundle
@@ -21,34 +20,24 @@ import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailsComicFragment :
-    BaseFragment<FragmentDetailsComicBinding, DetailsComicsViewModel>() {
+class ComicDetailsFragment : BaseFragment<FragmentDetailsComicBinding, DetailsComicsViewModel>() {
     override val viewModel : DetailsComicsViewModel by viewModels()
-    private val args : DetailsComicFragmentArgs by navArgs()
+    private val args : ComicDetailsFragmentArgs by navArgs()
     private lateinit var comicModel : ComicModel
     private var viewPager2 : ViewPager2? = null
     private lateinit var favoriteModel : FavoriteModel
+    private var converts = Converts()
 
 
     override fun getViewBinding(
-        inflater : LayoutInflater,
-        container : ViewGroup?
+        inflater : LayoutInflater, container : ViewGroup?
     ) : FragmentDetailsComicBinding =
         FragmentDetailsComicBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         comicModel = args.Comic
-        favoriteModel = FavoriteModel(
-            comicModel.id,
-            comicModel.title,
-            comicModel.description,
-            Constants.COMIC,
-            thumbnailModel = ThumbnailModel(
-                path = comicModel.thumbnailModel.path,
-                extension = comicModel.thumbnailModel.extension
-            )
-        )
+        favoriteModel = converts.ComicToFavorite(comicModel)
         viewModel.searchFavorite(favoriteModel.id)
         onLoadComic(comicModel)
         setupViewPager()
@@ -82,16 +71,13 @@ class DetailsComicFragment :
             binding.imageFavorite.setImageResource(color)
             textName.text = comic.title
             loadImage(
-                imageComic,
-                comic.thumbnailModel.path,
-                comic.thumbnailModel.extension
+                imageComic, comic.thumbnailModel.path, comic.thumbnailModel.extension
             )
         }
     }
 
     private fun updateButtonColors(position : Int) = binding.run {
-        val textViews =
-            arrayOf(binding.textAbout, binding.textCharacter, binding.textEvent)
+        val textViews = arrayOf(binding.textAbout, binding.textCharacter, binding.textEvent)
         val activeColor = ContextCompat.getColor(requireContext(), R.color.red)
         val inactiveColor = ContextCompat.getColor(requireContext(), R.color.white)
 

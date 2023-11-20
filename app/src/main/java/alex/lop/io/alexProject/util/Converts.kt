@@ -57,4 +57,30 @@ class Converts {
         )
     }
 
+    fun ComicToFavorite(comicModel : ComicModel) : FavoriteModel {
+        return FavoriteModel(
+            comicModel.id,
+            comicModel.title,
+            comicModel.description,
+            Constants.COMIC,
+            ThumbnailModel(
+                comicModel.thumbnailModel.path,
+                comicModel.thumbnailModel.extension
+            )
+        )
+    }
+
+    fun eventToFavorite(eventModel : EventModel) : FavoriteModel {
+        return FavoriteModel(
+            eventModel.id,
+            eventModel.title,
+            eventModel.description,
+            Constants.COMIC,
+            ThumbnailModel(
+                eventModel.thumbnailModel.path,
+                eventModel.thumbnailModel.extension
+            )
+        )
+    }
+
 }

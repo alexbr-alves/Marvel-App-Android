@@ -1,15 +1,15 @@
-package alex.lop.io.alexProject.fragment.detailsComic
+package alex.lop.io.alexProject.fragment.detailsEvent
 
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.adapters.CharacterDetailsAdapter
-import alex.lop.io.alexProject.databinding.FragmentCharacterComicBinding
+import alex.lop.io.alexProject.adapters.SeriesDetailsAdapter
+import alex.lop.io.alexProject.databinding.FragmentSeriesEventBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
-import alex.lop.io.alexProject.viewModel.detailsComics.CharactersComicViewModel
+import alex.lop.io.alexProject.viewModel.detailEvent.SeriesEventViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,42 +23,42 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class CharactersComicFragment(private val comicId: Int) :
-    BaseFragment<FragmentCharacterComicBinding, CharactersComicViewModel>() {
+class EventSeriesFragment(private val comicId : Int) :
+    BaseFragment<FragmentSeriesEventBinding, SeriesEventViewModel>() {
 
-    override val viewModel: CharactersComicViewModel by viewModels()
-    private val characterDetailsAdapter by lazy { CharacterDetailsAdapter() }
+    override val viewModel : SeriesEventViewModel by viewModels()
+    private val seriesDetailsAdapter by lazy { SeriesDetailsAdapter() }
 
     override fun getViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): FragmentCharacterComicBinding =
-        FragmentCharacterComicBinding.inflate(inflater, container, false)
+        inflater : LayoutInflater,
+        container : ViewGroup?
+    ) : FragmentSeriesEventBinding =
+        FragmentSeriesEventBinding.inflate(inflater, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.fetchCharacterComic(comicId)
+        viewModel.fetch(comicId)
         setupRecyclerView()
         collectObserver()
     }
 
     private fun setupRecyclerView() = with(binding) {
-        rvComics.apply {
-            adapter = characterDetailsAdapter
+        recycle.apply {
+            adapter = seriesDetailsAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
 
     private fun collectObserver() = lifecycleScope.launch {
-        viewModel.comicCharacterList.collect { resource ->
+        viewModel.list.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
                     binding.progressBarDetail.setInvisible()
                     resource.data?.let { values ->
-                        if (values.data.results.isEmpty()) {
+                        if (values.data.result.isEmpty()) {
                             binding.textEmpty.setVisible()
                         } else {
-                            characterDetailsAdapter.characters = values.data.results.toList()
+                            seriesDetailsAdapter.series = values.data.result.toList()
                         }
                     }
                 }

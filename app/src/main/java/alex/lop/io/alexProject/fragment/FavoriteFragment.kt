@@ -3,10 +3,6 @@ package alex.lop.io.alexProject.fragment
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.databinding.FragmentFavoriteCharacterBinding
 import alex.lop.io.alexProject.adapters.FavoriteAdapter
-import alex.lop.io.alexProject.data.model.ThumbnailModel
-import alex.lop.io.alexProject.data.model.character.CharacterModel
-import alex.lop.io.alexProject.data.model.comic.ComicModel
-import alex.lop.io.alexProject.data.model.event.EventModel
 import alex.lop.io.alexProject.viewModel.FavoriteCharacterViewModel
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.Constants
@@ -71,6 +67,7 @@ class FavoriteFragment :
                         )
                     findNavController().navigate(action)
                 }
+
                 Constants.COMIC -> {
                     val action = FavoriteFragmentDirections
                         .actionFavoriteCharacterFragmentToDetailsComicFragment(
@@ -78,6 +75,7 @@ class FavoriteFragment :
                         )
                     findNavController().navigate(action)
                 }
+
                 Constants.EVENT -> {
                     val action = FavoriteFragmentDirections
                         .actionFavoriteCharacterFragmentToDetailsEventFragment(

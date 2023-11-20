@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class EventFragment : BaseFragment<FragmentEventBinding,EventViewModel>(){
+class EventFragment : BaseFragment<FragmentEventBinding, EventViewModel>() {
     override val viewModel : EventViewModel by viewModels()
     private val eventAdapter by lazy { EventAdapter() }
     private var isSearchExpanded = false
@@ -96,7 +96,7 @@ class EventFragment : BaseFragment<FragmentEventBinding,EventViewModel>(){
 
     private fun collectObserver() = lifecycleScope.launch {
         viewModel.eventList.collect { resource ->
-            when(resource) {
+            when (resource) {
                 is ResourceState.Success -> {
                     binding.progressBar.setInvisible()
                     resource.data?.let { values ->
@@ -107,6 +107,7 @@ class EventFragment : BaseFragment<FragmentEventBinding,EventViewModel>(){
                         }
                     }
                 }
+
                 is ResourceState.Error -> {
                     binding.progressBar.setInvisible()
                     resource.message?.let { message ->
@@ -114,9 +115,11 @@ class EventFragment : BaseFragment<FragmentEventBinding,EventViewModel>(){
                         Timber.tag("EventFragment").e("Error -> $message")
                     }
                 }
+
                 is ResourceState.Loading -> {
                     binding.progressBar.setVisible()
                 }
+
                 else -> {}
             }
         }

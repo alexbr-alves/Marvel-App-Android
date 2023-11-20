@@ -1,14 +1,14 @@
 package alex.lop.io.alexProject.fragment.detailsCharacter
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.adapters.EventDetailsAdapter
-import alex.lop.io.alexProject.databinding.FragmentEventsCharapterBinding
+import alex.lop.io.alexProject.adapters.SeriesDetailsAdapter
+import alex.lop.io.alexProject.databinding.FragmentSeriesCharacterBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
-import alex.lop.io.alexProject.viewModel.detailCharacter.EventsCharacterViewModel
+import alex.lop.io.alexProject.viewModel.detailCharacter.SeriesCharacterViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,36 +22,37 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class EventsCharacterFragment( private val characterId: Int) :
-    BaseFragment<FragmentEventsCharapterBinding, EventsCharacterViewModel>() {
+class CharacterSeriesFragment(private val characterId: Int) :
+    BaseFragment<FragmentSeriesCharacterBinding, SeriesCharacterViewModel>() {
 
-    private val eventDetailsAdapter by lazy { EventDetailsAdapter() }
-    override val viewModel : EventsCharacterViewModel by viewModels()
+    private val seriesDetailsAdapter by lazy { SeriesDetailsAdapter() }
+    override val viewModel: SeriesCharacterViewModel by viewModels()
 
     override fun getViewBinding(
-        inflater : LayoutInflater,
-        container : ViewGroup?
-    ) : FragmentEventsCharapterBinding =
-        FragmentEventsCharapterBinding.inflate(inflater, container, false)
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentSeriesCharacterBinding =
+        FragmentSeriesCharacterBinding.inflate(inflater, container, false)
 
-    override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.fetchEvent(characterId)
-        setupRecycleView()
+        viewModel.fetchSeries(characterId)
+        setupRecyclerView()
         collectObserver()
     }
 
-    private fun collectObserver() = lifecycleScope.launch{
-        viewModel.eventList.collect { resource ->
+    private fun collectObserver() = lifecycleScope.launch {
+        viewModel.seriesList.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
                     binding.progressBarDetail.setInvisible()
                     resource.data?.let { values ->
                         if (values.data.result.isNotEmpty()) {
-                            eventDetailsAdapter.events = values.data.result.toList()
+                            seriesDetailsAdapter.series = values.data.result.toList()
                         } else {
                             binding.textEmpty.setVisible()
                         }
+
                     }
                 }
 
@@ -67,18 +68,16 @@ class EventsCharacterFragment( private val characterId: Int) :
                     binding.progressBarDetail.setVisible()
                 }
 
-                else -> {}
+                else -> {
+                }
             }
-
         }
     }
 
-    private fun setupRecycleView() = with(binding) {
-        rvEvents.apply {
-            adapter = eventDetailsAdapter
+    private fun setupRecyclerView() = with(binding) {
+        rvSeries.apply {
+            adapter = seriesDetailsAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
-
-
 }

@@ -82,11 +82,6 @@ class MainActivity : AppCompatActivity() {
                     getString(R.string.title_fragment_characters)
                 )
 
-                R.id.seriesFragment -> setupToolbar(
-                    true,
-                    getString(R.string.title_fragment_series)
-                )
-
                 R.id.detailsComicFragment -> setupToolbar(
                     true,
                     getString(R.string.title_fragment_detail)
@@ -110,6 +105,5 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-
-
+    
 }

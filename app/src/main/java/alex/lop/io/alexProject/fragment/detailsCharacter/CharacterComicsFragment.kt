@@ -1,17 +1,14 @@
-package alex.lop.io.alexProject.fragment.detailsEvent
-
+package alex.lop.io.alexProject.fragment.detailsCharacter
 
 import alex.lop.io.alexProject.R
-import alex.lop.io.alexProject.adapters.CharacterDetailsAdapter
-import alex.lop.io.alexProject.databinding.FragmentCharacterComicBinding
-import alex.lop.io.alexProject.databinding.FragmentCharacterEventBinding
+import alex.lop.io.alexProject.adapters.ComicDetailsAdapter
+import alex.lop.io.alexProject.databinding.FragmentComicsCharapterBinding
 import alex.lop.io.alexProject.fragment.BaseFragment
 import alex.lop.io.alexProject.state.ResourceState
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
-import alex.lop.io.alexProject.viewModel.detailEvent.CharacterEventViewModel
-import alex.lop.io.alexProject.viewModel.detailsComics.CharactersComicViewModel
+import alex.lop.io.alexProject.viewModel.detailCharacter.ComicsCharacterViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,42 +22,42 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class CharactersEventFragment(private val comicId: Int) :
-    BaseFragment<FragmentCharacterEventBinding, CharacterEventViewModel>() {
+class CharacterComicsFragment(private val characterId : Int) :
+    BaseFragment<FragmentComicsCharapterBinding, ComicsCharacterViewModel>() {
 
-    override val viewModel : CharacterEventViewModel by viewModels()
-    private val characterDetailsAdapter by lazy { CharacterDetailsAdapter() }
+    override val viewModel : ComicsCharacterViewModel by viewModels()
+    private val comicDetailsAdapter by lazy { ComicDetailsAdapter() }
 
     override fun getViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): FragmentCharacterEventBinding =
-        FragmentCharacterEventBinding.inflate(inflater, container, false)
+        inflater : LayoutInflater,
+        container : ViewGroup?
+    ) : FragmentComicsCharapterBinding =
+        FragmentComicsCharapterBinding.inflate(inflater, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.fetch(comicId)
-        setupRecyclerView()
+        viewModel.fetchComic(characterId)
+        setupRecycleView()
         collectObserver()
     }
 
-    private fun setupRecyclerView() = with(binding) {
+    private fun setupRecycleView() = with(binding) {
         rvComics.apply {
-            adapter = characterDetailsAdapter
+            adapter = comicDetailsAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
 
     private fun collectObserver() = lifecycleScope.launch {
-        viewModel.list.collect { resource ->
+        viewModel.comicList.collect { resource ->
             when (resource) {
                 is ResourceState.Success -> {
                     binding.progressBarDetail.setInvisible()
                     resource.data?.let { values ->
-                        if (values.data.results.isEmpty()) {
-                            binding.textEmpty.setVisible()
+                        if (values.data.result.isNotEmpty()) {
+                            comicDetailsAdapter.comics = values.data.result.toList()
                         } else {
-                            characterDetailsAdapter.characters = values.data.results.toList()
+                            binding.textEmpty.setVisible()
                         }
                     }
                 }
@@ -69,7 +66,7 @@ class CharactersEventFragment(private val comicId: Int) :
                     binding.progressBarDetail.setInvisible()
                     resource.message?.let { message ->
                         toast(getString(R.string.an_error_occurred))
-                        Timber.tag("CharactersComicFragment").e("Error -> $message")
+                        Timber.tag("ListCharacterFragment").e("Error -> $message")
                     }
                 }
 
@@ -77,8 +74,7 @@ class CharactersEventFragment(private val comicId: Int) :
                     binding.progressBarDetail.setVisible()
                 }
 
-                else -> {
-                }
+                else -> {}
             }
         }
     }
