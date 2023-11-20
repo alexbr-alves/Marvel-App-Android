@@ -5,6 +5,8 @@ import alex.lop.io.alexProject.data.model.ThumbnailModel
 import alex.lop.io.alexProject.data.model.character.CharacterModel
 import alex.lop.io.alexProject.data.model.comic.ComicModel
 import alex.lop.io.alexProject.data.model.event.EventModel
+import alex.lop.io.alexProject.data.model.timeline.TimelineModel
+import alex.lop.io.alexProject.data.model.timeline.TimelineType
 
 class Converts {
 
@@ -57,7 +59,7 @@ class Converts {
         )
     }
 
-    fun ComicToFavorite(comicModel : ComicModel) : FavoriteModel {
+    fun comicToFavorite(comicModel : ComicModel) : FavoriteModel {
         return FavoriteModel(
             comicModel.id,
             comicModel.title,
@@ -75,10 +77,46 @@ class Converts {
             eventModel.id,
             eventModel.title,
             eventModel.description,
-            Constants.COMIC,
+            Constants.EVENT,
             ThumbnailModel(
                 eventModel.thumbnailModel.path,
                 eventModel.thumbnailModel.extension
+            )
+        )
+    }
+
+    fun timelineToCharacter(timelineModel : TimelineModel) : CharacterModel {
+        return CharacterModel(
+            timelineModel.id,
+            timelineModel.title,
+            timelineModel.description,
+            ThumbnailModel(
+                timelineModel.thumbnailModel.path,
+                timelineModel.thumbnailModel.extension
+            )
+        )
+    }
+
+    fun timelineToComic(timelineModel : TimelineModel) : ComicModel {
+        return ComicModel(
+            timelineModel.id,
+            timelineModel.title,
+            timelineModel.description,
+            ThumbnailModel(
+                timelineModel.thumbnailModel.path,
+                timelineModel.thumbnailModel.extension
+            )
+        )
+    }
+
+    fun timelineToEvent(timelineModel : TimelineModel) : EventModel {
+        return EventModel(
+            timelineModel.id,
+            timelineModel.title,
+            timelineModel.description,
+            ThumbnailModel(
+                timelineModel.thumbnailModel.path,
+                timelineModel.thumbnailModel.extension
             )
         )
     }

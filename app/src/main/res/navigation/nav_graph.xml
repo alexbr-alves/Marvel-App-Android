@@ -40,13 +40,19 @@
 
     </fragment>
     <fragment
-        android:id="@+id/searchCharacterFragment"
+        android:id="@+id/timelineFragment"
         tools:layout="@layout/fragment_search_character"
         android:name="alex.lop.io.alexProject.fragment.TimelineFragment"
         android:label="SearchCharacterFragment" >
         <action
             android:id="@+id/action_searchCharacterFragment_to_detailsCharacterFragment"
             app:destination="@id/detailsCharacterFragment" />
+        <action
+            android:id="@+id/action_timelineFragment_to_detailsComicFragment"
+            app:destination="@id/detailsComicFragment" />
+        <action
+            android:id="@+id/action_timelineFragment_to_detailsEventFragment"
+            app:destination="@id/detailsEventFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"

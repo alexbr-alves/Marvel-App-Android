@@ -3,7 +3,9 @@ package alex.lop.io.alexProject.fragment
 import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.databinding.FragmentSearchCharacterBinding
 import alex.lop.io.alexProject.adapters.TimelineAdapter
+import alex.lop.io.alexProject.data.model.timeline.TimelineType
 import alex.lop.io.alexProject.state.ResourceState
+import alex.lop.io.alexProject.util.Converts
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
@@ -14,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -25,11 +28,43 @@ class TimelineFragment :
     BaseFragment<FragmentSearchCharacterBinding, TimelineViewModel>() {
     override val viewModel : TimelineViewModel by viewModels()
     private val timelineAdapter by lazy { context?.let { TimelineAdapter(it) } }
+    private var converts = Converts()
 
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecycleView()
         collectObserve()
+        clickAdapter()
+    }
+
+    private fun clickAdapter() {
+        timelineAdapter?.setOnClickListener { model ->
+            when (model.type) {
+                TimelineType.CHARACTER -> {
+                    val action =
+                        TimelineFragmentDirections.actionSearchCharacterFragmentToDetailsCharacterFragment(
+                            converts.timelineToCharacter(model)
+                        )
+                    findNavController().navigate(action)
+                }
+
+                TimelineType.COMIC -> {
+                    val action =
+                        TimelineFragmentDirections.actionTimelineFragmentToDetailsComicFragment(
+                            converts.timelineToComic(model)
+                        )
+                    findNavController().navigate(action)
+                }
+
+                TimelineType.EVENT -> {
+                    val action =
+                        TimelineFragmentDirections.actionTimelineFragmentToDetailsEventFragment(
+                            converts.timelineToEvent(model)
+                        )
+                    findNavController().navigate(action)
+                }
+            }
+        }
     }
 
     private fun collectObserve() = lifecycleScope.launch {

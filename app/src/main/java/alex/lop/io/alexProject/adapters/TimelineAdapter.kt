@@ -28,7 +28,7 @@ class TimelineAdapter(val context : Context) :
 
     private val differCallback = object : DiffUtil.ItemCallback<TimelineModel>() {
         override fun areItemsTheSame(oldItem : TimelineModel, newItem : TimelineModel) : Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
+            return true
         }
 
         override fun areContentsTheSame(

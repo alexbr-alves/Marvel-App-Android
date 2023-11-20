@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                     getString(R.string.title_fragment_favorites)
                 )
 
-                R.id.searchCharacterFragment -> setupToolbar(
+                R.id.timelineFragment -> setupToolbar(
                     true,
                     getString(R.string.feed)
                 )

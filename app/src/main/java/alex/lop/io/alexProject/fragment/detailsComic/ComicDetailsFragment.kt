@@ -37,7 +37,7 @@ class ComicDetailsFragment : BaseFragment<FragmentDetailsComicBinding, ComicDeta
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         comicModel = args.Comic
-        favoriteModel = converts.ComicToFavorite(comicModel)
+        favoriteModel = converts.comicToFavorite(comicModel)
         viewModel.searchFavorite(favoriteModel.id)
         onLoadComic(comicModel)
         setupViewPager()
