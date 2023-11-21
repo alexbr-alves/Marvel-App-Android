@@ -15,13 +15,15 @@ interface ServiceApi {
     @GET("characters")
     suspend fun characters(
         @Query("nameStartsWith") nameStartsWith : String? = null,
-        @Query("limit") limit : Int = 100
+        @Query("limit") limit : Int = 100,
+        @Query("offset") offset : Int? = 0,
     ) : Response<CharacterModelResponse>
 
     @GET("comics")
     suspend fun comics(
         @Query("titleStartsWith") titleStartsWith : String? = null,
-        @Query("limit") limit : Int = 100
+        @Query("limit") limit : Int = 100,
+        @Query("offset") offset : Int? = 0,
     ) : Response<ComicModelResponse>
 
     @GET("events")

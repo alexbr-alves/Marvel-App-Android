@@ -4,6 +4,7 @@ import alex.lop.io.alexProject.R
 import alex.lop.io.alexProject.adapters.ComicsAdapter
 import alex.lop.io.alexProject.databinding.FragmentComicBinding
 import alex.lop.io.alexProject.state.ResourceState
+import alex.lop.io.alexProject.util.setGone
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
 import alex.lop.io.alexProject.util.toast
@@ -21,6 +22,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -31,6 +33,8 @@ class ComicsFragment : BaseFragment<FragmentComicBinding, ComicViewModel>() {
     override val viewModel : ComicViewModel by viewModels()
     private val comicsAdapter by lazy { ComicsAdapter() }
     private var isSearchExpanded = false
+    private var totalCharacters : Int = 0
+    private var initialOffset : Int = 0
 
     override fun getViewBinding(
         inflater : LayoutInflater,
@@ -97,6 +101,7 @@ class ComicsFragment : BaseFragment<FragmentComicBinding, ComicViewModel>() {
                     resource.data?.let { values ->
                         if (values.data.result.isNotEmpty()) {
                             comicsAdapter.comicList = values.data.result.toList()
+                            totalCharacters = values.data.total
                         }
                     }
                 }
@@ -122,6 +127,23 @@ class ComicsFragment : BaseFragment<FragmentComicBinding, ComicViewModel>() {
             adapter = comicsAdapter
             layoutManager = LinearLayoutManager(requireContext())
             layoutManager = GridLayoutManager(requireContext(), 2)
+
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView : RecyclerView, dx : Int, dy : Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+
+                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                    val visibleItemCount = layoutManager.childCount
+                    val totalItemCount = layoutManager.itemCount
+                    val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+
+                    if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount && firstVisibleItemPosition >= 0) {
+                        textSeeMore.setVisible()
+                    } else {
+                        textSeeMore.setGone()
+                    }
+                }
+            })
         }
     }
 
@@ -130,6 +152,16 @@ class ComicsFragment : BaseFragment<FragmentComicBinding, ComicViewModel>() {
             val action = ComicsFragmentDirections
                 .actionComicsFragmentToDetailsComicFragment(it)
             findNavController().navigate(action)
+        }
+        binding.textSeeMore.setOnClickListener {
+            if (totalCharacters > (initialOffset + 100)) {
+                viewModel.fetch(offset = initialOffset + 100)
+                initialOffset += 100
+                binding.rvComicList.smoothScrollToPosition(0)
+            } else {
+                binding.textSeeMore.setGone()
+            }
+
         }
     }
 

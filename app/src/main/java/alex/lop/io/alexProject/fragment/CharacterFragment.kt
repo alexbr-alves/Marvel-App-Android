@@ -1,17 +1,18 @@
 package alex.lop.io.alexProject.fragment
 
-import alex.lop.io.alexProject.R
+
 import alex.lop.io.alexProject.adapters.CharacterAdapter
 import alex.lop.io.alexProject.databinding.FragmentCharacterBinding
 import alex.lop.io.alexProject.viewModel.CharacterViewModel
 import alex.lop.io.alexProject.state.ResourceState
+import alex.lop.io.alexProject.util.setGone
 import alex.lop.io.alexProject.util.setInvisible
 import alex.lop.io.alexProject.util.setVisible
-import alex.lop.io.alexProject.util.toast
 import android.animation.ValueAnimator
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -31,6 +33,8 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding, CharacterViewMo
     override val viewModel : CharacterViewModel by viewModels()
     private val characterAdapter by lazy { CharacterAdapter() }
     private var isSearchExpanded = false
+    private var totalCharacters : Int = 0
+    private var initialOffset : Int = 0
 
     override fun getViewBinding(
         inflater : LayoutInflater,
@@ -96,6 +100,7 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding, CharacterViewMo
                     resource.data?.let { values ->
                         binding.progressCircular.setInvisible()
                         characterAdapter.characters = values.data.results.toList()
+                        totalCharacters = values.data.total
                     }
                 }
 
@@ -121,6 +126,16 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding, CharacterViewMo
                 .actionListCharacterFragmentToDetailsCharacterFragment(characterModel)
             findNavController().navigate(action)
         }
+        binding.textSeeMore.setOnClickListener {
+            if (totalCharacters > (initialOffset + 100)) {
+                viewModel.fetch(offset = initialOffset + 100)
+                initialOffset += 100
+                binding.rvCharacters.smoothScrollToPosition(0)
+            } else {
+                binding.textSeeMore.setGone()
+            }
+
+        }
     }
 
     private fun setupRecycleView() = with(binding) {
@@ -128,6 +143,22 @@ class CharacterFragment : BaseFragment<FragmentCharacterBinding, CharacterViewMo
             adapter = characterAdapter
             layoutManager = LinearLayoutManager(requireContext())
             layoutManager = GridLayoutManager(requireContext(), 2)
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView : RecyclerView, dx : Int, dy : Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+
+                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                    val visibleItemCount = layoutManager.childCount
+                    val totalItemCount = layoutManager.itemCount
+                    val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+
+                    if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount && firstVisibleItemPosition >= 0) {
+                        textSeeMore.setVisible()
+                    } else {
+                        textSeeMore.setGone()
+                    }
+                }
+            })
         }
     }
 
