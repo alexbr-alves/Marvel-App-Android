@@ -27,11 +27,16 @@ class CharacterViewModel @Inject constructor(
         fetch()
     }
 
-    fun fetch(nameStartsWith : String? = null, limit : Int = 100, offset : Int? = 0) = viewModelScope.launch {
-        safeFetch(nameStartsWith, limit, offset)
-    }
+    fun fetch(nameStartsWith : String? = null, limit : Int = 100, offset : Int? = 0) =
+        viewModelScope.launch {
+            safeFetch(nameStartsWith, limit, offset)
+        }
 
-    private suspend fun safeFetch(nameStartsWith : String? = null,limit: Int = 100, offset : Int? = 0) {
+    private suspend fun safeFetch(
+        nameStartsWith : String? = null,
+        limit : Int = 100,
+        offset : Int? = 0
+    ) {
         _list.value = ResourceState.Loading()
         try {
             val response = repository.characters(nameStartsWith, limit, offset)
