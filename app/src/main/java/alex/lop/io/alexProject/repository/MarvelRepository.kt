@@ -9,7 +9,7 @@ class MarvelRepository @Inject constructor(
     private val api : ServiceApi,
     private val dao : MarvelDao
 ) {
-    suspend fun characters(nameStartsWith : String? = null) = api.characters(nameStartsWith)
+    suspend fun characters(nameStartsWith : String? = null, limit: Int = 100, offset : Int? = 0) = api.characters(nameStartsWith, limit,  offset)
     suspend fun comics(titleStartsWith : String? = null) = api.comics(titleStartsWith)
     suspend fun events(nameStartsWith : String? = null) = api.events(nameStartsWith)
     suspend fun series(titleStartsWith : String? = null) = api.series(titleStartsWith)
